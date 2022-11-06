@@ -2,12 +2,13 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import SessionStorage from '@service/sessionStorage';
 import { getAppConfigValue } from '@util/getAppConfigValue';
+import LOCATION_CONSTANTS from '@constant/location';
 
 const initialState = {
   lat: null,
   lng: null,
-  centerLat: null,
-  centerLng: null,
+  centerLat: LOCATION_CONSTANTS.CENTER_LAT,
+  centerLng: LOCATION_CONSTANTS.CENTER_LON,
   zoom: 7,
   isLoading: true,
   error: '',
@@ -63,8 +64,8 @@ export const fetchLocation = createAsyncThunk(
       payload = {
         lat: null,
         lng: null,
-        centerLat: '47.751076',
-        centerLng: '-120.740135',
+        centerLat: '21.3281792',
+        centerLng: '-157.8691132',
         zoom: 7,
       };
     }

@@ -20,7 +20,7 @@ export const getServerSideProps = async (context) => {
       context.query.id
     }`
   );
-  data = resultFromApi(serviceAtLocation.data);
+  data = serviceAtLocation.data;
 
   return {
     props: {

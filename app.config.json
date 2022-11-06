@@ -1,8 +1,8 @@
 {
-  "apiUrl": "http://localhost:3001",
-  "brandName": "Your Community Resources",
+  "apiUrl": "http://localhost:3004",
+  "brandName": "Aloha United Way",
   "homeUrl": "",
-  "publicUrl": "http://localhost:3000",
+  "publicUrl": "http://localhost:3005",
   "feedbackUrl": "",
   "contactEmail": "johndoe@connect211.com",
   "contactNumber": "",
@@ -31,11 +31,11 @@
     },
     "map": {
       "google": {
-        "apiKey": ""
+        "apiKey": "AIzaSyCDC1rcO7W0AiVaIP-cBNssqRAopKgSV2E"
       },
       "center": {
-        "lat": "47.751076",
-        "lon": "-120.740135"
+        "lat": "21.3281792",
+        "lon": "-157.8691132"
       }
     }
   },

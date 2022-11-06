@@ -5,6 +5,7 @@ import axios from 'axios';
 import { resultsFromApi } from 'src/adapters/results';
 import { favoritesFromApi } from 'src/adapters/favorite';
 import { Auth } from 'aws-amplify';
+import { filterByRadius } from '@util/mapUtil';
 
 type SearchParams = {
   q?: String;
@@ -48,7 +49,15 @@ export const fetchResults = createAsyncThunk(
       }
     );
 
-    return resultsFromApi(res.data);
+    let rv = resultsFromApi(res.data);
+    if (params.radius) {
+      rv = await filterByRadius(
+        rv,
+        Number(params.radius),
+        state.search.location
+      );
+    }
+    return rv;
   }
 );
 
@@ -79,7 +88,15 @@ export const fetchResultsByTaxonomies = createAsyncThunk(
       }
     );
 
-    return resultsFromApi(res.data);
+    let rv = resultsFromApi(res.data);
+    if (params.radius) {
+      rv = await filterByRadius(
+        rv,
+        Number(params.radius),
+        state.search.location
+      );
+    }
+    return rv;
   }
 );
 

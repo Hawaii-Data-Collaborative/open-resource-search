@@ -8,6 +8,7 @@ import MapStyles from './mapStyles.json';
 import CustomMarker from './CustomMarker';
 import MapContainer from './MapContainer';
 import { getAppConfigValue } from '@util/getAppConfigValue';
+import { setGoogleInstance } from '@util/mapUtil';
 
 function Map({ google }) {
   const [showInfoWindow, setShowInfoWindow] = useState(false);
@@ -33,6 +34,9 @@ function Map({ google }) {
       // @ts-ignore I need to check this later. Not sure how to fix ts errors here
       styles={MapStyles}
       onClick={() => setShowInfoWindow(false)}
+      onReady={() => {
+        setGoogleInstance(google);
+      }}
     >
       {results?.map((m) => {
         const title = m.locationName || 'Address Unavailable';
@@ -125,6 +129,7 @@ function Map({ google }) {
 }
 
 const WrappedMap = GoogleApiWrapper({
+  libraries: ['places', 'geometry'],
   apiKey: getAppConfigValue('services.map.google.apiKey'),
 })(Map);
 

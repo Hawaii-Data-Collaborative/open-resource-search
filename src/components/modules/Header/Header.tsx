@@ -31,7 +31,7 @@ export default function Header() {
             {/* eslint-disable-next-line */}
             <a style={{ lineHeight: 0 }}>
               <Styles.StyledImage
-                src="/logo.png"
+                src="/logo.svg"
                 alt="Go back to search home page"
               />
             </a>

@@ -24,7 +24,7 @@ import { useRouter } from 'next/router';
 import useCachedLocations from 'src/hooks/useCachedLocations';
 import { StyledAutocomplete, StyledFormControl } from './Search.styled';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
-import suggestions from '../../../../data/suggestions.json';
+import { useSuggestionsQuery } from '@hook/useSuggestionsQuery';
 
 type Props = {
   variant?: 'outlined' | 'standard' | 'filled';
@@ -40,6 +40,7 @@ function Search({ variant = 'outlined' }: Props) {
   const geoSuggestions = useCachedLocations(locationQuery);
   const radius = useAppSelector((state) => state.search.radius);
   const hits = useCachedTaxonomies(query);
+  const suggestions = useSuggestionsQuery();
   const newHits = query.length === 0 ? suggestions : hits;
 
   function updateQuery(e, v) {
@@ -104,10 +105,10 @@ function Search({ variant = 'outlined' }: Props) {
   function submitSearch(e) {
     e.preventDefault();
 
-    const suggestion = suggestions.find((el) => el.term === query);
+    const suggestion = suggestions.find((el) => el.text === query);
 
     if (suggestion == null) {
-      const taxonomy = newHits.find((el) => el?._source?.term === query);
+      const taxonomy = newHits.find((el) => el.text === query);
 
       if (taxonomy == null) {
         const queryParams: any = {};
@@ -170,7 +171,7 @@ function Search({ variant = 'outlined' }: Props) {
             fullWidth
             inputValue={query}
             onInputChange={updateQuery}
-            getOptionLabel={(o: any) => o?._source?.term ?? o?.term ?? ''}
+            getOptionLabel={(o: any) => o.text}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -203,6 +204,8 @@ function Search({ variant = 'outlined' }: Props) {
               }}
             >
               <option value="0">Any</option>
+              <option value="5">5 Miles</option>
+              <option value="10">10 Miles</option>
               <option value="15">15 Miles</option>
               <option value="30">30 Miles</option>
               <option value="45">45 Miles</option>
