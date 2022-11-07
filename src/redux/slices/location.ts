@@ -64,8 +64,8 @@ export const fetchLocation = createAsyncThunk(
       payload = {
         lat: null,
         lng: null,
-        centerLat: '21.3281792',
-        centerLng: '-157.8691132',
+        centerLat: getAppConfigValue('services.map.center.lat'),
+        centerLng: getAppConfigValue('services.map.center.lon'),
         zoom: 7,
       };
     }

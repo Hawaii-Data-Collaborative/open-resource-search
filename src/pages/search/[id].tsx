@@ -10,7 +10,7 @@ import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import axios from 'axios';
 import Search from 'src/components/layouts/Search/Search';
 import If from '@element/If/If';
-import { resultFromApi } from 'src/adapters/result';
+// import { resultFromApi } from 'src/adapters/result';
 
 export const getServerSideProps = async (context) => {
   let data: any = {};
@@ -45,11 +45,13 @@ function SingleResultPage({ data, query }) {
 
       dispatch(
         setCenter({
-          lat: data?.locationLat ?? '47.751076',
-          lng: data?.locationLon ?? '-120.740135',
+          lat:
+            data?.locationLat ?? getAppConfigValue('services.map.center.lat'),
+          lng:
+            data?.locationLon ?? getAppConfigValue('services.map.center.lon'),
         })
       );
-      dispatch(setZoom(10));
+      dispatch(setZoom(12));
     })();
   }, []);
 

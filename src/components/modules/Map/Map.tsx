@@ -16,7 +16,10 @@ function Map({ google }) {
   const location = useAppSelector((state) => state.location);
   const results = useAppSelector((state) => state.results.data) as any[];
   const memoizedLocation = useMemo(
-    () => ({ lat: location.centerLat, lng: location.centerLng }),
+    () => ({
+      lat: Number(location.centerLat),
+      lng: Number(location.centerLng),
+    }),
     [location.centerLng, location.centerLng]
   );
 
