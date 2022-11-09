@@ -3,6 +3,16 @@ import Link from 'src/components/elements/Link/Link';
 import Flex from 'src/components/elements/Flex/Flex';
 import theme from 'src/constants/theme';
 
+function getUrl(url: string) {
+  if (!url) {
+    return '';
+  }
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'http://' + url;
+  }
+  return url;
+}
+
 export default function ContactButtons({ hit, location }) {
   if (!hit) return null;
 
@@ -29,7 +39,7 @@ export default function ContactButtons({ hit, location }) {
       {hit.website && (
         <Link
           external
-          href={hit.website}
+          href={getUrl(hit.website)}
           target="_blank"
           rel="noreferrer"
           marginLeft="4px"
