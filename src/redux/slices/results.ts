@@ -50,7 +50,7 @@ export const fetchResults = createAsyncThunk(
     );
 
     let rv = resultsFromApi(res.data);
-    if (params.radius) {
+    if (params.radius && state.search.location?.trim()) {
       rv = await filterByRadius(
         rv,
         Number(params.radius),
