@@ -37,7 +37,7 @@ function Home() {
       </Head>
 
       <Flex
-        background="url('/hero.jpg') center bottom / cover"
+        background="url('/hero.png') center bottom / cover"
         maxWidth={1400}
         margin="0 auto"
         minHeight="35vw"
