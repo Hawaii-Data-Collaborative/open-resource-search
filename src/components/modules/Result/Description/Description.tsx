@@ -5,7 +5,7 @@ import Box from 'src/components/elements/Box/Box';
 export default function Description({ hit }) {
   return (
     <Box marginBottom="16px">
-      <Text color="textSecondary">
+      <Text color="textSecondary" whiteSpace="pre-line">
         {!hit && <Skeleton count={5} />}
 
         {hit && hit.description}

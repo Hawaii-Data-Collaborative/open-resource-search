@@ -29,6 +29,7 @@ interface StyledTextProps
     TypographyProps {
   paragraph?: boolean;
   color?: PalleteColorUnion;
+  whiteSpace?: string;
 }
 
 function Text({ variant, children, className }: TextProps) {
@@ -61,6 +62,7 @@ const StyledText = styled(Text)<StyledTextProps>`
       : props.color != null
       ? props.theme.pallete[props.color]
       : props.theme.pallete['textPrimary']};
+  white-space: ${(props) => props.whiteSpace};
   margin: ${(props) => (props.paragraph ? '0 0 8px' : 0)};
   ${(props) =>
     props.variant != null
