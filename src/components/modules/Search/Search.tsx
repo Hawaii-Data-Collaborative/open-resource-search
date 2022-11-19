@@ -171,7 +171,7 @@ function Search({ variant = 'outlined' }: Props) {
             fullWidth
             inputValue={query}
             onInputChange={updateQuery}
-            getOptionLabel={(o: any) => o.text}
+            getOptionLabel={(o: any) => o.title || o.text || o}
             renderInput={(params) => (
               <TextField
                 {...params}

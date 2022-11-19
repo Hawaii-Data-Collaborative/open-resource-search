@@ -2,6 +2,7 @@ import { Phone, Language, Navigation } from '@material-ui/icons';
 import Link from 'src/components/elements/Link/Link';
 import Flex from 'src/components/elements/Flex/Flex';
 import theme from 'src/constants/theme';
+import { logEvent } from 'src/analytics';
 
 function getUrl(url: string) {
   if (!url) {
@@ -15,6 +16,20 @@ function getUrl(url: string) {
 
 export default function ContactButtons({ hit, location }) {
   if (!hit) return null;
+
+  const onPhoneClick = () => {
+    logEvent('PhoneButtonClick', {
+      currentPage: window.location.toString(),
+      phone: hit.phone,
+    });
+  };
+
+  const onWebsiteClick = () => {
+    logEvent('WebsiteButtonClick', {
+      currentPage: window.location.toString(),
+      url: getUrl(hit.website),
+    });
+  };
 
   return (
     <Flex marginBottom="16px">
@@ -30,6 +45,7 @@ export default function ContactButtons({ hit, location }) {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onClick={onPhoneClick}
         >
           <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />{' '}
           Call
@@ -51,6 +67,7 @@ export default function ContactButtons({ hit, location }) {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onClick={onWebsiteClick}
         >
           <Language
             style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}

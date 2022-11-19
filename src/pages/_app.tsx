@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import Amplify from 'aws-amplify';
 import { ThemeProvider } from '@material-ui/core';
+import Script from 'next/script';
 
 import { GlobalStyleSheet } from 'src/styles/GlobalStyleSheet/GlobalStyleSheet';
 import FeedbackButton from 'src/components/modules/FeedbackButton/FeedbackButton';
@@ -34,6 +35,20 @@ Amplify.configure(awsExports);
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-GRCJFTC3LT"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-GRCJFTC3LT');
+        `}
+      </Script>
+
       <GlobalStyleSheet />
 
       <GlobalConfig>

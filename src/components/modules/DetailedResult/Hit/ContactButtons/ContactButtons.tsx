@@ -2,6 +2,7 @@ import { Phone, Language, Navigation } from '@material-ui/icons';
 import Link from 'src/components/elements/Link/Link';
 import { useAppSelector } from 'src/redux/store';
 import theme from 'src/constants/theme';
+import { logEvent } from 'src/analytics';
 
 import { DontPrintContainer } from '../Hit.styles';
 
@@ -9,6 +10,20 @@ export default function ContactButtons({ hit }) {
   const location = useAppSelector((state) => state.location);
 
   if (!hit) return null;
+
+  const onPhoneClick = () => {
+    logEvent('PhoneButtonClick', {
+      currentPage: window.location.toString(),
+      phone: hit.phone,
+    });
+  };
+
+  const onWebsiteClick = () => {
+    logEvent('WebsiteButtonClick', {
+      currentPage: window.location.toString(),
+      url: hit.website,
+    });
+  };
 
   return (
     <DontPrintContainer>
@@ -24,6 +39,7 @@ export default function ContactButtons({ hit }) {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onClick={onPhoneClick}
         >
           <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />{' '}
           Call
@@ -45,6 +61,7 @@ export default function ContactButtons({ hit }) {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onClick={onWebsiteClick}
         >
           <Language
             style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
@@ -70,6 +87,7 @@ export default function ContactButtons({ hit }) {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onClick={onWebsiteClick}
         >
           <Navigation
             style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
