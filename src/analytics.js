@@ -18,7 +18,9 @@ export function logEvent(eventName, data) {
     init();
   }
 
-  window.gtag('event', eventName, data);
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, data);
+  }
 
   const url = `${getAppConfigValue('apiUrl')}/api/v1/user-activity`;
   axios.post(url, { userId: user.id, event: eventName, data });
