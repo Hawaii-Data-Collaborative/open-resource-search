@@ -1,3 +1,4 @@
+import usePageLoaded from '@hook/usePageLoaded';
 import Head from 'next/head';
 import Box from 'src/components/elements/Box/Box';
 import Link from 'src/components/elements/Link/Link';
@@ -5,6 +6,8 @@ import Text from 'src/components/elements/Text/Text';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 
 function PrivacyPolicy() {
+  usePageLoaded();
+
   return (
     <Box>
       <Head>

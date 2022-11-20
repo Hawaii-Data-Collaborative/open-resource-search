@@ -12,6 +12,7 @@ import Box from 'src/components/elements/Box/Box';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import AuthLayout from 'src/components/layouts/Auth/Auth';
 import redirect from 'src/utils/redirect';
+import usePageLoaded from '@hook/usePageLoaded';
 
 export const getServerSideProps = (context) => {
   if (context.user != null) return redirect('/');
@@ -27,6 +28,8 @@ function SignUp() {
   const password = useRef<HTMLInputElement>();
   const firstName = useRef<HTMLInputElement>();
   const lastName = useRef<HTMLInputElement>();
+
+  usePageLoaded();
 
   const signUp = async (e) => {
     e.preventDefault();

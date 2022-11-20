@@ -14,6 +14,7 @@ import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import AuthLayout from 'src/components/layouts/Auth/Auth';
 import redirect from 'src/utils/redirect';
 import If from '@element/If/If';
+import usePageLoaded from '@hook/usePageLoaded';
 
 export const getServerSideProps = (context) => {
   if (context.user != null) return redirect('/');
@@ -30,6 +31,8 @@ function SignIn() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showResendButton, setShowResendButton] = useState(false);
+
+  usePageLoaded();
 
   const signIn = async (e) => {
     e.preventDefault();

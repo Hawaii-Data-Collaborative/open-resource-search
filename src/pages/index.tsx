@@ -16,9 +16,12 @@ import Search from '@module/Search/Search';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import Default from 'src/components/layouts/Default/Default';
 import If from '@element/If/If';
+import usePageLoaded from '@hook/usePageLoaded';
 
 function Home() {
   const dispatch = useAppDispatch();
+
+  usePageLoaded();
 
   useEffect(() => {
     if (SessionStorage.has('lastLocation')) {

@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import redirect from 'src/utils/redirect';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import If from '@element/If/If';
+import usePageLoaded from '@hook/usePageLoaded';
 
 type Props = {
   query: {
@@ -36,6 +37,8 @@ function PasswordReset({ query }: Props) {
   const [errorMessage, setErrorMessage] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
+
+  usePageLoaded();
 
   async function handleSubmit(e) {
     e.preventDefault();

@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import Search from 'src/components/layouts/Search/Search';
 import useFavoritesFetch from '@hook/useFavoritesFetch';
+import usePageLoaded from '@hook/usePageLoaded';
 
 function Favorites() {
   const router = useRouter();
@@ -17,6 +18,7 @@ function Favorites() {
   const auth = useAppSelector((state) => state.auth);
 
   useFavoritesFetch();
+  usePageLoaded();
 
   useEffect(() => {
     if (!auth.isLoggedIn && !auth.isLoading) {

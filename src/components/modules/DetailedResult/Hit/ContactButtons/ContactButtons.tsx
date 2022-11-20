@@ -25,6 +25,13 @@ export default function ContactButtons({ hit }) {
     });
   };
 
+  const onEmailClick = () => {
+    logEvent('EmailButtonClick', {
+      currentPage: window.location.toString(),
+      email: hit.email,
+    });
+  };
+
   return (
     <DontPrintContainer>
       {!hit.phone ?? hit.phone.length === 0 ? null : (
@@ -67,6 +74,30 @@ export default function ContactButtons({ hit }) {
             style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
           />{' '}
           Website
+        </Link>
+      )}
+
+      {!hit.email || hit.email.length === 0 ? null : (
+        <Link
+          external
+          href={'mailto:' + hit.email}
+          target="_blank"
+          rel="noreferrer"
+          marginLeft="4px"
+          marginRight="4px"
+          variant="outline"
+          color="primary"
+          background="#f7f5f9"
+          border="none"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          onClick={onEmailClick}
+        >
+          <Language
+            style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
+          />{' '}
+          Email
         </Link>
       )}
 

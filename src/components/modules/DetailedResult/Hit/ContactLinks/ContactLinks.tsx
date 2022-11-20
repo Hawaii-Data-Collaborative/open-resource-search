@@ -1,4 +1,4 @@
-import Link from 'src/components/elements/Link/Link';
+// import Link from 'src/components/elements/Link/Link';
 import Text from 'src/components/elements/Text/Text';
 import Box from 'src/components/elements/Box/Box';
 import Flex from 'src/components/elements/Flex/Flex';
@@ -8,7 +8,7 @@ export default function ContactLinks({ hit }) {
 
   return (
     <Box marginBottom="16px">
-      {hit.website && (
+      {/* {hit.website && (
         <Flex alignItems="flex-start">
           <Text color="primary" marginRight="4px">
             Website:
@@ -22,9 +22,9 @@ export default function ContactLinks({ hit }) {
             {hit.website}
           </Link>
         </Flex>
-      )}
+      )} */}
 
-      {hit.email && (
+      {/* {hit.email && (
         <Flex alignItems="flex-start">
           <Text color="primary" marginRight="4px">
             Email:
@@ -36,9 +36,9 @@ export default function ContactLinks({ hit }) {
             {hit.email}
           </Link>
         </Flex>
-      )}
+      )} */}
 
-      {hit.phone && (
+      {/* {hit.phone && (
         <Flex alignItems="flex-start">
           <Text color="primary" marginRight="4px">
             Phone:
@@ -47,14 +47,14 @@ export default function ContactLinks({ hit }) {
             {hit.phone}
           </Link>
         </Flex>
-      )}
+      )} */}
 
       {hit.schedule && (
         <Flex alignItems="flex-start">
           <Text color="primary" marginRight="4px">
             Hours:
           </Text>
-          <Text color="primary" fontWeight={300}>
+          <Text color="primary" fontWeight={300} whiteSpace="pre-line">
             {hit.schedule}
           </Text>
         </Flex>

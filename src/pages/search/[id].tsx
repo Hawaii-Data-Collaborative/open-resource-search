@@ -10,6 +10,7 @@ import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import axios from 'axios';
 import Search from 'src/components/layouts/Search/Search';
 import If from '@element/If/If';
+import usePageLoaded from '@hook/usePageLoaded';
 // import { resultFromApi } from 'src/adapters/result';
 
 export const getServerSideProps = async (context) => {
@@ -32,6 +33,8 @@ export const getServerSideProps = async (context) => {
 
 function SingleResultPage({ data, query }) {
   const dispatch = useAppDispatch();
+
+  usePageLoaded();
 
   useEffect(() => {
     (async function () {
