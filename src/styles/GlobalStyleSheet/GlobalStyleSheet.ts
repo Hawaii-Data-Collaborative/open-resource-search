@@ -40,6 +40,10 @@ export const GlobalStyleSheet = createGlobalStyle`
     margin: 0;
     font-family: "Open Sans", sans-serif;
   }
+
+  .MuiAutocomplete-listbox .MuiAutocomplete-groupLabel {
+    color: #888;
+  }
 `;
 GlobalStyleSheet.defaultProps = {
   theme: defaultTheme,
