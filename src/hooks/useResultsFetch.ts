@@ -6,6 +6,7 @@ import {
   fetchResultsByTaxonomies,
 } from 'src/redux/slices/results';
 import { fetchLocation } from 'src/redux/slices/location';
+import { logEvent } from 'src/analytics';
 
 function useResultsFetch() {
   const router = useRouter();
@@ -33,6 +34,10 @@ function useResultsFetch() {
         );
       } else {
         await dispatch(fetchResults(router.query.terms as string));
+      }
+
+      if (JSON.stringify(router.query) !== '{}') {
+        logEvent('Search', router.query);
       }
     })();
   }, [

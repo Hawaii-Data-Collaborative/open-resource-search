@@ -7,13 +7,11 @@ import { setResults } from 'src/redux/slices/results';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import SearchLayout from 'src/components/layouts/Search/Search';
 import useResultsFetch from '@hook/useResultsFetch';
-import usePageLoaded from '@hook/usePageLoaded';
 
 function Search() {
   const dispatch = useAppDispatch();
 
   useResultsFetch();
-  usePageLoaded();
 
   useEffect(() => {
     dispatch(setResults([]));
