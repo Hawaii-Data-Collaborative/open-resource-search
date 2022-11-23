@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import GoogleMap, { GoogleApiWrapper, InfoWindow } from 'google-maps-react';
-import Link from 'src/components/elements/Link/Link';
 import Text from 'src/components/elements/Text/Text';
 import { useAppSelector } from 'src/redux/store';
 
@@ -78,15 +77,14 @@ function Map({ google }) {
         onClose={() => setShowInfoWindow(false)}
       >
         <div>
-          <Text variant="h3" color="primary" paragraph>
+          <Text fontSize={15} style={{ color: '#667', userSelect: 'initial' }}>
             {activeMarker?.name}
           </Text>
-
-          <Text variant="subtitle" color="primary" paragraph>
+          <Text fontSize={12} style={{ color: '#667', userSelect: 'initial' }}>
             {activeMarker?.title}
           </Text>
 
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          {/* <div style={{ display: 'flex', alignItems: 'center' }}>
             {activeMarker?.phone && (
               <Text marginRight="16px">
                 <Link href={`tel:${activeMarker.phone}`} color="primary">
@@ -124,7 +122,7 @@ function Map({ google }) {
                 </Link>
               </Text>
             )}
-          </div>
+          </div> */}
         </div>
       </InfoWindow>
     </GoogleMap>
