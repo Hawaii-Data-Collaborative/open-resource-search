@@ -14,6 +14,7 @@ export default function ContactButtons({ hit }) {
   const onPhoneClick = () => {
     logEvent('PhoneButtonClick', {
       currentPage: window.location.toString(),
+      program: hit.title,
       phone: hit.phone,
     });
   };
@@ -21,6 +22,7 @@ export default function ContactButtons({ hit }) {
   const onWebsiteClick = () => {
     logEvent('WebsiteButtonClick', {
       currentPage: window.location.toString(),
+      program: hit.title,
       url: hit.website,
     });
   };
@@ -28,7 +30,15 @@ export default function ContactButtons({ hit }) {
   const onEmailClick = () => {
     logEvent('EmailButtonClick', {
       currentPage: window.location.toString(),
+      program: hit.title,
       email: hit.email,
+    });
+  };
+
+  const onDirectionsClick = () => {
+    logEvent('DirectionsButtonClick', {
+      currentPage: window.location.toString(),
+      program: hit.title,
     });
   };
 
@@ -118,7 +128,7 @@ export default function ContactButtons({ hit }) {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          onClick={onWebsiteClick}
+          onClick={onDirectionsClick}
         >
           <Navigation
             style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
