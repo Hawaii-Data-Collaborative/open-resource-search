@@ -24,6 +24,16 @@ export default function SiteFooter() {
         </Text>
         <Box>
           <Link
+            href="https://auwadmin.windwardapps.com"
+            target="_blank"
+            style={{
+              color: getTextColorContrast(theme.PRIMARY_COLOR),
+              marginRight: 20,
+            }}
+          >
+            Administrators
+          </Link>
+          <Link
             href="/privacy-policy"
             target="_blank"
             style={{ color: getTextColorContrast(theme.PRIMARY_COLOR) }}
