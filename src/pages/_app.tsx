@@ -14,6 +14,8 @@ import If from '@element/If/If';
 import GlobalConfig from '@module/GlobalConfig/GlobalConfig';
 import isInternetExplorer from '@util/isInternetExplorer';
 
+import '../components/elements/Button/Button.scss';
+
 // Import polyfills for IE11 support
 if (
   process.env.NODE_ENV === 'production' &&

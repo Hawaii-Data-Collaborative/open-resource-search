@@ -1,9 +1,32 @@
+import ClipboardJS from 'clipboard';
 import Skeleton from 'react-loading-skeleton';
-import { Room } from '@material-ui/icons';
+import { Button as MuiButton, Tooltip } from '@material-ui/core';
+import { FileCopy, Room } from '@material-ui/icons';
 import Text from 'src/components/elements/Text/Text';
 import theme from 'src/constants/theme';
+import { logEvent } from 'src/analytics';
+import { onCopyToClipboard } from '@util/domUtil';
+
+let clipboard: ClipboardJS;
 
 export default function Location({ hit }) {
+  const onRef = (node: HTMLElement) => {
+    if (node) {
+      clipboard = new ClipboardJS(node);
+    } else {
+      clipboard?.destroy();
+    }
+  };
+
+  const onCopyClick = (e) => {
+    onCopyToClipboard(e.currentTarget);
+    logEvent('Referral.Directions.CopyAddress', {
+      currentPage: window.location.toString(),
+      program: hit.title,
+      address: hit.locationName,
+    });
+  };
+
   return (
     <Text
       variant="subtitle"
@@ -19,6 +42,17 @@ export default function Location({ hit }) {
         <>
           <Room style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
           {hit.locationName}
+
+          <MuiButton
+            style={{ minWidth: 35 }}
+            onClick={onCopyClick}
+            innerRef={onRef}
+            data-clipboard-text={hit.locationName}
+          >
+            <Tooltip title="Copy" style={{ color: '#ccc' }}>
+              <FileCopy fontSize="small" />
+            </Tooltip>
+          </MuiButton>
         </>
       )}
     </Text>

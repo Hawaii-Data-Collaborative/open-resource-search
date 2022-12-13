@@ -50,3 +50,11 @@ Button.defaultProps = {
 };
 
 export default Button;
+
+export function Button2({ children, ...props }) {
+  return (
+    <button className="Button" {...props}>
+      {children}
+    </button>
+  );
+}
