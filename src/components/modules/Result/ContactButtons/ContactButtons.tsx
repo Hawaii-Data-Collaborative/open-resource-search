@@ -111,7 +111,7 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
   };
 
   const onWebsiteClick = () => {
-    logEvent('Referral.Website', {
+    logEvent('Referral.Website.OpenInNewTab', {
       currentPage: window.location.toString(),
       program: hit.title,
       url: getWebsiteUrl(hit.website),
@@ -119,7 +119,7 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
   };
 
   const onEmailClick = () => {
-    logEvent('Referral.Email', {
+    logEvent('Referral.Email.OpenInEmailClient', {
       currentPage: window.location.toString(),
       program: hit.title,
       email: hit.email,
@@ -127,7 +127,7 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
   };
 
   const onDirectionsClick = () => {
-    logEvent('Referral.Directions', {
+    logEvent('Referral.Directions.OpenInGoogleMaps', {
       currentPage: window.location.toString(),
       program: hit.title,
     });
