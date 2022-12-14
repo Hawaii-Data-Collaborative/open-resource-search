@@ -5,7 +5,7 @@ const initialState = {
   query: '',
   location: '',
   taxonomies: '',
-  radius: '30',
+  radius: '0',
 };
 
 export const searchSlice = createSlice({

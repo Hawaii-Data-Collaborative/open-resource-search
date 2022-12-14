@@ -37,7 +37,13 @@ function useResultsFetch() {
       }
 
       if (JSON.stringify(router.query) !== '{}') {
-        logEvent('Search', router.query);
+        if (router.query.category_name) {
+          logEvent('Search.Category', router.query);
+        } else if (router.query.taxonomies?.length) {
+          logEvent('Search.Taxonomy', router.query);
+        } else {
+          logEvent('Search.Keyword', router.query);
+        }
       }
     })();
   }, [
