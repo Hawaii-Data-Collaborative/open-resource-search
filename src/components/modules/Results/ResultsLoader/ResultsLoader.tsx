@@ -18,6 +18,23 @@ export default function ResultsLoader({ results, location }) {
           />
         );
       })}
+
+      {!results.isLoading && !results?.data?.length ? (
+        <div
+          style={{
+            padding: 20,
+            paddingTop: 50,
+            color: '#999',
+            fontSize: 14,
+            maxWidth: 300,
+            margin: 'auto',
+            textAlign: 'center',
+          }}
+        >
+          No results. If you are having a hard time finding what you're looking
+          for, call 211.
+        </div>
+      ) : null}
     </>
   );
 }

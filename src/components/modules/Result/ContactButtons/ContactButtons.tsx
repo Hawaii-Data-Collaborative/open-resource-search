@@ -80,7 +80,6 @@ export default function ContactButtons({ hit, location }) {
         <ContactButtonsDialog
           action={action}
           hit={hit}
-          location={location}
           onClose={() => setAction(null)}
         />
       ) : null}
@@ -90,7 +89,7 @@ export default function ContactButtons({ hit, location }) {
 
 let clipboard: ClipboardJS;
 
-export function ContactButtonsDialog({ action, hit, location, onClose }) {
+export function ContactButtonsDialog({ action, hit, onClose }) {
   const onRef = (node: HTMLElement) => {
     console.log('[onRef] node=', node);
     if (node) {
@@ -311,14 +310,14 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
           </>
         )}
 
-        {(action === 'directions' && location.lat == null) ||
-        location.lng == null ||
-        hit.locationLat == null ||
-        hit.locationLon == null ? null : (
+        {action === 'directions' &&
+        hit.locationName &&
+        hit.locationLat &&
+        hit.locationLon ? (
           <>
             <Link
               external
-              href={`https://www.google.com/maps/dir/?api=1&origin=${location.lat},${location.lng}&destination=${hit.locationLat},${hit.locationLon}`}
+              href={`https://www.google.com/maps/dir/?api=1&destination=${hit.locationLat},${hit.locationLon}`}
               target="_blank"
               rel="noreferrer"
               color="primary"
@@ -344,13 +343,13 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
                 justifyContent: 'center',
               }}
             >
-              <span>{hit.address || '[Address]'}</span>
+              <span>{hit.locationName}</span>
               <span style={{ display: 'inline-block', marginLeft: 5 }}>
                 <MuiButton
                   style={{ minWidth: 35 }}
                   onClick={onCopyAddressClick}
                   innerRef={onRef}
-                  data-clipboard-text={hit.address}
+                  data-clipboard-text={hit.locationName}
                 >
                   <Tooltip title="Copy" style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
@@ -359,7 +358,7 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
               </span>
             </div>
           </>
-        )}
+        ) : null}
       </div>
     </Dialog>
   );
