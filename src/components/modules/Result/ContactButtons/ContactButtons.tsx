@@ -119,7 +119,7 @@ export function ContactButtonsDialog({ action, hit, location, onClose }) {
   };
 
   const onEmailClick = () => {
-    logEvent('Referred.Email', {
+    logEvent('Referral.Email', {
       currentPage: window.location.toString(),
       program: hit.title,
       email: hit.email,
