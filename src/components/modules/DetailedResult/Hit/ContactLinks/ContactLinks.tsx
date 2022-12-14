@@ -55,7 +55,7 @@ export default function ContactLinks({ hit }) {
             Hours:
           </Text>
           <Text color="primary" fontWeight={300} whiteSpace="pre-line">
-            {hit.schedule}
+            {hit.schedule?.replaceAll('\\n', '\n')}
           </Text>
         </Flex>
       )}
