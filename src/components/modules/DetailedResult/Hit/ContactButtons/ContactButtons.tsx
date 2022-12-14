@@ -99,7 +99,6 @@ export default function ContactButtons({ hit }) {
         <ContactButtonsDialog
           action={action}
           hit={hit}
-          location={location}
           onClose={() => setAction(null)}
         />
       ) : null}
