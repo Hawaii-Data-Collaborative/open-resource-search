@@ -31,8 +31,8 @@ export default function ResultsLoader({ results, location }) {
             textAlign: 'center',
           }}
         >
-          No results. If you are having a hard time finding what you're looking
-          for, call 211.
+          No results. If you are having a hard time finding what you&apos;re
+          looking for, call 211.
         </div>
       ) : null}
     </>
