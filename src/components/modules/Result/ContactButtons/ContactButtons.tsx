@@ -22,7 +22,7 @@ export default function ContactButtons({ hit, location }) {
           style={{ flex: '1 1 50%' }}
           onClick={() => {
             setAction('call');
-            logEvent('PotentialReferral.Call', {
+            logEvent('Referral.Phone.ShowInfo', {
               currentPage: window.location.toString(),
               program: hit.title,
               phone: hit.phone,
@@ -40,7 +40,7 @@ export default function ContactButtons({ hit, location }) {
           onClick={() => {
             setAction('website');
 
-            logEvent('PotentialReferral.Website', {
+            logEvent('Referral.Website.ShowInfo', {
               currentPage: window.location.toString(),
               program: hit.title,
               url: getWebsiteUrl(hit.website),
@@ -63,7 +63,7 @@ export default function ContactButtons({ hit, location }) {
           onClick={() => {
             setAction('directions');
 
-            logEvent('PotentialReferral.Directions', {
+            logEvent('Referral.Directions.ShowInfo', {
               currentPage: window.location.toString(),
               program: hit.title,
             });
