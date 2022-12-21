@@ -8,6 +8,7 @@ import Location from './Location/Location';
 import Description from './Description/Description';
 import ContactLinks from './ContactLinks/ContactLinks';
 import ContactButtons from './ContactButtons/ContactButtons';
+import ServiceArea from './ServiceArea/ServiceArea';
 import ApplicationProcess from './ApplicationProcess/ApplicationProcess';
 import Languages from './Languages/Languages';
 import Eligibility from './Eligibility/Eligibility';
@@ -43,6 +44,7 @@ export default function Hit({ hit, query }: HitProps) {
       <Description hit={hit} />
       <ContactLinks hit={hit} />
       <ContactButtons hit={hit} />
+      <ServiceArea hit={hit} />
       <ApplicationProcess hit={hit} />
       <Languages hit={hit} />
       <Eligibility hit={hit} />
