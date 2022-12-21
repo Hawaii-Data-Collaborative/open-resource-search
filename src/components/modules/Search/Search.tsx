@@ -41,7 +41,8 @@ function Search({ variant = 'outlined' }: Props) {
   const radius = useAppSelector((state) => state.search.radius);
   const hits = useCachedTaxonomies(query);
   const suggestions = useSuggestionsQuery();
-  const newHits = query.length === 0 ? suggestions : hits;
+  const hasRelatedSearches = suggestions.some((s) => s.id < -1000);
+  const newHits = query.length === 0 || hasRelatedSearches ? suggestions : hits;
 
   function updateQuery(e, v) {
     // For some reason on enter will send an empty value even if there is an existing value.
@@ -172,7 +173,11 @@ function Search({ variant = 'outlined' }: Props) {
             inputValue={query}
             onInputChange={updateQuery}
             getOptionLabel={(o: any) => o.title || o.text || o.group || o}
-            groupBy={query.length === 0 ? (o: any) => o.group : undefined}
+            groupBy={
+              query.length === 0 || hasRelatedSearches
+                ? (o: any) => o.group
+                : undefined
+            }
             renderInput={(params) => (
               <TextField
                 {...params}

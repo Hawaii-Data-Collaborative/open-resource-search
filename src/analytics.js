@@ -25,3 +25,10 @@ export function logEvent(eventName, data) {
   const url = `${getAppConfigValue('apiUrl')}/api/v1/user-activity`;
   axios.post(url, { userId: user.id, event: eventName, data });
 }
+
+export function getAnalyticsUserId() {
+  if (!user) {
+    init();
+  }
+  return user.id;
+}
