@@ -18,7 +18,7 @@ export default function Category({ data }) {
       <Box>
         <img
           alt=""
-          src={data.categoryImage}
+          src={data.icon}
           width={36}
           height="auto"
           style={{
@@ -28,11 +28,11 @@ export default function Category({ data }) {
       </Box>
       <Box>
         <Text variant="h3" color="primary" marginBottom="8px">
-          {data.categoryName}
+          {data.name}
         </Text>
         <Flex flexDirection="column">
-          {data.categories.map((cat) => {
-            let href = `/search?taxonomies=${cat.id}`;
+          {data.children.map((cat) => {
+            let href = `/search?${cat.params}`;
 
             if (location != null && location.length > 0) {
               href += `&location=${location}`;
