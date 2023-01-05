@@ -20,12 +20,38 @@ export default function Results({ hideSearch }) {
   return (
     <StyledResults ref={scrollParent}>
       {!hideSearch && (
-        <Box padding="16px" backgroundColor="#ECE9F1">
+        <Box
+          padding="16px 16px 0px"
+          backgroundColor="#ECE9F1"
+          position="relative"
+        >
           <Search variant="filled" />
 
           {router.query.taxonomies != null &&
             router.query.taxonomies.length > 0 && (
-              <Text color="textSecondary">Taxonomy Search: {taxonomies}</Text>
+              <>
+                <Text
+                  color="textSecondary"
+                  maxHeight={70}
+                  overflow="hidden"
+                  fontSize={13}
+                  lineHeight={1.4}
+                  paddingTop="5px"
+                >
+                  {`Taxonomy Search: ${taxonomies}`}
+                </Text>
+                <div
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    background:
+                      'linear-gradient(#ECE9F100 0%, #ECE9F166 10%, #ECE9F1AA 30%, #ECE9F1FF 100%)',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                  }}
+                />
+              </>
             )}
         </Box>
       )}
