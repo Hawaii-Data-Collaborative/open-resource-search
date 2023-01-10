@@ -52,9 +52,9 @@ export const fetchResults = createAsyncThunk(
 
     let rv = resultsFromApi(res.data);
     const count = rv.length;
+    const radius = Number(params.radius);
     let filterByRadiusCount = null;
-
-    if (params.radius && state.search.location?.trim()) {
+    if (radius > 0 && state.search.location?.trim()) {
       rv = await filterByRadius(
         rv,
         Number(params.radius),
@@ -109,7 +109,8 @@ export const fetchResultsByTaxonomies = createAsyncThunk(
     );
 
     let rv = resultsFromApi(res.data);
-    if (params.radius && state.search.location?.trim()) {
+    const radius = Number(params.radius);
+    if (radius > 0 && state.search.location?.trim()) {
       rv = await filterByRadius(
         rv,
         Number(params.radius),

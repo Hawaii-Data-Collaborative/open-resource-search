@@ -188,37 +188,6 @@ function Search({ variant = 'outlined' }: Props) {
             )}
           />
         </Flex>
-
-        <Flex
-          marginLeft={[0, '4px']}
-          marginRight={[0, '4px']}
-          width={['100%', 'initial']}
-        >
-          <StyledFormControl
-            style={{ minWidth: '140px', width: '100%' }}
-            variant={variant}
-          >
-            <InputLabel htmlFor="radius-filter">Search Radius</InputLabel>
-            <Select
-              native
-              value={radius}
-              onChange={setRadius}
-              label="Search Radius"
-              inputProps={{
-                name: 'radius',
-                id: 'radius-filter',
-              }}
-            >
-              <option value="0">Any</option>
-              <option value="5">5 Miles</option>
-              <option value="10">10 Miles</option>
-              <option value="15">15 Miles</option>
-              <option value="30">30 Miles</option>
-              <option value="45">45 Miles</option>
-              <option value="60">60 Miles</option>
-            </Select>
-          </StyledFormControl>
-        </Flex>
       </Flex>
 
       <Flex flexDirection={['column', 'row']}>
@@ -306,6 +275,31 @@ function Search({ variant = 'outlined' }: Props) {
             }}
           />
         </Flex>
+
+        <StyledFormControl
+          style={{ marginLeft: 5, marginRight: 5 }}
+          variant={variant}
+        >
+          <InputLabel htmlFor="radius-filter">Distance</InputLabel>
+          <Select
+            native
+            value={radius}
+            onChange={setRadius}
+            label="Distance"
+            inputProps={{
+              name: 'radius',
+              id: 'radius-filter',
+            }}
+          >
+            <option value="0">Any</option>
+            <option value="5">5 Miles</option>
+            <option value="10">10 Miles</option>
+            <option value="15">15 Miles</option>
+            <option value="30">30 Miles</option>
+            <option value="45">45 Miles</option>
+            <option value="60">60 Miles</option>
+          </Select>
+        </StyledFormControl>
 
         <Button
           color="secondary"
