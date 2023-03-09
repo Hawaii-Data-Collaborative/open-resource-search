@@ -11,7 +11,7 @@ export function useSuggestionsQuery() {
   useEffect(() => {
     const fn = async () => {
       // prettier-ignore
-      const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/suggestion?userId=${getAnalyticsUserId()}&searchText=${searchText}`);
+      const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/suggestions?userId=${getAnalyticsUserId()}&searchText=${searchText}`);
       setData(res.data);
     };
 

@@ -32,10 +32,12 @@ export default function Results({ hideSearch }) {
               <>
                 <Text
                   color="textSecondary"
+                  minHeight={22}
                   maxHeight={70}
                   overflow="hidden"
                   fontSize={13}
                   lineHeight={1.4}
+                  paddingBottom="2px"
                   paddingTop="5px"
                 >
                   {`Taxonomy Search: ${taxonomies}`}
@@ -45,10 +47,11 @@ export default function Results({ hideSearch }) {
                     width: '100%',
                     height: 30,
                     background:
-                      'linear-gradient(#ECE9F100 0%, #ECE9F166 10%, #ECE9F1AA 30%, #ECE9F1FF 100%)',
+                      'linear-gradient(#ECE9F100 0%, #ECE9F133 40%, #ECE9F166 60%, #ECE9F1FF 100%)',
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
+                    pointerEvents: 'none',
                   }}
                 />
               </>

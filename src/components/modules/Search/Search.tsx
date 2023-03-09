@@ -17,14 +17,20 @@ import {
   MyLocationOutlined,
 } from '@material-ui/icons';
 import { useAppDispatch, useAppSelector } from 'src/redux/store';
-import { setQuery, setLocation, setDistance } from 'src/redux/slices/search';
-import useCachedTaxonomies from 'src/hooks/useCachedTaxonomies';
+import {
+  setQuery,
+  setLocation,
+  setDistance,
+  setTaxonomies,
+} from 'src/redux/slices/search';
+// import useCachedTaxonomies from 'src/hooks/useCachedTaxonomies';
 import parse from 'autosuggest-highlight/parse';
 import { useRouter } from 'next/router';
 import useCachedLocations from 'src/hooks/useCachedLocations';
 import { StyledAutocomplete, StyledFormControl } from './Search.styled';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import { useSuggestionsQuery } from '@hook/useSuggestionsQuery';
+import { getParentElements } from '@util/domUtil';
 
 type Props = {
   variant?: 'outlined' | 'standard' | 'filled';
@@ -39,17 +45,49 @@ function Search({ variant = 'outlined' }: Props) {
   const taxonomies = useAppSelector((state) => state.search.taxonomies);
   const geoSuggestions = useCachedLocations(locationQuery);
   const radius = useAppSelector((state) => state.search.radius);
-  const hits = useCachedTaxonomies(query);
+  // const hits = useCachedTaxonomies(query);
   const suggestions = useSuggestionsQuery();
-  const hasRelatedSearches = suggestions.some((s) => s.id < -1000);
-  const newHits = query.length === 0 || hasRelatedSearches ? suggestions : hits;
+  const newHits = suggestions;
 
-  function updateQuery(e, v) {
+  const onChange = (e, v) => {
+    console.log('[onChange] v=%o e=%o', v, e);
+    let text: string, group: string, code: string;
+    if (!v) {
+      text = '';
+    } else if (typeof v === 'string') {
+      text = v;
+    } else if (typeof v === 'object') {
+      text = v.text;
+      group = v.group;
+      code = v.code;
+    }
+
+    dispatch(setQuery(text));
+    if (group === 'Categories / Taxonomies') {
+      dispatch(setTaxonomies(code));
+    } else {
+      dispatch(setTaxonomies(''));
+    }
+  };
+
+  function onInputChange(e, v) {
+    console.log('[onInputChange] v=%o e=%o', v, e);
+    if (
+      e?.type === 'click' &&
+      !getParentElements(e.target).some((el) =>
+        el.classList.contains('MuiAutocomplete-endAdornment')
+      )
+    ) {
+      console.log('[onInputChange] defer to onChange');
+      return;
+    }
     // For some reason on enter will send an empty value even if there is an existing value.
     if (e != null && e.key !== 'Enter') {
       dispatch(setQuery(v));
-    } else if (e != null && e.key === 'Enter' && v.length > 0) {
+      dispatch(setTaxonomies(''));
+    } else if (e != null && e.key === 'Enter' && v?.length > 0) {
       dispatch(setQuery(v));
+      dispatch(setTaxonomies(''));
     }
   }
 
@@ -106,54 +144,24 @@ function Search({ variant = 'outlined' }: Props) {
   function submitSearch(e) {
     e.preventDefault();
 
-    const suggestion = suggestions.find((el) => el.text === query);
-
-    if (suggestion == null) {
-      const taxonomy = newHits.find((el) => el.text === query);
-
-      if (taxonomy == null) {
-        const queryParams: any = {};
-
-        if (query.length > 0) {
-          queryParams.terms = query;
-        } else if (taxonomies.length > 0) {
-          queryParams.taxonomies = taxonomies;
-        }
-
-        if (locationQuery.length > 0) {
-          queryParams.location = locationQuery;
-        }
-
-        if (radius.length > 0) {
-          queryParams.radius = radius;
-        }
-
-        router.push({
-          pathname: '/search',
-          query: queryParams,
-        });
-      } else {
-        router.push({
-          pathname: '/search',
-          query: {
-            terms: query,
-            location: locationQuery,
-            radius: radius,
-            taxonomies: taxonomy._source.taxonomy,
-          },
-        });
-      }
-    } else {
-      router.push({
-        pathname: '/search',
-        query: {
-          terms: query,
-          location: locationQuery,
-          radius: radius,
-          taxonomies: suggestion.taxonomies,
-        },
-      });
+    const queryParams: any = {};
+    if (query.length > 0) {
+      queryParams.terms = query;
     }
+    if (taxonomies.length > 0) {
+      queryParams.taxonomies = taxonomies;
+    }
+    if (locationQuery.length > 0) {
+      queryParams.location = locationQuery;
+    }
+    if (radius.length > 0 && radius !== '0') {
+      queryParams.radius = radius;
+    }
+
+    router.push({
+      pathname: '/search',
+      query: queryParams,
+    });
   }
 
   return (
@@ -171,13 +179,11 @@ function Search({ variant = 'outlined' }: Props) {
             freeSolo
             fullWidth
             inputValue={query}
-            onInputChange={updateQuery}
+            onInputChange={onInputChange}
+            onChange={onChange}
+            filterOptions={(options) => options}
             getOptionLabel={(o: any) => o.title || o.text || o.group || o}
-            groupBy={
-              query.length === 0 || hasRelatedSearches
-                ? (o: any) => o.group
-                : undefined
-            }
+            groupBy={(o: any) => o.group}
             renderInput={(params) => (
               <TextField
                 {...params}

@@ -18,3 +18,16 @@ export function onCopyToClipboard(element: HTMLElement) {
     document.body.removeChild(div);
   }, 2000);
 }
+
+export function getParentElements(el: Element) {
+  const parents = [];
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    if (!el) break;
+    if (el.parentElement) {
+      parents.push(el.parentElement);
+    }
+    el = el.parentElement;
+  }
+  return parents;
+}
