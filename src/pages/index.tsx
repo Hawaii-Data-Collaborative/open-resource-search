@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import InfoIcon from '@material-ui/icons/Info';
 import Flex from 'src/components/elements/Flex/Flex';
 import Box from 'src/components/elements/Box/Box';
 import Text from 'src/components/elements/Text/Text';
@@ -68,6 +69,30 @@ function Home() {
           </Text>
 
           <Search />
+
+          <div>
+            <Text
+              color="textPrimary"
+              marginTop="8px"
+              display="flex"
+              alignItems="center"
+              fontSize="90%"
+            >
+              <InfoIcon style={{ marginRight: 5 }} fontSize="small" />
+              <Link
+                href="https://auw211.org/tips-for-search/"
+                rel="noreferrer noopener"
+                variant="normal"
+                color="textPrimary"
+                target="_blank"
+                style={{
+                  textDecoration: 'underline',
+                }}
+              >
+                <span>Search tips</span>
+              </Link>
+            </Text>
+          </div>
 
           <If value={getAppConfigValue('search.subtitle')}>
             <Text color="textPrimary" marginTop="4px">
