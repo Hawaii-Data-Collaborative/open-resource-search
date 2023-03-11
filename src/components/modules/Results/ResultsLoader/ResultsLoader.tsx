@@ -32,7 +32,15 @@ export default function ResultsLoader({ results, location }) {
           }}
         >
           No results. If you are having a hard time finding what you&apos;re
-          looking for, call 211.
+          looking for,{' '}
+          <a
+            href="https://auw211.org/tips-for-search/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            check out our tips page
+          </a>{' '}
+          or call 211.
         </div>
       ) : null}
     </>
