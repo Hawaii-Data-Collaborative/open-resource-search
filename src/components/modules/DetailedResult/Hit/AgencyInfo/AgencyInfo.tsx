@@ -11,7 +11,7 @@ export default function AgencyInfo({ hit }) {
       <Text variant="subtitle" color="primary">
         {!hit ? <Skeleton /> : hit.organizationName}
       </Text>
-      <Text color="textSecondary">
+      <Text color="textSecondary" whiteSpace="pre-wrap">
         {!hit && <Skeleton count={3} />}
         {hit && hit.organizationDescription}
       </Text>
