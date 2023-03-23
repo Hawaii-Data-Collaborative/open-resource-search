@@ -3,7 +3,7 @@ import { Button as MuiButton, Tooltip } from '@material-ui/core';
 import ClipboardJS from 'clipboard';
 import { getDistance } from 'geolib';
 import Skeleton from 'react-loading-skeleton';
-import { FileCopy, Room } from '@material-ui/icons';
+import { FileCopy, Room, Info } from '@material-ui/icons';
 import Text from 'src/components/elements/Text/Text';
 import theme from 'src/constants/theme';
 import { logEvent } from 'src/analytics';
@@ -59,7 +59,7 @@ export default function Location({ hit, location }) {
         <Skeleton />
       ) : (
         <>
-          {hit.locationName && (
+          {hit.locationName ? (
             <>
               <Room
                 style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
@@ -81,6 +81,25 @@ export default function Location({ hit, location }) {
                   <FileCopy fontSize="small" />
                 </Tooltip>
               </MuiButton>
+            </>
+          ) : (
+            <>
+              <Room
+                style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
+              />
+              <span style={{ fontSize: '90%', color: '#999' }}>
+                Address unavailable
+              </span>
+              <Tooltip title="This location may be confidential or not open to the public. Please choose another provided contact method for this service.">
+                <Info
+                  fontSize="small"
+                  style={{
+                    marginLeft: '5px',
+                    transform: 'scale(0.9)',
+                    opacity: 0.7,
+                  }}
+                />
+              </Tooltip>
             </>
           )}
         </>
