@@ -1,3 +1,5 @@
+Cloned from https://github.com/211-Connect/open-resource-search.
+
 ![Preview image of deployed application](.github/screenshot.png)
 
 # Open Resource Search
