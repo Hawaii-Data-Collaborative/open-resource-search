@@ -1,7 +1,15 @@
 import { environment } from '@constant/environment';
 import appConfig from '../../app.config.json';
 
+const envConfigs = {
+  'services.map.google.apiKey': environment.SERVICES_MAP_GOOGLE_APIKEY,
+};
+
 export function getAppConfigValue(path: string) {
+  if (envConfigs[path]) {
+    return envConfigs[path];
+  }
+
   const originalPath = path;
   const splitPath = path.split('.');
 
