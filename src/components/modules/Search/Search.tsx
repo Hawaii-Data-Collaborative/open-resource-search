@@ -63,7 +63,7 @@ function Search({ variant = 'outlined' }: Props) {
     }
 
     dispatch(setQuery(text));
-    if (group === 'Categories / Taxonomies') {
+    if (group === 'Services') {
       dispatch(setTaxonomies(code));
     } else {
       dispatch(setTaxonomies(''));
