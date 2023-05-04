@@ -74,3 +74,23 @@ export const VisibleOnMobile = styled.div`
     display: block;
   }
 `;
+
+export const StyledBanner = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #f7383e;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px;
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+  & > * + * {
+    margin-left: 10px;
+  }
+`;

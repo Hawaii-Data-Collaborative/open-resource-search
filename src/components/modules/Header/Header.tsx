@@ -10,10 +10,12 @@ import theme from 'src/constants/theme';
 
 import * as Styles from './Header.styles';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
+import { useBannerQuery } from '@hook/useBannerQuery';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const banner = useBannerQuery();
 
   async function logOut() {
     try {
@@ -226,6 +228,14 @@ export default function Header() {
           </AnimatePresence>
         </Styles.VisibleOnMobile>
       </Styles.StyledHeader>
+
+      {banner?.text ? (
+        <Styles.StyledBanner>
+          <a href={banner.link} target="_blank" rel="noreferrer">
+            {banner.text}
+          </a>
+        </Styles.StyledBanner>
+      ) : null}
     </>
   );
 }
