@@ -15,7 +15,7 @@ export default function ContactButtons({ hit }) {
   if (!hit) return null;
 
   return (
-    <DontPrintContainer style={{ gap: 10 }}>
+    <DontPrintContainer style={{ gap: 10 }} className="ContactButtons">
       {!hit.phone ?? hit.phone.length === 0 ? null : (
         <Button2
           style={{ flex: '1 1 50%' }}

@@ -15,6 +15,7 @@ import GlobalConfig from '@module/GlobalConfig/GlobalConfig';
 import isInternetExplorer from '@util/isInternetExplorer';
 
 import '../components/elements/Button/Button.scss';
+import '../components/modules/DetailedResult/Hit/Categories/Categories.scss';
 
 // Import polyfills for IE11 support
 if (

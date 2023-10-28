@@ -7,7 +7,7 @@ export default function ContactLinks({ hit }) {
   if (!hit) return null;
 
   return (
-    <Box marginBottom="16px">
+    <Box marginBottom="16px" className="ContactLinks">
       {/* {hit.website && (
         <Flex alignItems="flex-start">
           <Text color="primary" marginRight="4px">

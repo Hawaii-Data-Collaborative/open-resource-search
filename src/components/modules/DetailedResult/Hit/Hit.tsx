@@ -8,6 +8,7 @@ import Location from './Location/Location';
 import Description from './Description/Description';
 import ContactLinks from './ContactLinks/ContactLinks';
 import ContactButtons from './ContactButtons/ContactButtons';
+import Categories from './Categories/Categories';
 import ServiceArea from './ServiceArea/ServiceArea';
 import ApplicationProcess from './ApplicationProcess/ApplicationProcess';
 import Languages from './Languages/Languages';
@@ -27,7 +28,7 @@ export default function Hit({ hit, query }: HitProps) {
   const [share, setShare] = useState(false);
 
   return (
-    <Box padding="16px 24px">
+    <Box padding="16px 24px" className="Hit">
       <Actions setShare={setShare} />
 
       <EmergencyInfo hit={hit} />
@@ -44,6 +45,7 @@ export default function Hit({ hit, query }: HitProps) {
       <Description hit={hit} />
       <ContactLinks hit={hit} />
       <ContactButtons hit={hit} />
+      <Categories hit={hit} />
       <ServiceArea hit={hit} />
       <ApplicationProcess hit={hit} />
       <Languages hit={hit} />

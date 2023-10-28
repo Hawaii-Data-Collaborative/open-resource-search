@@ -1,0 +1,22 @@
+.Categories {
+  h2 {
+    padding-bottom: 8px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  a {
+    font-size: 10.5px;
+    padding: 4px 14px;
+    border-radius: 17px;
+    background-color: #e0f4fd;
+    &:hover {
+      background-color: darken(#e0f4fd, 5%);
+    }
+    &:active {
+      background-color: darken(#e0f4fd, 10%);
+    }
+  }
+}
