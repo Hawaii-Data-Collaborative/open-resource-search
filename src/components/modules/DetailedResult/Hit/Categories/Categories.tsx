@@ -17,7 +17,7 @@ export default function Categories({ hit }) {
           <Button
             key={c.value}
             color="default"
-            href={`/search?taxonomies=${c.value}`}
+            href={`/search?terms=${c.label}&taxonomies=${c.value}`}
           >
             {c.label}
           </Button>
