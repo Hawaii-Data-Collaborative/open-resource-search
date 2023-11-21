@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 echo "[deploy] pushing ..."
-git push beta main
+git push
 
 echo "[deploy] scp'ing ..."
 scp next.tar.gz auw1:/var/www/searchengine-frontend/
