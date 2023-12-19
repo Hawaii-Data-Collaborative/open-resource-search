@@ -50,7 +50,7 @@ function Search({ variant = 'outlined' }: Props) {
   const newHits = suggestions;
 
   const onChange = (e, v) => {
-    console.log('[onChange] v=%o e=%o', v, e);
+    // console.log('[onChange] v=%o e=%o', v, e);
     let text: string, group: string, code: string;
     if (!v) {
       text = '';
@@ -71,14 +71,14 @@ function Search({ variant = 'outlined' }: Props) {
   };
 
   function onInputChange(e, v) {
-    console.log('[onInputChange] v=%o e=%o', v, e);
+    // console.log('[onInputChange] v=%o e=%o', v, e);
     if (
       e?.type === 'click' &&
       !getParentElements(e.target).some((el) =>
         el.classList.contains('MuiAutocomplete-endAdornment')
       )
     ) {
-      console.log('[onInputChange] defer to onChange');
+      // console.log('[onInputChange] defer to onChange');
       return;
     }
     // For some reason on enter will send an empty value even if there is an existing value.
