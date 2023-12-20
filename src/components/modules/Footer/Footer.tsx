@@ -24,7 +24,7 @@ export default function SiteFooter() {
         </Text>
         <Box>
           <Link
-            href="https://auwadmin.windwardapps.com"
+            href="/admin"
             target="_blank"
             style={{
               color: getTextColorContrast(theme.PRIMARY_COLOR),
