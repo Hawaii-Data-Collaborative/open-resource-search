@@ -1,8 +1,8 @@
 {
-  "apiUrl": "http://146.190.13.218:3004",
+  "apiUrl": "https://dev-auw.hawaiidata.org",
   "brandName": "Aloha United Way",
   "homeUrl": "",
-  "publicUrl": "http://146.190.13.218:3004",
+  "publicUrl": "https://dev-auw.hawaiidata.org",
   "feedbackUrl": "",
   "contactEmail": "johndoe@connect211.com",
   "contactNumber": "",
