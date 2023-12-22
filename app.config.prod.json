@@ -1,8 +1,8 @@
 {
-  "apiUrl": "https://search.auw211.org/",
+  "apiUrl": "https://search.auw211.org",
   "brandName": "Aloha United Way",
   "homeUrl": "",
-  "publicUrl": "https://search.auw211.org/",
+  "publicUrl": "https://search.auw211.org",
   "feedbackUrl": "",
   "contactEmail": "johndoe@connect211.com",
   "contactNumber": "",
