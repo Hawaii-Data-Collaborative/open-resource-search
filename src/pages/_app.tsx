@@ -16,6 +16,7 @@ import isInternetExplorer from '@util/isInternetExplorer';
 
 import '../components/elements/Button/Button.scss';
 import '../components/modules/DetailedResult/Hit/Categories/Categories.scss';
+import '../components/modules/Search/Search.scss';
 
 // Import polyfills for IE11 support
 if (

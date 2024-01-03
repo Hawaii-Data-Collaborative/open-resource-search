@@ -7,6 +7,7 @@ import {
   Typography,
   InputAdornment,
   IconButton,
+  FormControl,
 } from '@material-ui/core';
 import Flex from 'src/components/elements/Flex/Flex';
 import Button from 'src/components/elements/Button/Button';
@@ -27,7 +28,7 @@ import {
 import parse from 'autosuggest-highlight/parse';
 import { useRouter } from 'next/router';
 import useCachedLocations from 'src/hooks/useCachedLocations';
-import { StyledAutocomplete, StyledFormControl } from './Search.styled';
+import { StyledAutocomplete } from './Search.styled';
 import { getAppConfigValue } from 'src/utils/getAppConfigValue';
 import { useSuggestionsQuery } from '@hook/useSuggestionsQuery';
 import { getParentElements } from '@util/domUtil';
@@ -165,7 +166,7 @@ function Search({ variant = 'outlined' }: Props) {
   }
 
   return (
-    <form onSubmit={submitSearch}>
+    <form className="Search" onSubmit={submitSearch}>
       <Flex mb="8px" flexDirection={['column', 'row']}>
         <Flex
           flex={2}
@@ -282,10 +283,7 @@ function Search({ variant = 'outlined' }: Props) {
           />
         </Flex>
 
-        <StyledFormControl
-          style={{ marginLeft: 5, marginRight: 5 }}
-          variant={variant}
-        >
+        <FormControl className="distance" variant={variant}>
           <InputLabel htmlFor="radius-filter">Distance</InputLabel>
           <Select
             native
@@ -305,7 +303,7 @@ function Search({ variant = 'outlined' }: Props) {
             <option value="45">45 Miles</option>
             <option value="60">60 Miles</option>
           </Select>
-        </StyledFormControl>
+        </FormControl>
 
         <Button
           color="secondary"
