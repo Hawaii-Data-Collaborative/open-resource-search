@@ -45,7 +45,7 @@ export default function Hit({ hit, location, score }: HitProps) {
       </Box>
 
       <Description hit={hit} />
-      <ContactButtons hit={hit} location={location} />
+      <ContactButtons hit={hit} />
       <MoreInformation hit={hit} />
 
       {(process.env.NODE_ENV === 'development' ||
