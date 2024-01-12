@@ -54,10 +54,7 @@ export default function ContactButtons({ hit, location }) {
         </Button2>
       )}
 
-      {location.lat == null ||
-      location.lng == null ||
-      hit.locationLat == null ||
-      hit.locationLon == null ? null : (
+      {hit.locationLat && hit.locationLon ? (
         <Button2
           style={{ flex: '1 1 50%' }}
           onClick={() => {
@@ -74,7 +71,7 @@ export default function ContactButtons({ hit, location }) {
           />
           Directions
         </Button2>
-      )}
+      ) : null}
 
       {action ? (
         <ContactButtonsDialog

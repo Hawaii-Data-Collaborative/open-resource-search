@@ -8,7 +8,7 @@ export default function Eligibility({ hit }) {
       <Text variant="h2" color="primary">
         Eligibility
       </Text>
-      <Text color="textSecondary">
+      <Text color="textSecondary" whiteSpace="pre-line">
         {!hit && <Skeleton count={3} />}
 
         {hit && hit.eligibility}
