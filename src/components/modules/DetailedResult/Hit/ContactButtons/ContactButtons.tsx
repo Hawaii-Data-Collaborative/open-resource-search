@@ -1,5 +1,4 @@
 import { Phone, Language, Navigation } from '@material-ui/icons';
-import { useAppSelector } from 'src/redux/store';
 import theme from 'src/constants/theme';
 import { logEvent } from 'src/analytics';
 import { DontPrintContainer } from '../Hit.styles';
@@ -10,7 +9,6 @@ import { ContactButtonsDialog } from '@module/Result/ContactButtons/ContactButto
 
 export default function ContactButtons({ hit }) {
   const [action, setAction] = useState(null);
-  const location = useAppSelector((state) => state.location);
 
   if (!hit) return null;
 

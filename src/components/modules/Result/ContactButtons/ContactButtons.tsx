@@ -10,7 +10,7 @@ import { getWebsiteUrl } from '@util/stringUtil';
 import ClipboardJS from 'clipboard';
 import { onCopyToClipboard } from '@util/domUtil';
 
-export default function ContactButtons({ hit, location }) {
+export default function ContactButtons({ hit }) {
   const [action, setAction] = useState(null);
 
   if (!hit) return null;
