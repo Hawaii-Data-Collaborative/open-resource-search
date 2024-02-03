@@ -54,9 +54,15 @@ export default function ContactLinks({ hit }) {
           <Text color="primary" marginRight="4px">
             Hours:
           </Text>
-          <Text color="primary" fontWeight={300} whiteSpace="pre-line">
-            {hit.schedule?.replaceAll('\\n', '\n')}
-          </Text>
+          <Text
+            variant="div"
+            color="primary"
+            fontWeight={300}
+            whiteSpace="pre-line"
+            dangerouslySetInnerHTML={{
+              __html: hit.schedule?.replaceAll('\\n', '\n'),
+            }}
+          />
         </Flex>
       )}
     </Box>

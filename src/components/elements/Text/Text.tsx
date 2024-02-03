@@ -14,10 +14,9 @@ import {
 } from 'styled-system';
 
 import { defaultTheme } from 'src/styles/theme';
-import { VariantUnion } from './variants';
 
 interface TextProps extends HTMLAttributes<HTMLElement> {
-  variant?: VariantUnion;
+  variant?: string;
 }
 
 interface StyledTextProps
@@ -32,10 +31,18 @@ interface StyledTextProps
   whiteSpace?: string;
 }
 
-function Text({ variant, children, className }: TextProps) {
+function Text({
+  variant,
+  children,
+  className,
+  dangerouslySetInnerHTML,
+}: TextProps) {
   const otherProps: any = {};
   if (typeof children === 'string') {
     otherProps.title = children;
+  }
+  if (dangerouslySetInnerHTML) {
+    otherProps.dangerouslySetInnerHTML = dangerouslySetInnerHTML;
   }
   switch (variant) {
     case 'h1':
@@ -69,6 +76,12 @@ function Text({ variant, children, className }: TextProps) {
         <span className={className} {...otherProps}>
           {children}
         </span>
+      );
+    case 'div':
+      return (
+        <div className={className} {...otherProps}>
+          {children}
+        </div>
       );
     case 'body1':
     case 'body2':
