@@ -1,18 +1,21 @@
-import Flex from 'src/components/elements/Flex/Flex';
-import Header from 'src/components/modules/Header/Header';
+import Flex from 'src/components/elements/Flex/Flex'
+import Header from 'src/components/modules/Header/Header'
+import { AuthContextProvider } from 'src/components/providers'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const Search = ({ children }: Props) => (
-  <Flex flexDirection="column" height="100vh" overflow="hidden">
-    <Header />
+  <AuthContextProvider>
+    <Flex flexDirection="column" height="100vh" overflow="hidden">
+      <Header />
 
-    <Flex flex={1} position="relative" overflow="hidden" role="main">
-      {children}
+      <Flex flex={1} position="relative" overflow="hidden" role="main">
+        {children}
+      </Flex>
     </Flex>
-  </Flex>
-);
+  </AuthContextProvider>
+)
 
-export default Search;
+export default Search

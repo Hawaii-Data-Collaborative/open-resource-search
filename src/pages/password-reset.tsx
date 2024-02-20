@@ -1,83 +1,69 @@
-import { useRef, useState } from 'react';
-import { Link } from 'src/components/elements/Link/Link';
-import { Text } from 'src/components/elements/Text/Text';
-import { Button } from 'src/components/elements/Button/Button';
-import { Input } from 'src/components/elements/Input/Input';
-import { Flex } from 'src/components/elements/Flex/Flex';
-import { Label } from 'src/components/elements/Label/Label';
-import { Box } from 'src/components/elements/Box/Box';
-import Head from 'next/head';
-import { Auth } from 'aws-amplify';
-import { useRouter } from 'next/router';
-import redirect from 'src/utils/redirect';
-import { getAppConfigValue } from 'src/utils/getAppConfigValue';
-import If from '@element/If/If';
-import usePageLoaded from '@hook/usePageLoaded';
+import { useRef, useState } from 'react'
+import { Link } from 'src/components/elements/Link/Link'
+import { Text } from 'src/components/elements/Text/Text'
+import { Button } from 'src/components/elements/Button/Button'
+import { Input } from 'src/components/elements/Input/Input'
+import { Flex } from 'src/components/elements/Flex/Flex'
+import { Label } from 'src/components/elements/Label/Label'
+import { Box } from 'src/components/elements/Box/Box'
+import Head from 'next/head'
+import { Auth } from 'aws-amplify'
+import { useRouter } from 'next/router'
+import redirect from 'src/utils/redirect'
+import { getAppConfigValue } from 'src/utils/getAppConfigValue'
+import If from '@element/If/If'
+import usePageLoaded from '@hook/usePageLoaded'
 
 type Props = {
   query: {
-    confirmation_code?: string;
-    user_name?: string;
-  };
-};
+    confirmation_code?: string
+    user_name?: string
+  }
+}
 
-export const getServerSideProps = (context) => {
-  if (context.user != null) return redirect('/');
+export const getServerSideProps = context => {
+  if (context.user != null) return redirect('/')
 
   return {
     props: {
-      query: context.query,
-    },
-  };
-};
+      query: context.query
+    }
+  }
+}
 
 function PasswordReset({ query }: Props) {
-  const username = useRef<HTMLInputElement>();
-  const newPassword = useRef<HTMLInputElement>();
-  const [errorMessage, setErrorMessage] = useState('');
-  const [message, setMessage] = useState('');
-  const router = useRouter();
+  const username = useRef<HTMLInputElement>()
+  const newPassword = useRef<HTMLInputElement>()
+  const [errorMessage, setErrorMessage] = useState('')
+  const [message, setMessage] = useState('')
+  const router = useRouter()
 
-  usePageLoaded();
+  usePageLoaded()
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       if (query.confirmation_code != null && query.user_name != null) {
-        await Auth.forgotPasswordSubmit(
-          query.user_name,
-          query.confirmation_code,
-          newPassword?.current?.value ?? ''
-        );
-        router.push(
-          '/signin?message=Password%20saved.%20Sign%20in%20with%20your%20new%20password.'
-        );
+        await Auth.forgotPasswordSubmit(query.user_name, query.confirmation_code, newPassword?.current?.value ?? '')
+        router.push('/login?message=Password%20saved.%20Sign%20in%20with%20your%20new%20password.')
       } else {
-        await Auth.forgotPassword(username?.current?.value ?? '');
+        await Auth.forgotPassword(username?.current?.value ?? '')
         setMessage(
           'If an account exists with this email address, you will be receiving a confirmation link to your inbox.'
-        );
+        )
       }
     } catch (err) {
-      setMessage('');
-      setErrorMessage(err?.message ?? '');
+      setMessage('')
+      setErrorMessage(err?.message ?? '')
     }
   }
 
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="center"
-      minHeight="100vh"
-      flexDirection="column"
-    >
+    <Flex alignItems="center" justifyContent="center" minHeight="100vh" flexDirection="column">
       <Head>
         <title>{getAppConfigValue('brandName')} | Sign In</title>
-        <meta
-          name="description"
-          content={getAppConfigValue('meta.description')}
-        />
+        <meta name="description" content={getAppConfigValue('meta.description')} />
       </Head>
       <form
         onSubmit={handleSubmit}
@@ -87,28 +73,17 @@ function PasswordReset({ query }: Props) {
           width: '100%',
           maxWidth: 360,
           borderRadius: 6,
-          marginBottom: '16px',
+          marginBottom: '16px'
         }}
       >
         <If value={message.length > 0}>
-          <Box
-            marginBottom="8px"
-            backgroundColor="#3faa4b"
-            borderRadius="6px"
-            padding="8px"
-          >
+          <Box marginBottom="8px" backgroundColor="#3faa4b" borderRadius="6px" padding="8px">
             {message}
           </Box>
         </If>
 
         <If value={errorMessage.length > 0}>
-          <Box
-            marginBottom="8px"
-            backgroundColor="#DA291C"
-            color="#fff"
-            borderRadius="6px"
-            padding="8px"
-          >
+          <Box marginBottom="8px" backgroundColor="#DA291C" color="#fff" borderRadius="6px" padding="8px">
             {errorMessage}
           </Box>
         </If>
@@ -117,12 +92,7 @@ function PasswordReset({ query }: Props) {
           <Text variant="h2" color="textSecondary" marginBottom="16px">
             Change Password
           </Text>
-          <Label
-            id="password-label"
-            htmlFor="password"
-            marginBottom="8px"
-            color="textSecondary"
-          >
+          <Label id="password-label" htmlFor="password" marginBottom="8px" color="textSecondary">
             New Password
           </Label>
           <Input
@@ -131,7 +101,7 @@ function PasswordReset({ query }: Props) {
             id="password"
             style={{
               border: '1px solid #ebebeb',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}
             placeholder="NewSuperSecretPassword"
             type="password"
@@ -146,12 +116,7 @@ function PasswordReset({ query }: Props) {
           <Text variant="h2" color="textSecondary" marginBottom="16px">
             Password Reset
           </Text>
-          <Label
-            id="email-label"
-            htmlFor="email"
-            marginBottom="8px"
-            color="textSecondary"
-          >
+          <Label id="email-label" htmlFor="email" marginBottom="8px" color="textSecondary">
             Email
           </Label>
           <Input
@@ -160,7 +125,7 @@ function PasswordReset({ query }: Props) {
             id="email"
             style={{
               border: '1px solid #ebebeb',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
             }}
             placeholder="johndoe@example.com"
             type="email"
@@ -174,7 +139,7 @@ function PasswordReset({ query }: Props) {
 
       <Text paragraph>
         Want to sign in?{' '}
-        <Link color="textPrimary" href="/signin">
+        <Link color="textPrimary" href="/login">
           Log In
         </Link>
       </Text>
@@ -184,7 +149,7 @@ function PasswordReset({ query }: Props) {
         </Link>
       </Text>
     </Flex>
-  );
+  )
 }
 
-export default PasswordReset;
+export default PasswordReset

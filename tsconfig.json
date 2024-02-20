@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
@@ -28,7 +29,8 @@
       "@icon/*": ["src/components/icons/*"],
       "@config/*": ["src/config/*"],
       "@api/*": ["src/api/*"],
-      "@redux/*": ["src/redux/*"]
+      "@redux/*": ["src/redux/*"],
+      "@context": ["src/context"]
     }
   },
   "include": ["next-env.d.ts", "styled.d.ts", "**/*.ts", "**/*.tsx"],

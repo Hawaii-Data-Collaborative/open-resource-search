@@ -1,17 +1,31 @@
-import { useState } from 'react';
-import NextLink from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CloseOutlined, MenuOutlined } from '@material-ui/icons';
-import Link from 'src/components/elements/Link/Link';
-import theme from 'src/constants/theme';
+import { useState } from 'react'
+import NextLink from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { CloseOutlined, MenuOutlined } from '@material-ui/icons'
+import Link from 'src/components/elements/Link/Link'
+import theme from 'src/constants/theme'
 
-import * as Styles from './Header.styles';
-import { getAppConfigValue } from 'src/utils/getAppConfigValue';
-import { useBannerQuery } from '@hook/useBannerQuery';
+import * as Styles from './Header.styles'
+import { getAppConfigValue } from 'src/utils/getAppConfigValue'
+import { useBannerQuery } from '@hook/useBannerQuery'
+import { useAuthContext } from '@hook/useAuthContext'
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const banner = useBannerQuery();
+  const [isOpen, setIsOpen] = useState(false)
+  const banner = useBannerQuery()
+  const { user } = useAuthContext()
+
+  const divider = (
+    <span
+      style={{
+        backgroundColor: theme.PRIMARY_COLOR,
+        marginLeft: '1rem',
+        marginRight: '1rem',
+        width: 1,
+        height: 24
+      }}
+    />
+  )
 
   return (
     <>
@@ -20,20 +34,17 @@ export default function Header() {
           <NextLink href="/" passHref>
             {/* eslint-disable-next-line */}
             <a style={{ lineHeight: 0 }}>
-              <Styles.StyledImage
-                src="/logo.svg"
-                alt="Go back to search home page"
-              />
+              <Styles.StyledImage src="/logo.svg" alt="Go back to search home page" />
             </a>
           </NextLink>
 
           <Styles.VisibleOnMobile>
             <button
-              onClick={() => setIsOpen((prev) => !prev)}
+              onClick={() => setIsOpen(prev => !prev)}
               style={{
                 background: 'none',
                 border: 'none',
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
             >
               {isOpen ? <CloseOutlined /> : <MenuOutlined />}
@@ -43,28 +54,45 @@ export default function Header() {
 
         <Styles.HiddenOnMobile>
           <>
-            <Link
-              href={getAppConfigValue('homeUrl') || '/'}
-              rel="noreferrer"
-              variant="normal"
-              color="primary"
-            >
+            <Link href={getAppConfigValue('homeUrl') || '/'} rel="noreferrer" variant="normal" color="primary">
               Home
             </Link>
 
-            <span
-              style={{
-                backgroundColor: theme.PRIMARY_COLOR,
-                marginLeft: '1rem',
-                marginRight: '1rem',
-                width: 1,
-                height: 24,
-              }}
-            ></span>
+            {divider}
 
             <Link href="https://auw211.org/" variant="normal" color="primary">
               Main Site
             </Link>
+
+            {user ? (
+              <>
+                {divider}
+
+                <Link href="/profile" variant="normal" color="primary">
+                  Profile
+                </Link>
+
+                {divider}
+
+                <Link href="/profile/favorites" variant="normal" color="primary">
+                  Favorites
+                </Link>
+              </>
+            ) : (
+              <>
+                {divider}
+
+                <Link href="/login" variant="normal" color="primary">
+                  Log in
+                </Link>
+
+                {divider}
+
+                <Link href="/signup" variant="normal" color="primary">
+                  Sign up
+                </Link>
+              </>
+            )}
           </>
         </Styles.HiddenOnMobile>
 
@@ -74,14 +102,14 @@ export default function Header() {
               <motion.div
                 initial={{ maxHeight: 0, overflow: 'hidden' }}
                 animate={{
-                  maxHeight: 300,
+                  maxHeight: 300
                 }}
                 transition={{ duration: 0.3 }}
                 exit={{ maxHeight: 0, overflow: 'hidden' }}
                 style={{
                   width: '100%',
                   marginBottom: '1rem',
-                  overflow: 'unset',
+                  overflow: 'unset'
                 }}
               >
                 <div
@@ -91,15 +119,10 @@ export default function Header() {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center',
+                    alignItems: 'center'
                   }}
                 >
-                  <Link
-                    href={getAppConfigValue('homeUrl') || '/'}
-                    rel="noreferrer"
-                    variant="normal"
-                    color="primary"
-                  >
+                  <Link href={getAppConfigValue('homeUrl') || '/'} rel="noreferrer" variant="normal" color="primary">
                     Home
                   </Link>
 
@@ -109,15 +132,11 @@ export default function Header() {
                       marginTop: '1rem',
                       marginBottom: '1rem',
                       width: 24,
-                      height: 1,
+                      height: 1
                     }}
                   ></span>
 
-                  <Link
-                    href="https://auw211.org/"
-                    variant="normal"
-                    color="primary"
-                  >
+                  <Link href="https://auw211.org/" variant="normal" color="primary">
                     Main Site
                   </Link>
                 </div>
@@ -135,5 +154,5 @@ export default function Header() {
         </Styles.StyledBanner>
       ) : null}
     </>
-  );
+  )
 }
