@@ -102,7 +102,7 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
 
 export const fetchFavorites = createAsyncThunk('fetchFavorites', async () => {
   const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
-  return favoritesFromApi(res.data)
+  return resultsFromApi(res.data)
 })
 
 export const deleteFavoriteById = createAsyncThunk('deleteFavoriteById', async (id: string) => {

@@ -8,7 +8,7 @@ import theme from 'src/constants/theme'
 import * as Styles from './Header.styles'
 import { getAppConfigValue } from 'src/utils/getAppConfigValue'
 import { useBannerQuery } from '@hook/useBannerQuery'
-import { useAuthContext } from '@hook/useAuthContext'
+import { useAuthContext } from 'src/hooks'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,14 +1,21 @@
 import { createContext } from 'react'
 
-interface IAuthContext {
-  user: {
-    email: string
-  }
-  setUser: (user: any) => void
+interface User {
+  email: string
 }
 
-export const AuthContext = createContext<IAuthContext>({
-  user: null,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setUser: (user: any) => {}
-})
+interface IAuthContext {
+  user: User
+  setUser: (user: User) => void
+}
+
+interface IFavsContext {
+  favorites: any[]
+  setFavorites: (favorites: any[]) => void
+  spidMap: any
+  addFavorite: (id: string) => void
+  deleteFavorite: (id: string) => void
+}
+
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext)
+export const FavsContext = createContext<IFavsContext>({} as IFavsContext)

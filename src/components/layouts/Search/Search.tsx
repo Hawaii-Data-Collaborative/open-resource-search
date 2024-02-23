@@ -1,13 +1,13 @@
 import Flex from 'src/components/elements/Flex/Flex'
 import Header from 'src/components/modules/Header/Header'
-import { AuthContextProvider } from 'src/components/providers'
+import { Providers } from 'src/components/providers'
 
 type Props = {
   children: React.ReactNode
 }
 
 const Search = ({ children }: Props) => (
-  <AuthContextProvider>
+  <Providers>
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
 
@@ -15,7 +15,7 @@ const Search = ({ children }: Props) => (
         {children}
       </Flex>
     </Flex>
-  </AuthContextProvider>
+  </Providers>
 )
 
 export default Search

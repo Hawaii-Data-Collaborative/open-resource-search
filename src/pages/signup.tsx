@@ -16,7 +16,7 @@ import usePageLoaded from '@hook/usePageLoaded'
 import { AUTH_TOKEN } from '@constant/index'
 import localStorage from '@service/localStorage'
 import { toastErr } from '@service/toast'
-import { useAuthContext } from '@hook/useAuthContext'
+import { useAuthContext } from 'src/hooks'
 
 export const getServerSideProps = context => {
   if (context.user != null) return redirect('/')

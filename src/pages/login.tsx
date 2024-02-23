@@ -18,7 +18,7 @@ import If from '@element/If/If'
 import usePageLoaded from '@hook/usePageLoaded'
 import { AUTH_TOKEN } from '@constant/index'
 import localStorage from '@service/localStorage'
-import { useAuthContext } from '@hook/useAuthContext'
+import { useAuthContext } from 'src/hooks'
 import { toastErr } from '@service/toast'
 
 export const getServerSideProps = context => {

@@ -1,31 +1,31 @@
-import { useState } from 'react';
-import Box from 'src/components/elements/Box/Box';
-import Flex from 'src/components/elements/Flex/Flex';
+import { useState } from 'react'
+import Box from 'src/components/elements/Box/Box'
+import Flex from 'src/components/elements/Flex/Flex'
 
-import SocialButtonsModal from './SocialButtonsModal/SocialButtonsModal';
-import Heading from './Heading/Heading';
-import Location from './Location/Location';
-import Description from './Description/Description';
-import ContactLinks from './ContactLinks/ContactLinks';
-import ContactButtons from './ContactButtons/ContactButtons';
-import Categories from './Categories/Categories';
-import ServiceArea from './ServiceArea/ServiceArea';
-import ApplicationProcess from './ApplicationProcess/ApplicationProcess';
-import Languages from './Languages/Languages';
-import Eligibility from './Eligibility/Eligibility';
-import AgencyInfo from './AgencyInfo/AgencyInfo';
-import Fees from './Fees/Fees';
-import Actions from './Actions/Actions';
-import FavoriteButton from './FavoriteButton/FavoriteButton';
-import { EmergencyInfo } from './EmergencyInfo/EmergencyInfo';
+import SocialButtonsModal from './SocialButtonsModal/SocialButtonsModal'
+import Heading from './Heading/Heading'
+import Location from './Location/Location'
+import Description from './Description/Description'
+import ContactLinks from './ContactLinks/ContactLinks'
+import ContactButtons from './ContactButtons/ContactButtons'
+import Categories from './Categories/Categories'
+import ServiceArea from './ServiceArea/ServiceArea'
+import ApplicationProcess from './ApplicationProcess/ApplicationProcess'
+import Languages from './Languages/Languages'
+import Eligibility from './Eligibility/Eligibility'
+import AgencyInfo from './AgencyInfo/AgencyInfo'
+import Fees from './Fees/Fees'
+import Actions from './Actions/Actions'
+import { EmergencyInfo } from './EmergencyInfo/EmergencyInfo'
+import FavoriteButton from '../../Result/FavoriteButton/FavoriteButton'
 
 type HitProps = {
-  hit: any;
-  query: any;
-};
+  hit: any
+  query: any
+}
 
-export default function Hit({ hit, query }: HitProps) {
-  const [share, setShare] = useState(false);
+export default function Hit({ hit }: HitProps) {
+  const [share, setShare] = useState(false)
 
   return (
     <Box padding="16px 24px" className="Hit">
@@ -39,7 +39,7 @@ export default function Hit({ hit, query }: HitProps) {
           <Location hit={hit} />
         </Flex>
 
-        <FavoriteButton hit={hit} query={query} />
+        <FavoriteButton hit={hit} />
       </Flex>
 
       <Description hit={hit} />
@@ -54,5 +54,5 @@ export default function Hit({ hit, query }: HitProps) {
       <AgencyInfo hit={hit} />
       <SocialButtonsModal share={share} setShare={setShare} hit={hit} />
     </Box>
-  );
+  )
 }

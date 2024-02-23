@@ -1,26 +1,26 @@
-import Box from 'src/components/elements/Box/Box';
-import Text from 'src/components/elements/Text/Text';
-import Flex from 'src/components/elements/Flex/Flex';
+import Box from 'src/components/elements/Box/Box'
+import Text from 'src/components/elements/Text/Text'
+import Flex from 'src/components/elements/Flex/Flex'
 
-import Heading from './Heading/Heading';
-import Location from './Location/Location';
-import Description from './Description/Description';
-import ContactButtons from './ContactButtons/ContactButtons';
-import MoreInformation from './MoreInformation/MoreInformation';
-import { checkString } from '@util/checkString';
-import FavoriteButton from './FavoriteButton/FavoriteButton';
+import Heading from './Heading/Heading'
+import Location from './Location/Location'
+import Description from './Description/Description'
+import ContactButtons from './ContactButtons/ContactButtons'
+import MoreInformation from './MoreInformation/MoreInformation'
+import { checkString } from '@util/checkString'
+import FavoriteButton from './FavoriteButton/FavoriteButton'
 
 interface ILocation {
-  lat?: number;
-  lng?: number;
-  zoom?: number;
+  lat?: number
+  lng?: number
+  zoom?: number
 }
 
 interface HitProps {
-  hit?: any;
-  location?: ILocation;
-  score?: any;
-  mutate?: any;
+  hit?: any
+  location?: ILocation
+  score?: any
+  mutate?: any
 }
 
 export default function Hit({ hit, location, score }: HitProps) {
@@ -38,7 +38,7 @@ export default function Hit({ hit, location, score }: HitProps) {
         <Flex>
           <Heading hit={hit} />
 
-          {hit && hit.isFavorite && <FavoriteButton hit={hit} />}
+          <FavoriteButton hit={hit} />
         </Flex>
 
         <Location hit={hit} location={location} />
@@ -48,15 +48,13 @@ export default function Hit({ hit, location, score }: HitProps) {
       <ContactButtons hit={hit} />
       <MoreInformation hit={hit} />
 
-      {(process.env.NODE_ENV === 'development' ||
-        process.env.NEXT_PUBLIC_DEBUG) != null &&
-        checkString(score) && (
-          <Flex justifyContent="flex-end" alignItems="center">
-            <Text color="textSecondary" variant="body1">
-              score: {score}
-            </Text>
-          </Flex>
-        )}
+      {(process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEBUG) != null && checkString(score) && (
+        <Flex justifyContent="flex-end" alignItems="center">
+          <Text color="textSecondary" variant="body1">
+            score: {score}
+          </Text>
+        </Flex>
+      )}
     </Box>
-  );
+  )
 }

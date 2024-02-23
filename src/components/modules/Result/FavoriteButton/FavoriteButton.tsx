@@ -1,32 +1,28 @@
-import { useAppSelector, useAppDispatch } from 'src/redux/store';
-import { deleteFavoriteById, setResults } from 'src/redux/slices/results';
-import { FavoriteOutlined } from '@material-ui/icons';
-import Button from 'src/components/elements/Button/Button';
+import { FavoriteBorder, FavoriteOutlined } from '@material-ui/icons'
+import Button from 'src/components/elements/Button/Button'
+import { useAuthContext, useFavsContext } from 'src/hooks'
 
 export default function FavoriteButton({ hit }) {
-  const dispatch = useAppDispatch();
-  const results = useAppSelector((state) => state.results.data);
+  const { user } = useAuthContext()
+  const { spidMap, addFavorite, deleteFavorite } = useFavsContext()
 
-  async function removeFromFavorites() {
-    const oldResults = [].concat(results);
+  const isFav = hit ? spidMap[hit.id] : false
 
-    try {
-      const removedIndex = results.findIndex((el) => el.id === hit.id);
-
-      const newResults = [...results];
-      newResults.splice(removedIndex, 1);
-
-      dispatch(setResults(newResults));
-
-      await dispatch(deleteFavoriteById(hit.id));
-    } catch (err) {
-      console.error(err);
-      dispatch(setResults(oldResults));
+  const onClick = () => {
+    if (isFav) {
+      deleteFavorite(hit.id)
+    } else {
+      addFavorite(hit.id)
     }
+  }
+
+  if (!user) {
+    return null
   }
 
   return (
     <Button
+      className="FavoriteButton"
       noPrint
       noShadows
       aria-label="Remove from Favorites"
@@ -44,11 +40,15 @@ export default function FavoriteButton({ hit }) {
         padding: 0,
         fontWeight: 300,
         width: 40,
-        height: 40,
+        height: 40
       }}
-      onClick={removeFromFavorites}
+      onClick={onClick}
     >
-      <FavoriteOutlined style={{ color: '#DA291C', width: 40, height: 40 }} />
+      {isFav ? (
+        <FavoriteOutlined className="fav" style={{ color: '#DA291C', width: 25, height: 25 }} />
+      ) : (
+        <FavoriteBorder className="unfav" style={{ width: 25, height: 25 }} />
+      )}
     </Button>
-  );
+  )
 }
