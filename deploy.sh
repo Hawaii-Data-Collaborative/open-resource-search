@@ -33,6 +33,8 @@ if [ -d "./.next" ]; then
 fi
 echo "[deploy] uncompressing ..."
 tar xzf next.tar.gz
+echo "[deploy] installing dependencies ..."
+npm i --force
 echo "[deploy] restarting ..."
 sudo ./restart.sh
 EOF
