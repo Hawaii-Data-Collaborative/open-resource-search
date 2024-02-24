@@ -1,0 +1,54 @@
+{
+  "apiUrl": "https://dev.hawaiidata.org/auw211",
+  "brandName": "Aloha United Way",
+  "homeUrl": "",
+  "publicUrl": "https://dev.hawaiidata.org/auw211",
+  "feedbackUrl": "",
+  "contactEmail": "johndoe@connect211.com",
+  "contactNumber": "",
+  "meta": {
+    "description": "You community resource data is unique, but the best way to find answers is remarkably similar in all cases. By following best practices for searching, we deliver a great experience for your users, and super quick setup time."
+  },
+  "search": {
+    "title": "What do you need help with?",
+    "label": "Search resources in Hawaii",
+    "subtitle": "To find resources outside of Hawaii, use your state’s 211.",
+    "subtitleUrlText": "Find your local 211.",
+    "subtitleUrl": "https://www.211.org"
+  },
+  "alertSearch": {
+    "text": null,
+    "buttonText": null,
+    "url": ""
+  },
+  "services": {
+    "auth": {
+      "cognito": {
+        "region": "",
+        "userPoolId": "",
+        "clientId": ""
+      }
+    },
+    "map": {
+      "google": {
+        "apiKey": ""
+      },
+      "center": {
+        "lat": "21.3281792",
+        "lon": "-157.8691132"
+      }
+    }
+  },
+  "theme": {
+    "baseFontSize": "17px",
+    "primaryColor": "#005191",
+    "primaryMediumColor": "#3E7BAB",
+    "primaryLightColor": "#BBCFDF",
+    "secondaryColor": "#FFB351",
+    "secondaryMediumColor": "#FDC47B",
+    "secondaryLightColor": "#FBE8CF",
+    "errorColor": "#DA291C",
+    "successColor": "#00C48C",
+    "borderRadius": "8px"
+  }
+}
