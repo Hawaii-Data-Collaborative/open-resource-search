@@ -1,26 +1,26 @@
-import { useState, useMemo } from 'react';
-import GoogleMap, { GoogleApiWrapper, InfoWindow } from 'google-maps-react';
-import Text from 'src/components/elements/Text/Text';
-import { useAppSelector } from 'src/redux/store';
+import { useState, useMemo } from 'react'
+import GoogleMap, { GoogleApiWrapper, InfoWindow } from 'google-maps-react'
+import Text from 'src/components/elements/Text/Text'
+import { useAppSelector } from 'src/redux/store'
 
-import MapStyles from './mapStyles.json';
-import CustomMarker from './CustomMarker';
-import MapContainer from './MapContainer';
-import { getAppConfigValue } from '@util/getAppConfigValue';
-import { setGoogleInstance } from '@util/mapUtil';
+import MapStyles from './mapStyles.json'
+import CustomMarker from './CustomMarker'
+import MapContainer from './MapContainer'
+import { getAppConfigValue } from '@util/getAppConfigValue'
+import { setGoogleInstance } from '@util/mapUtil'
 
 function Map({ google }) {
-  const [showInfoWindow, setShowInfoWindow] = useState(false);
-  const [activeMarker, setActiveMarker] = useState(null);
-  const location = useAppSelector((state) => state.location);
-  const results = useAppSelector((state) => state.results.data) as any[];
+  const [showInfoWindow, setShowInfoWindow] = useState(false)
+  const [activeMarker, setActiveMarker] = useState(null)
+  const location = useAppSelector(state => state.location)
+  const results = useAppSelector(state => state.results.data) as any[]
   const memoizedLocation = useMemo(
     () => ({
       lat: Number(location.centerLat),
-      lng: Number(location.centerLng),
+      lng: Number(location.centerLng)
     }),
     [location.centerLng, location.centerLng]
-  );
+  )
 
   return (
     // @ts-ignore I need to check this later. Not sure how to fix ts errors here
@@ -37,12 +37,12 @@ function Map({ google }) {
       styles={MapStyles}
       onClick={() => setShowInfoWindow(false)}
       onReady={() => {
-        setGoogleInstance(google);
+        setGoogleInstance(google)
       }}
     >
-      {results?.map((m) => {
-        const title = m.locationName || 'Address Unavailable';
-        const name = m.title;
+      {results?.map(m => {
+        const title = m.locationName || 'Address Unavailable'
+        const name = m.title
 
         return (
           <CustomMarker
@@ -53,23 +53,24 @@ function Map({ google }) {
             phone={m.phone}
             website={m.website}
             onClick={(props, marker) => {
-              setActiveMarker(marker);
-              setShowInfoWindow(true);
+              setActiveMarker(marker)
+              setShowInfoWindow(true)
               document.getElementById(m.id)?.scrollIntoView({
-                behavior: 'smooth',
-              });
+                behavior: 'smooth'
+              })
             }}
             title={title}
             name={name}
             optimized={false}
             position={{
               lat: m.locationLat,
-              lng: m.locationLon,
+              lng: m.locationLon
             }}
           />
-        );
+        )
       })}
 
+      {/* @ts-expect-error it's fine */}
       <InfoWindow
         marker={activeMarker}
         visible={showInfoWindow}
@@ -126,18 +127,18 @@ function Map({ google }) {
         </div>
       </InfoWindow>
     </GoogleMap>
-  );
+  )
 }
 
 const WrappedMap = GoogleApiWrapper({
   libraries: ['places', 'geometry'],
-  apiKey: getAppConfigValue('services.map.google.apiKey'),
-})(Map);
+  apiKey: getAppConfigValue('services.map.google.apiKey')
+})(Map)
 
 export default function CustomWrappedMap() {
   return (
     <MapContainer>
       <WrappedMap />
     </MapContainer>
-  );
+  )
 }

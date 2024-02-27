@@ -43,12 +43,7 @@ export default function Location({ hit }) {
           <Room style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
           {hit.locationName}
 
-          <MuiButton
-            style={{ minWidth: 35 }}
-            onClick={onCopyClick}
-            innerRef={onRef}
-            data-clipboard-text={hit.locationName}
-          >
+          <MuiButton style={{ minWidth: 35 }} onClick={onCopyClick} ref={onRef} data-clipboard-text={hit.locationName}>
             <Tooltip title="Copy" style={{ color: '#ccc' }}>
               <FileCopy fontSize="small" />
             </Tooltip>

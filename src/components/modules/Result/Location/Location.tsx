@@ -61,7 +61,7 @@ export default function Location({ hit, location }) {
               <MuiButton
                 style={{ minWidth: 35 }}
                 onClick={onCopyClick}
-                innerRef={onRef}
+                ref={onRef}
                 data-clipboard-text={hit.locationName}
               >
                 <Tooltip title="Copy" style={{ color: '#ccc' }}>

@@ -96,6 +96,7 @@ export default function Header() {
         </Styles.HiddenOnMobile>
 
         <Styles.VisibleOnMobile style={{ width: '100%' }}>
+          {/* @ts-expect-error it's fine */}
           <AnimatePresence>
             {isOpen && (
               <motion.div

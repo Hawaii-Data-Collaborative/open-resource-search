@@ -230,7 +230,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                 <MuiButton
                   style={{ minWidth: 35 }}
                   onClick={onCopyWebsiteClick}
-                  innerRef={onRef}
+                  ref={onRef}
                   data-clipboard-text={hit.website}
                 >
                   <Tooltip title="Copy" style={{ color: '#ccc' }}>
@@ -274,7 +274,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                 <MuiButton
                   style={{ minWidth: 35 }}
                   onClick={onCopyEmailClick}
-                  innerRef={onRef}
+                  ref={onRef}
                   data-clipboard-text={hit.email}
                 >
                   <Tooltip title="Copy" style={{ color: '#ccc' }}>
@@ -319,7 +319,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                 <MuiButton
                   style={{ minWidth: 35 }}
                   onClick={onCopyAddressClick}
-                  innerRef={onRef}
+                  ref={onRef}
                   data-clipboard-text={hit.locationName}
                 >
                   <Tooltip title="Copy" style={{ color: '#ccc' }}>
