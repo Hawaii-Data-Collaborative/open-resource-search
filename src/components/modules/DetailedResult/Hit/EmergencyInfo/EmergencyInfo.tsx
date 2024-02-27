@@ -1,11 +1,11 @@
-import { AnnouncementOutlined } from '@material-ui/icons';
+import { AnnouncementOutlined } from '@mui/icons-material'
 
-import Flex from 'src/components/elements/Flex/Flex';
-import Alert from 'src/components/elements/Alert/Alert';
-import Text from 'src/components/elements/Text/Text';
+import Flex from 'src/components/elements/Flex/Flex'
+import Alert from 'src/components/elements/Alert/Alert'
+import Text from 'src/components/elements/Text/Text'
 
 export function EmergencyInfo({ hit }) {
-  if (!hit.emergencyInfo || hit.emergencyInfo.length === 0) return null;
+  if (!hit.emergencyInfo || hit.emergencyInfo.length === 0) return null
 
   return (
     <Alert color="error" mb="16px">
@@ -19,7 +19,7 @@ export function EmergencyInfo({ hit }) {
 
       <Text variant="body1">{hit.emergencyInfo}</Text>
     </Alert>
-  );
+  )
 }
 
-export default EmergencyInfo;
+export default EmergencyInfo

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import NextLink from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CloseOutlined, MenuOutlined } from '@material-ui/icons'
+import { CloseOutlined, MenuOutlined } from '@mui/icons-material'
 import Link from 'src/components/elements/Link/Link'
 import theme from 'src/constants/theme'
 
@@ -32,10 +32,9 @@ export default function Header() {
       <Styles.StyledHeader>
         <Styles.StyledContainer>
           <NextLink href="/" passHref>
-            {/* eslint-disable-next-line */}
-            <a style={{ lineHeight: 0 }}>
+            <span style={{ lineHeight: 0 }}>
               <Styles.StyledImage src="/logo.svg" alt="Go back to search home page" />
-            </a>
+            </span>
           </NextLink>
 
           <Styles.VisibleOnMobile>

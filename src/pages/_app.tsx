@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux'
-import { ThemeProvider } from '@material-ui/core'
+import { ThemeProvider } from '@mui/material'
 import Script from 'next/script'
 
 import { GlobalStyleSheet } from 'src/styles/GlobalStyleSheet/GlobalStyleSheet'

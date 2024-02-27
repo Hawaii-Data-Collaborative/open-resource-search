@@ -1,4 +1,4 @@
-import { FavoriteBorder, FavoriteOutlined } from '@material-ui/icons'
+import { FavoriteBorder, FavoriteOutlined } from '@mui/icons-material'
 import Button from 'src/components/elements/Button/Button'
 import { useAuthContext, useFavsContext } from 'src/hooks'
 

@@ -1,10 +1,10 @@
-import Button from '@material-ui/core/Button';
-import Text from 'src/components/elements/Text/Text';
-import Box from 'src/components/elements/Box/Box';
+import Button from '@mui/material/Button'
+import Text from 'src/components/elements/Text/Text'
+import Box from 'src/components/elements/Box/Box'
 
 export default function Categories({ hit }) {
   if (!hit?.categories?.length) {
-    return <div className="Categories" />;
+    return <div className="Categories" />
   }
 
   return (
@@ -13,16 +13,12 @@ export default function Categories({ hit }) {
         Categories
       </Text>
       <div className="chips">
-        {hit.categories.map((c) => (
-          <Button
-            key={c.value}
-            color="default"
-            href={`/search?terms=${c.label}&taxonomies=${c.value}`}
-          >
+        {hit.categories.map(c => (
+          <Button key={c.value} href={`/search?terms=${c.label}&taxonomies=${c.value}`}>
             {c.label}
           </Button>
         ))}
       </div>
     </Box>
-  );
+  )
 }

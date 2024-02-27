@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Autocomplete } from '@material-ui/lab';
+import { Autocomplete, FormControl } from '@mui/material'
+import styled from 'styled-components'
 import {
   background,
   space,
@@ -14,9 +14,8 @@ import {
   SpaceProps,
   LayoutProps,
   TypographyProps,
-  ColorProps,
-} from 'styled-system';
-import { FormControl } from '@material-ui/core';
+  ColorProps
+} from 'styled-system'
 
 interface AutocompleteProps
   extends SpaceProps,
@@ -35,7 +34,7 @@ export const StyledAutocomplete = styled(Autocomplete)<AutocompleteProps>`
   ${flexbox};
   ${background};
   ${position};
-`;
+`
 
 export const StyledFormControl = styled(FormControl)<AutocompleteProps>`
   ${space};
@@ -45,4 +44,4 @@ export const StyledFormControl = styled(FormControl)<AutocompleteProps>`
   ${flexbox};
   ${background};
   ${position};
-`;
+`

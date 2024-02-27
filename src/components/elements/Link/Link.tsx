@@ -1,6 +1,6 @@
-import { AnchorHTMLAttributes } from 'react';
-import NextLink from 'next/link';
-import styled, { PalleteColorUnion } from 'styled-components';
+import { AnchorHTMLAttributes } from 'react'
+import NextLink from 'next/link'
+import styled, { PalleteColorUnion } from 'styled-components'
 import {
   space,
   SpaceProps,
@@ -11,11 +11,11 @@ import {
   flexbox,
   layout,
   LayoutProps,
-  FlexboxProps,
-} from 'styled-system';
+  FlexboxProps
+} from 'styled-system'
 
-import { defaultTheme } from 'src/styles/theme';
-import { getVariant, Variant } from './variants';
+import { defaultTheme } from 'src/styles/theme'
+import { getVariant, Variant } from './variants'
 
 interface LinkProps
   extends AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -24,31 +24,28 @@ interface LinkProps
     BordersProps,
     LayoutProps,
     FlexboxProps {
-  external?: boolean;
-  disabled?: boolean;
-  variant?: Variant;
-  color?: PalleteColorUnion;
+  external?: boolean
+  disabled?: boolean
+  variant?: Variant
+  color?: PalleteColorUnion
 }
 
 const StyledAnchor = styled.a<LinkProps>`
-  border-radius: ${(props) => props.theme.shape.borderRadius};
+  border-radius: ${props => props.theme.shape.borderRadius};
   transition: all 0.2s ease-in-out;
-  pointer-events: ${(props) => (props.disabled ? 'none' : 'initial')};
-  color: ${(props) =>
-    props.color != null
-      ? props.theme.pallete[props.color]
-      : props.theme.pallete['textPrimary']};
-  ${(props) => getVariant(props)};
+  pointer-events: ${props => (props.disabled ? 'none' : 'initial')};
+  color: ${props => (props.color != null ? props.theme.pallete[props.color] : props.theme.pallete['textPrimary'])};
+  ${props => getVariant(props)};
   ${space};
   ${background};
   ${borders};
   ${layout};
   ${flexbox};
-`;
+`
 
 StyledAnchor.defaultProps = {
-  theme: defaultTheme,
-};
+  theme: defaultTheme
+}
 
 function Link({ external, href, children, ...props }: LinkProps) {
   if (external) {
@@ -56,15 +53,15 @@ function Link({ external, href, children, ...props }: LinkProps) {
       <StyledAnchor href={href} {...props}>
         {children}
       </StyledAnchor>
-    );
+    )
   }
 
   return (
-    <NextLink href={href} passHref>
+    <NextLink href={href} passHref legacyBehavior>
       <StyledAnchor {...props}>{children}</StyledAnchor>
     </NextLink>
-  );
+  )
 }
 
-export { Link };
-export default Link;
+export { Link }
+export default Link

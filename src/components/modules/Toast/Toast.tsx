@@ -1,18 +1,17 @@
-import { Box } from '@material-ui/core'
-import Alert, { Color } from '@material-ui/lab/Alert'
+import { Alert, AlertColor, Box } from '@mui/material'
 import { toastEmitter } from '@service/emitters'
 import { useEffect, useState } from 'react'
 
 interface IState {
   message: string
-  severity: Color
+  severity: AlertColor
 }
 
 export function Toast() {
   const [state, setState] = useState<IState>({ message: '', severity: null })
 
   useEffect(() => {
-    toastEmitter.on('message', (message: string, severity: Color) => {
+    toastEmitter.on('message', (message: string, severity: AlertColor) => {
       setState({ message, severity })
       setTimeout(() => {
         setState({ message: '', severity: null })

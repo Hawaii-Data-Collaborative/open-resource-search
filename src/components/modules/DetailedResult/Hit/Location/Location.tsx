@@ -1,31 +1,31 @@
-import ClipboardJS from 'clipboard';
-import Skeleton from 'react-loading-skeleton';
-import { Button as MuiButton, Tooltip } from '@material-ui/core';
-import { FileCopy, Room, Info } from '@material-ui/icons';
-import Text from 'src/components/elements/Text/Text';
-import theme from 'src/constants/theme';
-import { logEvent } from 'src/analytics';
-import { onCopyToClipboard } from '@util/domUtil';
+import ClipboardJS from 'clipboard'
+import Skeleton from 'react-loading-skeleton'
+import { Button as MuiButton, Tooltip } from '@mui/material'
+import { FileCopy, Room, Info } from '@mui/icons-material'
+import Text from 'src/components/elements/Text/Text'
+import theme from 'src/constants/theme'
+import { logEvent } from 'src/analytics'
+import { onCopyToClipboard } from '@util/domUtil'
 
-let clipboard: ClipboardJS;
+let clipboard: ClipboardJS
 
 export default function Location({ hit }) {
   const onRef = (node: HTMLElement) => {
     if (node) {
-      clipboard = new ClipboardJS(node);
+      clipboard = new ClipboardJS(node)
     } else {
-      clipboard?.destroy();
+      clipboard?.destroy()
     }
-  };
+  }
 
-  const onCopyClick = (e) => {
-    onCopyToClipboard(e.currentTarget);
+  const onCopyClick = e => {
+    onCopyToClipboard(e.currentTarget)
     logEvent('Referral.Directions.CopyAddress', {
       currentPage: window.location.toString(),
       program: hit.title,
-      address: hit.locationName,
-    });
-  };
+      address: hit.locationName
+    })
+  }
 
   return (
     <Text
@@ -57,21 +57,19 @@ export default function Location({ hit }) {
       ) : (
         <>
           <Room style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
-          <span style={{ fontSize: '90%', color: '#999' }}>
-            Address unavailable
-          </span>
+          <span style={{ fontSize: '90%', color: '#999' }}>Address unavailable</span>
           <Tooltip title="This location may be confidential or not open to the public. Please choose another provided contact method for this service.">
             <Info
               fontSize="small"
               style={{
                 marginLeft: '5px',
                 transform: 'scale(0.9)',
-                opacity: 0.7,
+                opacity: 0.7
               }}
             />
           </Tooltip>
         </>
       )}
     </Text>
-  );
+  )
 }

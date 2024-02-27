@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Button as MuiButton, Dialog, Tooltip } from '@material-ui/core';
-import { Phone, Language, Navigation, FileCopy } from '@material-ui/icons';
-import { Button2 } from 'src/components/elements/Button/Button';
-import Flex from 'src/components/elements/Flex/Flex';
-import Link from 'src/components/elements/Link/Link';
-import theme from 'src/constants/theme';
-import { logEvent } from 'src/analytics';
-import { getWebsiteUrl } from '@util/stringUtil';
-import ClipboardJS from 'clipboard';
-import { onCopyToClipboard } from '@util/domUtil';
+import { useState } from 'react'
+import { Button as MuiButton, Dialog, Tooltip } from '@mui/material'
+import { Phone, Language, Navigation, FileCopy } from '@mui/icons-material'
+import { Button2 } from 'src/components/elements/Button/Button'
+import Flex from 'src/components/elements/Flex/Flex'
+import Link from 'src/components/elements/Link/Link'
+import theme from 'src/constants/theme'
+import { logEvent } from 'src/analytics'
+import { getWebsiteUrl } from '@util/stringUtil'
+import ClipboardJS from 'clipboard'
+import { onCopyToClipboard } from '@util/domUtil'
 
 export default function ContactButtons({ hit }) {
-  const [action, setAction] = useState(null);
+  const [action, setAction] = useState(null)
 
-  if (!hit) return null;
+  if (!hit) return null
 
   return (
     <Flex marginBottom="16px" style={{ gap: 10 }}>
@@ -21,16 +21,15 @@ export default function ContactButtons({ hit }) {
         <Button2
           style={{ flex: '1 1 50%' }}
           onClick={() => {
-            setAction('call');
+            setAction('call')
             logEvent('Referral.Phone.ShowInfo', {
               currentPage: window.location.toString(),
               program: hit.title,
-              phone: hit.phone,
-            });
+              phone: hit.phone
+            })
           }}
         >
-          <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />{' '}
-          Call
+          <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Call
         </Button2>
       )}
 
@@ -38,19 +37,16 @@ export default function ContactButtons({ hit }) {
         <Button2
           style={{ flex: '1 1 50%' }}
           onClick={() => {
-            setAction('website');
+            setAction('website')
 
             logEvent('Referral.Website.ShowInfo', {
               currentPage: window.location.toString(),
               program: hit.title,
-              url: getWebsiteUrl(hit.website),
-            });
+              url: getWebsiteUrl(hit.website)
+            })
           }}
         >
-          <Language
-            style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
-          />{' '}
-          Website
+          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Website
         </Button2>
       )}
 
@@ -58,112 +54,104 @@ export default function ContactButtons({ hit }) {
         <Button2
           style={{ flex: '1 1 50%' }}
           onClick={() => {
-            setAction('directions');
+            setAction('directions')
 
             logEvent('Referral.Directions.ShowInfo', {
               currentPage: window.location.toString(),
-              program: hit.title,
-            });
+              program: hit.title
+            })
           }}
         >
-          <Navigation
-            style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
-          />
+          <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
           Directions
         </Button2>
       ) : null}
 
-      {action ? (
-        <ContactButtonsDialog
-          action={action}
-          hit={hit}
-          onClose={() => setAction(null)}
-        />
-      ) : null}
+      {action ? <ContactButtonsDialog action={action} hit={hit} onClose={() => setAction(null)} /> : null}
     </Flex>
-  );
+  )
 }
 
-let clipboard: ClipboardJS;
+let clipboard: ClipboardJS
 
 export function ContactButtonsDialog({ action, hit, onClose }) {
   const onRef = (node: HTMLElement) => {
-    console.log('[onRef] node=', node);
+    console.log('[onRef] node=', node)
     if (node) {
       clipboard = new ClipboardJS(node, {
-        container: document.querySelector('#ContactButtonsDialog'),
-      });
+        container: document.querySelector('#ContactButtonsDialog')
+      })
     } else {
-      clipboard?.destroy();
+      clipboard?.destroy()
     }
-  };
+  }
 
   const onPhoneClick = () => {
     logEvent('Referral.Phone.Call', {
       currentPage: window.location.toString(),
       program: hit.title,
-      phone: hit.phone,
-    });
-  };
+      phone: hit.phone
+    })
+  }
 
   const onWebsiteClick = () => {
     logEvent('Referral.Website.OpenInNewTab', {
       currentPage: window.location.toString(),
       program: hit.title,
-      url: getWebsiteUrl(hit.website),
-    });
-  };
+      url: getWebsiteUrl(hit.website)
+    })
+  }
 
   const onEmailClick = () => {
     logEvent('Referral.Email.OpenInEmailClient', {
       currentPage: window.location.toString(),
       program: hit.title,
-      email: hit.email,
-    });
-  };
+      email: hit.email
+    })
+  }
 
   const onDirectionsClick = () => {
     logEvent('Referral.Directions.OpenInGoogleMaps', {
       currentPage: window.location.toString(),
-      program: hit.title,
-    });
-  };
+      program: hit.title
+    })
+  }
 
-  const onCopyPhoneClick = (e) => {
-    console.log('[onCopyPhoneClick] e.currentTarget=', e.currentTarget);
-    onCopyToClipboard(e.currentTarget);
+  const onCopyPhoneClick = e => {
+    console.log('[onCopyPhoneClick] e.currentTarget=', e.currentTarget)
+    onCopyToClipboard(e.currentTarget)
     logEvent('Referral.Phone.CopyNumber', {
       currentPage: window.location.toString(),
       program: hit.title,
-      phone: hit.phone,
-    });
-  };
+      phone: hit.phone
+    })
+  }
 
-  const onCopyWebsiteClick = (e) => {
-    onCopyToClipboard(e.currentTarget);
+  const onCopyWebsiteClick = e => {
+    onCopyToClipboard(e.currentTarget)
     logEvent('Referral.Website.CopyWebsite', {
       currentPage: window.location.toString(),
       program: hit.title,
-      url: getWebsiteUrl(hit.website),
-    });
-  };
+      url: getWebsiteUrl(hit.website)
+    })
+  }
 
-  const onCopyEmailClick = (e) => {
-    onCopyToClipboard(e.currentTarget);
+  const onCopyEmailClick = e => {
+    onCopyToClipboard(e.currentTarget)
     logEvent('Referral.Email.CopyEmail', {
       currentPage: window.location.toString(),
       program: hit.title,
-      email: hit.email,
-    });
-  };
+      email: hit.email
+    })
+  }
 
-  const onCopyAddressClick = (e) => {
-    onCopyToClipboard(e.currentTarget);
+  const onCopyAddressClick = e => {
+    onCopyToClipboard(e.currentTarget)
     logEvent('Referral.Directions.CopyAddress', {
       currentPage: window.location.toString(),
-      program: hit.title,
-    });
-  };
+      program: hit.title
+    })
+  }
 
   return (
     <Dialog open onClose={onClose}>
@@ -183,17 +171,14 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onPhoneClick}
             >
-              <Phone
-                style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
-              />{' '}
-              Call from this device
+              <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Call from this device
             </Link>
 
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <span>{hit.phone}</span>
@@ -201,7 +186,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                 <MuiButton
                   style={{ minWidth: 35 }}
                   onClick={onCopyPhoneClick}
-                  innerRef={onRef}
+                  ref={onRef}
                   data-clipboard-text={hit.phone}
                 >
                   <Tooltip title="Copy" style={{ color: '#ccc' }}>
@@ -230,17 +215,14 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onWebsiteClick}
             >
-              <Language
-                style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
-              />{' '}
-              Open in new tab
+              <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Open in new tab
             </Link>
 
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <span>{hit.website}</span>
@@ -277,17 +259,14 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onEmailClick}
             >
-              <Language
-                style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
-              />{' '}
-              Send Email
+              <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Send Email
             </Link>
 
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <span>{hit.email}</span>
@@ -307,10 +286,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
           </>
         )}
 
-        {action === 'directions' &&
-        hit.locationName &&
-        hit.locationLat &&
-        hit.locationLon ? (
+        {action === 'directions' && hit.locationName && hit.locationLat && hit.locationLon ? (
           <>
             <Link
               external
@@ -327,9 +303,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onDirectionsClick}
             >
-              <Navigation
-                style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }}
-              />
+              <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
               Directions
             </Link>
 
@@ -337,7 +311,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <span>{hit.locationName}</span>
@@ -358,5 +332,5 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
         ) : null}
       </div>
     </Dialog>
-  );
+  )
 }

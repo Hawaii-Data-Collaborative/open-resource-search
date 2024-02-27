@@ -2,26 +2,26 @@ import Head from 'next/head'
 import Results from '@module/Results/Results'
 import Map from 'src/components/modules/Map/Map'
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from 'src/redux/store'
-import { fetchLocation, setZoom } from 'src/redux/slices/location'
-import SessionStorage from '@service/sessionStorage'
+import { useAppDispatch } from 'src/redux/store'
+import { setZoom } from 'src/redux/slices/location'
 import { setResults } from 'src/redux/slices/results'
 import { useRouter } from 'next/router'
 import { getAppConfigValue } from 'src/utils/getAppConfigValue'
 import Search from 'src/components/layouts/Search/Search'
 import useFavoritesFetch from '@hook/useFavoritesFetch'
 import usePageLoaded from '@hook/usePageLoaded'
+import { useAuthContext } from '@hook/index'
 
 function Favorites() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const auth = useAppSelector(state => state.auth)
+  const { user } = useAuthContext()
 
   useFavoritesFetch()
   usePageLoaded()
 
   useEffect(() => {
-    if (!auth.isLoggedIn && !auth.isLoading) {
+    if (!user) {
       dispatch(setResults([]))
       router.push({
         pathname: '/login',
@@ -30,16 +30,16 @@ function Favorites() {
         }
       })
     }
-  }, [auth.isLoading, auth.isLoggedIn])
+  }, [user])
 
   useEffect(() => {
     ;(async function () {
-      await dispatch(
-        fetchLocation({
-          location: SessionStorage.get('lastLocation'),
-          forceFetch: true
-        })
-      )
+      // await dispatch(
+      //   fetchLocation({
+      //     location: SessionStorage.get('lastLocation'),
+      //     forceFetch: true
+      //   })
+      // )
       dispatch(setZoom(7))
     })()
   }, [])

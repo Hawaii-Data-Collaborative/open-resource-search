@@ -2,12 +2,17 @@ import axios from 'axios'
 import { useEffect, useMemo, useState } from 'react'
 import { FavsContext } from '@context'
 import { getAppConfigValue } from '@util/getAppConfigValue'
+import { useAuthContext } from '@hook/index'
 
 export function FavsContextProvider({ children }) {
+  const { user } = useAuthContext()
   const [favorites, setFavorites] = useState([])
   const [spids, setSpids] = useState([])
 
   useEffect(() => {
+    if (!user) {
+      return
+    }
     const fn = async () => {
       const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
       setFavorites(res.data)

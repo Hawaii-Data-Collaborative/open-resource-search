@@ -7,7 +7,6 @@ import { Flex } from 'src/components/elements/Flex/Flex'
 import { Label } from 'src/components/elements/Label/Label'
 import { Box } from 'src/components/elements/Box/Box'
 import Head from 'next/head'
-import { Auth } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import redirect from 'src/utils/redirect'
 import { getAppConfigValue } from 'src/utils/getAppConfigValue'
@@ -45,10 +44,10 @@ function PasswordReset({ query }: Props) {
 
     try {
       if (query.confirmation_code != null && query.user_name != null) {
-        await Auth.forgotPasswordSubmit(query.user_name, query.confirmation_code, newPassword?.current?.value ?? '')
+        // await Auth.forgotPasswordSubmit(query.user_name, query.confirmation_code, newPassword?.current?.value ?? '')
         router.push('/login?message=Password%20saved.%20Sign%20in%20with%20your%20new%20password.')
       } else {
-        await Auth.forgotPassword(username?.current?.value ?? '')
+        // await Auth.forgotPassword(username?.current?.value ?? '')
         setMessage(
           'If an account exists with this email address, you will be receiving a confirmation link to your inbox.'
         )

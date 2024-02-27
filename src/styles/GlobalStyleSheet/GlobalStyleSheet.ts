@@ -1,5 +1,5 @@
-import { defaultTheme } from 'src/styles/theme';
-import { createGlobalStyle } from 'styled-components';
+import { defaultTheme } from 'src/styles/theme'
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyleSheet = createGlobalStyle`
   ::-webkit-scrollbar {
@@ -29,9 +29,9 @@ export const GlobalStyleSheet = createGlobalStyle`
   }
 
   html {
-    background-color: ${(props) => props.theme.pallete.primaryMedium};
+    background-color: ${props => props.theme.pallete.primaryMedium};
     scroll-behavior: smooth;
-    font-size: ${(props) => props.theme.typography.htmlFontSize};
+    font-size: ${props => props.theme.typography.htmlFontSize};
   }
 
   html,
@@ -44,7 +44,11 @@ export const GlobalStyleSheet = createGlobalStyle`
   .MuiAutocomplete-listbox .MuiAutocomplete-groupLabel {
     color: #888;
   }
-`;
+
+  a {
+    text-decoration: none;
+  }
+`
 GlobalStyleSheet.defaultProps = {
-  theme: defaultTheme,
-};
+  theme: defaultTheme
+}

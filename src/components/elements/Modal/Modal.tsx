@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import FocusTrap from 'focus-trap-react';
-import { CloseOutlined } from '@material-ui/icons';
-import Button from 'src/components/elements/Button/Button';
-import ClientOnlyPortal from 'src/components/modules/ClientOnlyPortal/ClientOnlyPortal';
-import styled from 'styled-components';
-import If from '@element/If/If';
+import React, { useEffect } from 'react'
+import FocusTrap from 'focus-trap-react'
+import { CloseOutlined } from '@mui/icons-material'
+import Button from 'src/components/elements/Button/Button'
+import ClientOnlyPortal from 'src/components/modules/ClientOnlyPortal/ClientOnlyPortal'
+import styled from 'styled-components'
+import If from '@element/If/If'
 
 const StyledModal = styled.div`
   align-items: center;
@@ -21,25 +21,25 @@ const StyledModal = styled.div`
   @media print {
     display: none;
   }
-`;
+`
 
 export const Modal = ({ children, open, handleClose }) => {
   useEffect(() => {
     function clickListener(e) {
-      const innerModal = e.target.closest('#innerModal');
-      const outerModal = e.target.closest('#modal');
+      const innerModal = e.target.closest('#innerModal')
+      const outerModal = e.target.closest('#modal')
 
       if (innerModal == null && outerModal != null) {
-        handleClose();
+        handleClose()
       }
     }
 
     if (open) {
-      document.addEventListener('click', clickListener);
+      document.addEventListener('click', clickListener)
     }
 
-    return () => document.removeEventListener('click', clickListener);
-  }, [open, handleClose]);
+    return () => document.removeEventListener('click', clickListener)
+  }, [open, handleClose])
 
   return (
     <If value={open}>
@@ -56,7 +56,7 @@ export const Modal = ({ children, open, handleClose }) => {
                 overflow: 'auto',
                 padding: 16,
                 position: 'relative',
-                width: '100%',
+                width: '100%'
               }}
             >
               <Button
@@ -75,7 +75,7 @@ export const Modal = ({ children, open, handleClose }) => {
                   padding: 0,
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: 'center'
                 }}
               >
                 <CloseOutlined />
@@ -87,7 +87,7 @@ export const Modal = ({ children, open, handleClose }) => {
         </StyledModal>
       </ClientOnlyPortal>
     </If>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

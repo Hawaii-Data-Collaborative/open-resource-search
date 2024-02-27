@@ -2,7 +2,6 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { Auth } from 'aws-amplify'
 import Link from 'src/components/elements/Link/Link'
 import Text from 'src/components/elements/Text/Text'
 import Button from 'src/components/elements/Button/Button'
@@ -76,7 +75,7 @@ function SignIn() {
 
   const resendVerificationEmail = async () => {
     try {
-      await Auth.resendSignUp(email.trim())
+      // await Auth.resendSignUp(email.trim())
       setErrorMessage('')
       setShowResendButton(false)
       setSuccessMessage('Verification code sent!')

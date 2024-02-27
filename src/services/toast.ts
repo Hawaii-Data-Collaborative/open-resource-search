@@ -1,7 +1,7 @@
+import { AlertColor } from '@mui/material'
 import { toastEmitter } from './emitters'
-import { Color } from '@material-ui/lab/Alert'
 
-export function toast(msg: string, severity: Color | undefined) {
+export function toast(msg: string, severity: AlertColor | undefined) {
   toastEmitter.emit('message', msg, severity)
 }
 
