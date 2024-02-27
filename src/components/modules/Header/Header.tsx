@@ -9,6 +9,7 @@ import * as Styles from './Header.styles'
 import { getAppConfigValue } from 'src/utils/getAppConfigValue'
 import { useBannerQuery } from '@hook/useBannerQuery'
 import { useAuthContext } from 'src/hooks'
+import { link } from '@util/stringUtil'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -33,7 +34,7 @@ export default function Header() {
         <Styles.StyledContainer>
           <NextLink href="/" passHref>
             <span style={{ lineHeight: 0 }}>
-              <Styles.StyledImage src="/logo.svg" alt="Go back to search home page" />
+              <Styles.StyledImage src={link('/logo.svg')} alt="Go back to search home page" />
             </span>
           </NextLink>
 

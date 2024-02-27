@@ -18,6 +18,7 @@ import { getAppConfigValue } from 'src/utils/getAppConfigValue'
 import Default from 'src/components/layouts/Default/Default'
 import If from '@element/If/If'
 import usePageLoaded from '@hook/usePageLoaded'
+import { link } from '@util/stringUtil'
 
 function Home() {
   const dispatch = useAppDispatch()
@@ -38,7 +39,7 @@ function Home() {
       </Head>
 
       <Flex
-        background="url('/hero.png') center bottom / cover"
+        background={`url(${link('/hero.png')}) center bottom / cover`}
         maxWidth={1400}
         margin="0 auto"
         minHeight="35vw"
