@@ -1,20 +1,15 @@
 import axios from 'axios'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AuthContext } from '@context'
 import { AUTH_TOKEN } from '@constant/index'
 import localStorage from '@service/localStorage'
 import { getAppConfigValue } from '@util/getAppConfigValue'
 
-export function AuthContextProvider({ children }) {
-  const [value, setValue] = useState<any>({})
+let _user
+const emptyFn = () => {}
 
-  const setUser = useMemo(
-    // @ts-expect-error it's fine
-    user => {
-      setValue(value => ({ ...value, user }))
-    },
-    [setValue]
-  )
+export function AuthContextProvider({ children }) {
+  const [value, setValue] = useState<any>({ user: _user, setUser: emptyFn, loading: true })
 
   useEffect(() => {
     const fn = async () => {
@@ -31,7 +26,15 @@ export function AuthContextProvider({ children }) {
           localStorage.remove(AUTH_TOKEN)
         }
       }
-      setValue({ user, setUser })
+
+      setValue({
+        loading: false,
+        user,
+        setUser: user => {
+          _user = user
+          setValue(value => ({ ...value, user }))
+        }
+      })
     }
     fn()
   }, [])

@@ -19,6 +19,7 @@ import { AUTH_TOKEN } from '@constant/index'
 import localStorage from '@service/localStorage'
 import { useAuthContext } from 'src/hooks'
 import { toastErr } from '@service/toast'
+import { AuthContextProvider } from 'src/components/providers'
 
 export const getServerSideProps = context => {
   if (context.user != null) return redirect('/')
@@ -28,7 +29,15 @@ export const getServerSideProps = context => {
   }
 }
 
-function SignIn() {
+export default function SignIn() {
+  return (
+    <AuthContextProvider>
+      <SingInInner />
+    </AuthContextProvider>
+  )
+}
+
+function SingInInner() {
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [email, setEmail] = useState('')
@@ -216,5 +225,3 @@ function SignIn() {
     </AuthLayout>
   )
 }
-
-export default SignIn

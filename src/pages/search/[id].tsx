@@ -11,6 +11,7 @@ import axios from 'axios'
 import Search from 'src/components/layouts/Search/Search'
 import If from '@element/If/If'
 import usePageLoaded from '@hook/usePageLoaded'
+import { Providers } from 'src/components/providers'
 // import { resultFromApi } from 'src/adapters/result';
 
 export const getServerSideProps = async context => {
@@ -29,7 +30,15 @@ export const getServerSideProps = async context => {
   }
 }
 
-function SingleResultPage({ data, query }) {
+export default function SingleResultPage(props) {
+  return (
+    <Providers>
+      <SingleResultPageInner {...props} />
+    </Providers>
+  )
+}
+
+function SingleResultPageInner({ data, query }) {
   const dispatch = useAppDispatch()
 
   usePageLoaded()
@@ -78,5 +87,3 @@ function SingleResultPage({ data, query }) {
     </Search>
   )
 }
-
-export default SingleResultPage

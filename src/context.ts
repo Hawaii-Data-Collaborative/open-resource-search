@@ -7,6 +7,7 @@ interface User {
 interface IAuthContext {
   user: User
   setUser: (user: User) => void
+  loading: boolean
 }
 
 interface IFavsContext {

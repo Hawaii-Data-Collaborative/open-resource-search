@@ -7,8 +7,17 @@ import Default from '@layout/Default/Default'
 import localStorage from '@service/localStorage'
 import { AUTH_TOKEN } from '@constant/index'
 import Profile from 'src/components/modules/Profile/Profile'
+import { AuthContextProvider } from 'src/components/providers'
 
-function ProfilePage() {
+export default function ProfilePage() {
+  return (
+    <AuthContextProvider>
+      <ProfilePageInner />
+    </AuthContextProvider>
+  )
+}
+
+function ProfilePageInner() {
   const router = useRouter()
 
   usePageLoaded()
@@ -35,5 +44,3 @@ function ProfilePage() {
     </Default>
   )
 }
-
-export default ProfilePage

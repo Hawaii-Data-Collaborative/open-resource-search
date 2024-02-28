@@ -19,8 +19,17 @@ import Default from 'src/components/layouts/Default/Default'
 import If from '@element/If/If'
 import usePageLoaded from '@hook/usePageLoaded'
 import { link } from '@util/stringUtil'
+import { AuthContextProvider } from 'src/components/providers'
 
-function Home() {
+export default function Home() {
+  return (
+    <AuthContextProvider>
+      <HomeInner />
+    </AuthContextProvider>
+  )
+}
+
+function HomeInner() {
   const dispatch = useAppDispatch()
 
   usePageLoaded()
@@ -112,5 +121,3 @@ function Home() {
     </Default>
   )
 }
-
-export default Home

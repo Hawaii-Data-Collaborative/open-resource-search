@@ -11,17 +11,26 @@ import Search from 'src/components/layouts/Search/Search'
 import useFavoritesFetch from '@hook/useFavoritesFetch'
 import usePageLoaded from '@hook/usePageLoaded'
 import { useAuthContext } from '@hook/index'
+import { Providers } from 'src/components/providers'
 
-function Favorites() {
+export default function Favorites() {
+  return (
+    <Providers>
+      <FavoritesInner />
+    </Providers>
+  )
+}
+
+function FavoritesInner() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { user } = useAuthContext()
+  const { user, loading } = useAuthContext()
 
   useFavoritesFetch()
   usePageLoaded()
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !user) {
       dispatch(setResults([]))
       router.push({
         pathname: '/login',
@@ -30,7 +39,7 @@ function Favorites() {
         }
       })
     }
-  }, [user])
+  }, [user, loading])
 
   useEffect(() => {
     ;(async function () {
@@ -57,5 +66,3 @@ function Favorites() {
     </Search>
   )
 }
-
-export default Favorites
