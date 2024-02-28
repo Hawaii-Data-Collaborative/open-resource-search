@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev -p 3005",
     "build": "next build",
-    "build:beta": "DEPLOYMENT_TARGET=beta next build",
+    "build:beta": "NEXT_PUBLIC_DEPLOYMENT_TARGET=beta next build",
     "start": "next start -p 3005 -H localhost"
   },
   "license": "GNU GPLv3",

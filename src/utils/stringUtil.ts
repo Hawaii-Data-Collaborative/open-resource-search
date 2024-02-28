@@ -8,8 +8,7 @@ export function getWebsiteUrl(url: string) {
   return url
 }
 
-const IS_BETA = location.origin === 'https://dev.hawaiidata.org'
-
 export function link(url) {
+  const IS_BETA = process.env.NEXT_PUBLIC_DEPLOYMENT_TARGET === 'beta'
   return IS_BETA ? '/auw211' + url : url
 }

@@ -1,3 +1,3 @@
 module.exports = {
-  basePath: process.env.DEPLOYMENT_TARGET === 'beta' ? '/auw211' : ''
+  basePath: process.env.NEXT_PUBLIC_DEPLOYMENT_TARGET === 'beta' ? '/auw211' : ''
 }
