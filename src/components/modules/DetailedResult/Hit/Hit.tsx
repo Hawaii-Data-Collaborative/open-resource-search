@@ -33,14 +33,13 @@ export default function Hit({ hit }: HitProps) {
 
       <EmergencyInfo hit={hit} />
 
-      <Flex marginBottom="16px" justifyContent="space-between">
-        <Flex flex={1} paddingRight="16px" flexDirection="column">
+      <Box marginBottom="16px">
+        <Flex alignItems="flex-start" justifyContent="space-between">
           <Heading hit={hit} />
-          <Location hit={hit} />
+          <FavoriteButton hit={hit} />
         </Flex>
-
-        <FavoriteButton hit={hit} />
-      </Flex>
+        <Location hit={hit} />
+      </Box>
 
       <Description hit={hit} />
       <ContactLinks hit={hit} />

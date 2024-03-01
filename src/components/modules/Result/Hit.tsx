@@ -35,12 +35,10 @@ export default function Hit({ hit, location, score }: HitProps) {
       boxShadow="0 0 8px #D0C9D6"
     >
       <Box marginBottom="16px">
-        <Flex>
+        <Flex alignItems="flex-start" justifyContent="space-between">
           <Heading hit={hit} />
-
           <FavoriteButton hit={hit} />
         </Flex>
-
         <Location hit={hit} location={location} />
       </Box>
 

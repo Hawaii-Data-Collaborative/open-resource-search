@@ -16,7 +16,7 @@ export default function FavoriteButton({ hit }) {
     }
   }
 
-  if (!user) {
+  if (!hit || !user) {
     return null
   }
 
@@ -38,9 +38,9 @@ export default function FavoriteButton({ hit }) {
         fontFamily: 'Open Sans,sans-serif',
         cursor: 'pointer',
         padding: 0,
-        fontWeight: 300,
-        width: 40,
-        height: 40
+        fontWeight: 300
+        // width: 40,
+        // height: 40
       }}
       onClick={onClick}
     >
