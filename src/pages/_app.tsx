@@ -14,7 +14,6 @@ import isInternetExplorer from '@util/isInternetExplorer'
 import { Toast } from '@module/Toast/Toast'
 import { initAxios } from '@service/axios'
 
-import '../components/elements/Button/Button.scss'
 import '../components/modules/Result/FavoriteButton/FavoriteButton.scss'
 import '../components/modules/DetailedResult/Hit/Categories/Categories.scss'
 import '../components/modules/Search/Search.scss'

@@ -5,7 +5,7 @@ import { defaultTheme } from 'src/styles/theme'
 import getTextColorContrast from 'src/utils/getTextColorContrast'
 
 interface IButtonProps extends SpaceProps {
-  color?: PalleteColorUnion
+  color?: PalleteColorUnion | 'gray'
   noPrint?: boolean
   noShadows?: boolean
   fullWidth?: boolean
@@ -13,10 +13,11 @@ interface IButtonProps extends SpaceProps {
 
 export const Button = styled.button<IButtonProps>`
   align-items: center;
-  background-color: ${props => props.theme.pallete[props.color]};
+  background-color: ${props => (props.color === 'gray' ? 'rgb(247, 245, 249)' : props.theme.pallete[props.color])};
   border-radius: ${props => props.theme.shape.borderRadius};
   box-shadow: ${props => (props.noShadows ? 'none' : '0 0 8px #d0c9d6')};
-  color: ${props => getTextColorContrast(props.theme.pallete[props.color])};
+  color: ${props =>
+    props.color === 'gray' ? 'rgb(0, 81, 145)' : getTextColorContrast(props.theme.pallete[props.color])};
   border: none;
   align-items: center;
   display: flex;
@@ -31,8 +32,10 @@ export const Button = styled.button<IButtonProps>`
   ${space};
 
   &:hover:not(:disabled) {
-    background-color: ${props => props.theme.pallete[props.color + 'Medium']};
-    color: ${props => getTextColorContrast(props.theme.pallete[props.color + 'Medium'])};
+    background-color: ${props =>
+      props.color === 'gray' ? 'rgb(0, 81, 145)' : props.theme.pallete[props.color + 'Medium']};
+    color: ${props =>
+      props.color === 'gray' ? '#fff' : getTextColorContrast(props.theme.pallete[props.color + 'Medium'])};
   }
 
   ${props =>
@@ -50,11 +53,3 @@ Button.defaultProps = {
 }
 
 export default Button
-
-export function Button2({ children, ...props }) {
-  return (
-    <button className="Button" {...props}>
-      {children}
-    </button>
-  )
-}

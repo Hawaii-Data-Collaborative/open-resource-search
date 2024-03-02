@@ -4,7 +4,7 @@ import { logEvent } from 'src/analytics'
 import { DontPrintContainer } from '../Hit.styles'
 import { getWebsiteUrl } from '@util/stringUtil'
 import { useState } from 'react'
-import { Button2 } from '@element/Button/Button'
+import { Button } from '@element/Button/Button'
 import { ContactButtonsDialog } from '@module/Result/ContactButtons/ContactButtons'
 
 export default function ContactButtons({ hit }) {
@@ -15,7 +15,9 @@ export default function ContactButtons({ hit }) {
   return (
     <DontPrintContainer style={{ gap: 10 }} className="ContactButtons">
       {!hit.phone ?? hit.phone.length === 0 ? null : (
-        <Button2
+        <Button
+          color="gray"
+          noShadows
           style={{ flex: '1 1 50%' }}
           onClick={() => {
             setAction('call')
@@ -27,11 +29,13 @@ export default function ContactButtons({ hit }) {
           }}
         >
           <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Call
-        </Button2>
+        </Button>
       )}
 
       {!hit.website || hit.website.length === 0 ? null : (
-        <Button2
+        <Button
+          color="gray"
+          noShadows
           style={{ flex: '1 1 50%' }}
           onClick={() => {
             setAction('website')
@@ -44,11 +48,13 @@ export default function ContactButtons({ hit }) {
           }}
         >
           <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Website
-        </Button2>
+        </Button>
       )}
 
       {!hit.email || hit.email.length === 0 ? null : (
-        <Button2
+        <Button
+          color="gray"
+          noShadows
           style={{ flex: '1 1 50%' }}
           onClick={() => {
             setAction('email')
@@ -61,11 +67,13 @@ export default function ContactButtons({ hit }) {
           }}
         >
           <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Email
-        </Button2>
+        </Button>
       )}
 
       {hit.locationLat && hit.locationLon ? (
-        <Button2
+        <Button
+          color="gray"
+          noShadows
           style={{ flex: '1 1 50%' }}
           onClick={() => {
             setAction('directions')
@@ -78,7 +86,7 @@ export default function ContactButtons({ hit }) {
         >
           <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
           Directions
-        </Button2>
+        </Button>
       ) : null}
 
       {action ? <ContactButtonsDialog action={action} hit={hit} onClose={() => setAction(null)} /> : null}
