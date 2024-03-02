@@ -8,6 +8,7 @@ import CustomMarker from './CustomMarker'
 import MapContainer from './MapContainer'
 import { getAppConfigValue } from '@util/getAppConfigValue'
 import { setGoogleInstance } from '@util/mapUtil'
+import { link } from '@util/stringUtil'
 
 function Map({ google }) {
   const [showInfoWindow, setShowInfoWindow] = useState(false)
@@ -48,7 +49,7 @@ function Map({ google }) {
           <CustomMarker
             key={m.id}
             // @ts-ignore
-            icon="/pin.svg"
+            icon={link('/pin.svg')}
             // @ts-ignore I need to check this later. Not sure how to fix ts errors here
             phone={m.phone}
             website={m.website}
