@@ -27,6 +27,6 @@ mv app.config.json $configFile
 mv app.config.dev.json app.config.json
 
 echo "[build] compressing ..."
-tar -cz --no-xattrs -f next.tar.gz .next
+tar czf next.tar.gz --exclude '._*' .next
 
 echo "[build] done"
