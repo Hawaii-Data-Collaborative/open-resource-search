@@ -1,8 +1,7 @@
-import { DefaultTheme } from 'styled-components'
-import theme from 'src/constants/theme'
+import { THEME_CONSTANTS as theme } from '../constants'
 import { createTheme } from '@mui/material'
 
-export const defaultTheme: DefaultTheme = {
+export const defaultTheme = {
   typography: {
     htmlFontSize: theme.BASE_FONT_SIZE,
     fontFamily: '"Open Sans", sans-serif',

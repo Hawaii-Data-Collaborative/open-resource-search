@@ -1,4 +1,4 @@
-class localStorage {
+export class localStorage {
   static has(value: string) {
     if (this.get(value) != null) return true
     return false
@@ -35,5 +35,3 @@ class localStorage {
     }
   }
 }
-
-export default localStorage

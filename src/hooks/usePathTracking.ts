@@ -1,18 +1,15 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-
-import SessionStorage from '@service/sessionStorage';
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { sessionStorage } from '../services'
 
 export function usePathTracking() {
-  const router = useRouter();
+  const location = useLocation()
 
   useEffect(() => {
     // Set the previous path as the value of the current path.
-    const prevPath = SessionStorage.get('currentPath');
-    SessionStorage.set('prevPath', prevPath);
+    const prevPath = sessionStorage.get('currentPath')
+    sessionStorage.set('prevPath', prevPath)
     // Set the current path value by looking at the browser's location object.
-    SessionStorage.set('currentPath', window.location.pathname);
-  }, [router.asPath]);
+    sessionStorage.set('currentPath', window.location.pathname)
+  }, [location.pathname])
 }
-
-export default usePathTracking;

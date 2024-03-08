@@ -1,41 +1,36 @@
-import SessionStorage from '@service/sessionStorage';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { sessionStorage } from '../../services'
 
 const initialState = {
   query: '',
   location: '',
   taxonomies: '',
-  radius: '0',
-};
+  radius: '0'
+}
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
     setQuery: (state, action: PayloadAction<string>) => {
-      state.query = action.payload;
+      state.query = action.payload
     },
     setDistance: (state, action: PayloadAction<string>) => {
-      const radius = parseInt(action.payload);
-      if (action.payload.length > 0 && isNaN(radius)) return;
+      const radius = parseInt(action.payload)
+      if (action.payload.length > 0 && isNaN(radius)) return
 
-      state.radius = action.payload;
+      state.radius = action.payload
     },
     setLocation: (state, action: PayloadAction<string>) => {
-      state.location = action.payload;
-      SessionStorage.set('lastLocation', action.payload);
+      state.location = action.payload
+      sessionStorage.set('lastLocation', action.payload)
     },
     setTaxonomies: (state, action: PayloadAction<string>) => {
-      state.taxonomies = action.payload;
-    },
-  },
-});
+      state.taxonomies = action.payload
+    }
+  }
+})
 
-export const {
-  setQuery,
-  setLocation,
-  setTaxonomies,
-  setDistance,
-} = searchSlice.actions;
+export const { setQuery, setLocation, setTaxonomies, setDistance } = searchSlice.actions
 
-export default searchSlice.reducer;
+export default searchSlice.reducer

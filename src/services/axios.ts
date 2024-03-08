@@ -1,6 +1,6 @@
 import axios from 'axios'
-import localStorage from './localStorage'
-import { AUTH_TOKEN } from '@constant/index'
+import { localStorage } from './localStorage'
+import { AUTH_TOKEN } from '../constants'
 
 export function initAxios() {
   axios.interceptors.request.use(config => {

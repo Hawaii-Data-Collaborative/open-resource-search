@@ -1,7 +1,7 @@
-import { checkString } from '@util/checkString';
+import { checkString } from '../utils'
 
 export const resultsFromApi = (results: any[]) =>
-  results.map((result) => ({
+  results.map(result => ({
     id: result._source.id,
     title: getTitle(result._source),
     locationName: getLocationName(result._source),
@@ -10,35 +10,35 @@ export const resultsFromApi = (results: any[]) =>
     description: getDescription(result._source),
     phone: result._source.phone,
     website: result._source.website,
-    _score: result._score,
-  }));
+    _score: result._score
+  }))
 
 function getTitle(result) {
-  let title = '';
+  let title = ''
 
   if (checkString(result.service_name)) {
-    title += `${result.service_name} at `;
+    title += `${result.service_name} at `
   }
 
   if (checkString(result.location_name)) {
-    title += result.location_name;
+    title += result.location_name
   } else {
-    title += result.organization_name;
+    title += result.organization_name
   }
 
-  return title;
+  return title
 }
 
 function getLocationName(result) {
   if (checkString(result.physical_address)) {
-    return `${result.physical_address}, ${result.physical_address_city}, ${result.physical_address_state} ${result.physical_address_postal_code}`;
+    return `${result.physical_address}, ${result.physical_address_city}, ${result.physical_address_state} ${result.physical_address_postal_code}`
   }
 }
 
 function getDescription(result) {
   if (checkString(result.service_short_description)) {
-    return result.service_short_description;
+    return result.service_short_description
   }
 
-  return result.service_description;
+  return result.service_description
 }

@@ -9,6 +9,6 @@ export function getWebsiteUrl(url: string) {
 }
 
 export function link(url) {
-  const IS_BETA = process.env.NEXT_PUBLIC_DEPLOYMENT_TARGET === 'beta'
+  const IS_BETA = import.meta.env.VITE_PUBLIC_DEPLOYMENT_TARGET === 'beta'
   return IS_BETA ? '/auw211' + url : url
 }

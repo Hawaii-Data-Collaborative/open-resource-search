@@ -1,18 +1,18 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getAppConfigValue } from 'src/utils/getAppConfigValue'
-import { RootState } from 'src/redux/store'
-import { resultsFromApi } from 'src/adapters/results'
-import { favoritesFromApi } from 'src/adapters/favorite'
-import { filterByRadius } from '@util/mapUtil'
-import { logEvent } from 'src/analytics'
+import { getAppConfigValue } from '../../utils/getAppConfigValue'
+import { RootState } from '../../redux/store'
+import { resultsFromApi } from '../../adapters/results'
+import { favoritesFromApi } from '../../adapters/favorite'
+import { filterByRadius } from '../../utils'
+import { logEvent } from '../../analytics'
 
 type SearchParams = {
-  q?: String
-  lat?: Number
-  lon?: Number
-  radius?: String
-  taxonomies?: String
+  q?: string
+  lat?: number
+  lon?: number
+  radius?: string
+  taxonomies?: string
 }
 
 const initialState = {
