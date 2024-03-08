@@ -29,9 +29,9 @@ export const GlobalStyleSheet = createGlobalStyle`
   }
 
   html {
-    background-color: ${props => props.theme.pallete.primaryMedium};
+    background-color: ${props => (props.theme as any).pallete.primaryMedium};
     scroll-behavior: smooth;
-    font-size: ${props => props.theme.typography.htmlFontSize};
+    font-size: ${props => (props.theme as any).typography.htmlFontSize};
   }
 
   html,

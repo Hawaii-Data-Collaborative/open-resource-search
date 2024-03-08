@@ -164,7 +164,6 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
         {action === 'call' && hit.phone && (
           <>
             <Link
-              external
               to={`tel:${hit.phone}`}
               variant="outline"
               color="primary"
@@ -206,7 +205,6 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
         {action === 'website' && hit.website && (
           <>
             <Link
-              external
               to={getWebsiteUrl(hit.website)}
               target="_blank"
               rel="noreferrer"
@@ -250,7 +248,6 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
         {action === 'email' && hit.email && (
           <>
             <Link
-              external
               to={'mailto:' + hit.email}
               target="_blank"
               rel="noreferrer"
@@ -294,7 +291,6 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
         {action === 'directions' && hit.locationName && hit.locationLat && hit.locationLon ? (
           <>
             <Link
-              external
               to={`https://www.google.com/maps/dir/?api=1&destination=${hit.locationLat},${hit.locationLon}`}
               target="_blank"
               rel="noreferrer"

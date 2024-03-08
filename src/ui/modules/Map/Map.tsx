@@ -17,7 +17,7 @@ function Map({ google }) {
       lat: Number(location.centerLat),
       lng: Number(location.centerLng)
     }),
-    [location.centerLng, location.centerLng]
+    [location.centerLat, location.centerLng]
   )
 
   return (
@@ -48,7 +48,7 @@ function Map({ google }) {
             icon={link('/pin.svg')}
             phone={m.phone}
             website={m.website}
-            onClick={(props, marker) => {
+            onClick={(_props, marker) => {
               setActiveMarker(marker)
               setShowInfoWindow(true)
               document.getElementById(m.id)?.scrollIntoView({

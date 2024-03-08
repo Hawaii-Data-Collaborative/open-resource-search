@@ -31,7 +31,7 @@ function Search({ variant = 'outlined' }: Props) {
   const suggestions = useSuggestionsQuery()
   const newHits = suggestions
 
-  const onChange = (e, v) => {
+  const onChange = (_e, v) => {
     // console.log('[onChange] v=%o e=%o', v, e);
     let text: string, group: string, code: string
     if (!v) {

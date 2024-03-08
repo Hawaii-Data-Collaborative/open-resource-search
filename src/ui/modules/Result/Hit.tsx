@@ -45,7 +45,7 @@ export default function Hit({ hit, location, score }: HitProps) {
       <ContactButtons hit={hit} />
       <MoreInformation hit={hit} />
 
-      {(import.meta.env.MODE === 'development' || import.meta.env.VITE_PUBLIC_DEBUG) != null && checkString(score) && (
+      {(import.meta.env.MODE === 'development' || import.meta.env.VITE_DEBUG) != null && checkString(score) && (
         <Flex justifyContent="flex-end" alignItems="center">
           <Text color="textSecondary" variant="body1">
             score: {score}

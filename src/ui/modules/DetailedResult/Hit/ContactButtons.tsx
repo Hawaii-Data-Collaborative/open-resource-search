@@ -14,7 +14,7 @@ export default function ContactButtons({ hit }) {
 
   return (
     <DontPrintContainer style={{ gap: 10 }} className="ContactButtons">
-      {!hit.phone ?? hit.phone.length === 0 ? null : (
+      {!hit.phone?.length ? null : (
         <Button
           color="gray"
           noShadows
@@ -32,7 +32,7 @@ export default function ContactButtons({ hit }) {
         </Button>
       )}
 
-      {!hit.website || hit.website.length === 0 ? null : (
+      {!hit.website?.length ? null : (
         <Button
           color="gray"
           noShadows
@@ -51,7 +51,7 @@ export default function ContactButtons({ hit }) {
         </Button>
       )}
 
-      {!hit.email || hit.email.length === 0 ? null : (
+      {!hit.email?.length ? null : (
         <Button
           color="gray"
           noShadows
