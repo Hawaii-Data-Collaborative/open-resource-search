@@ -3,6 +3,7 @@ import './Categories.scss'
 import Button from '@mui/material/Button'
 import Text from '../../../elements/Text'
 import Box from '../../../elements/Box'
+import { link } from '../../../../utils'
 
 export default function Categories({ hit }) {
   if (!hit?.categories?.length) {
@@ -16,7 +17,7 @@ export default function Categories({ hit }) {
       </Text>
       <div className="chips">
         {hit.categories.map(c => (
-          <Button key={c.value} href={`/search?terms=${c.label}&taxonomies=${c.value}`}>
+          <Button key={c.value} href={link(`/search?terms=${c.label}&taxonomies=${c.value}`)}>
             {c.label}
           </Button>
         ))}

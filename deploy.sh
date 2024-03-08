@@ -20,19 +20,19 @@ echo "[deploy] pushing ..."
 git push
 
 echo "[deploy] scp'ing ..."
-scp next.tar.gz $host:$dir/
+scp dist.tar.gz $host:$dir/
 
 echo "[deploy] ssh'ing ..."
 ssh $host bash << EOF
 cd $dir
 git pull
-if [ -d "./.next" ]; then
-  echo "[deploy] moving existing .next dir to .next-old ..."
-  rm -rf .next-old
-  mv .next .next-old
+if [ -d "./.dist" ]; then
+  echo "[deploy] moving existing dist dir to dist-old ..."
+  rm -rf dist-old
+  mv dist dist-old
 fi
 echo "[deploy] uncompressing ..."
-tar xzf next.tar.gz
+tar xzf dist.tar.gz
 echo "[deploy] installing dependencies ..."
 npm i --force
 echo "[deploy] restarting ..."

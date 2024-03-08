@@ -10,36 +10,37 @@ import {
   SearchPage,
   SignupPage
 } from './pages'
+import { link } from '../utils'
 
 export function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={link('/')}>
           <HomePage />
         </Route>
-        <Route path="/search/:id">
+        <Route path={link('/search/:id')}>
           <ProgramDetailsPage />
         </Route>
-        <Route path="/search">
+        <Route path={link('/search')}>
           <SearchPage />
         </Route>
-        <Route path="/signup">
+        <Route path={link('/signup')}>
           <SignupPage />
         </Route>
-        <Route path="/login">
+        <Route path={link('/login')}>
           <LoginPage />
         </Route>
-        <Route path="/profile/favorites">
+        <Route path={link('/profile/favorites')}>
           <FavoritesPage />
         </Route>
-        <Route path="/profile">
+        <Route path={link('/profile')}>
           <ProfilePage />
         </Route>
-        <Route path="/password-reset">
+        <Route path={link('/password-reset')}>
           <PasswordResetPage />
         </Route>
-        <Route path="/privacy-policy">
+        <Route path={link('/privacy-policy')}>
           <PrivacyPolicyPage />
         </Route>
       </Switch>

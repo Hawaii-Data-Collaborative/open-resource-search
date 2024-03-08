@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store'
 import { setQuery, setLocation, setDistance, setTaxonomies } from '../../../redux/slices/search'
 import { useCachedLocations } from '../../../hooks'
 import { StyledAutocomplete } from './Search.styled'
-import { getAppConfigValue } from '../../../utils'
+import { getAppConfigValue, link } from '../../../utils'
 import { useSuggestionsQuery } from '../../../hooks'
 import { getParentElements } from '../../../utils'
 
@@ -139,7 +139,7 @@ function Search({ variant = 'outlined' }: Props) {
     }
 
     history.push({
-      pathname: '/search',
+      pathname: link('/search'),
       search: new URLSearchParams(queryParams).toString()
     })
   }
