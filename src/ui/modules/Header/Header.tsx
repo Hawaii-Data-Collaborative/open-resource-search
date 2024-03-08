@@ -29,7 +29,7 @@ export default function Header() {
     <>
       <Styles.StyledHeader>
         <Styles.StyledContainer>
-          <RouterLink to="/">
+          <RouterLink to={link('/')}>
             <span style={{ lineHeight: 0 }}>
               <Styles.StyledImage src={link('/logo.svg')} alt="Go back to search home page" />
             </span>

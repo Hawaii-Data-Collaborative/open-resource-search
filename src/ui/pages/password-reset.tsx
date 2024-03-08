@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { getAppConfigValue } from '../../utils'
+import { getAppConfigValue, link } from '../../utils'
 import { usePageLoaded, useTitle, useMeta } from '../../hooks'
 import { Box, Button, Flex, If, Input, Label, Link, Text } from '../elements'
 
@@ -116,7 +116,7 @@ function PasswordReset() {
         </Link>
       </Text>
       <Text>
-        <Link color="textPrimary" to="/">
+        <Link color="textPrimary" to={link('/')}>
           Back to home page
         </Link>
       </Text>

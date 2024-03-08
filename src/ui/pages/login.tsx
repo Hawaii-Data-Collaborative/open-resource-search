@@ -198,7 +198,7 @@ function SingInInner() {
         </Link>
       </Text>
       <Text>
-        <Link color="textPrimary" to="/">
+        <Link color="textPrimary" to={link('/')}>
           Back to home page
         </Link>
       </Text>

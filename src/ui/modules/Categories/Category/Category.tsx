@@ -4,6 +4,7 @@ import Flex from '../../../elements/Flex'
 import Box from '../../../elements/Box'
 import { useAppDispatch, useAppSelector } from '../../../../redux/store'
 import { setQuery } from '../../../../redux/slices/search'
+import { link } from '../../../../utils'
 
 export default function Category({ data }) {
   const dispatch = useAppDispatch()
@@ -32,7 +33,7 @@ export default function Category({ data }) {
         </Text>
         <Flex flexDirection="column">
           {data.children.map(cat => {
-            let href = `/search?${cat.params}`
+            let href = link(`/search?${cat.params}`)
 
             if (location != null && location.length > 0) {
               href += `&location=${location}`

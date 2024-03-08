@@ -28,7 +28,6 @@ function Profile() {
 
   const logout = () => {
     localStorage.remove(AUTH_TOKEN)
-    // @ts-expect-error it's fine
     window.location = link('/')
   }
 
