@@ -51,7 +51,7 @@ export default function Header() {
 
         <Styles.HiddenOnMobile>
           <>
-            <Link to={getAppConfigValue('homeUrl') || '/'} rel="noreferrer" variant="normal" color="primary">
+            <Link to={getAppConfigValue('homeUrl') || link('/')} rel="noreferrer" variant="normal" color="primary">
               Home
             </Link>
 
@@ -119,7 +119,12 @@ export default function Header() {
                     alignItems: 'center'
                   }}
                 >
-                  <Link to={getAppConfigValue('homeUrl') || '/'} rel="noreferrer" variant="normal" color="primary">
+                  <Link
+                    to={getAppConfigValue('homeUrl') || link('/')}
+                    rel="noreferrer"
+                    variant="normal"
+                    color="primary"
+                  >
                     Home
                   </Link>
 

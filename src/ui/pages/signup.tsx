@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuthContext, useMeta, usePageLoaded, useTitle } from '../../hooks'
 import { AuthContextProvider } from '../../providers'
-import { getAppConfigValue } from '../../utils'
+import { getAppConfigValue, link } from '../../utils'
 import { AUTH_TOKEN } from '../../constants'
 import { toastErr } from '../../services'
 import { AuthLayout } from '../layouts'
@@ -42,7 +42,7 @@ function SignupInner() {
       setSaving(false)
       setUser(res.data.user)
       localStorage.set(AUTH_TOKEN, res.data.token)
-      history.push(getAppConfigValue('homeUrl') || '/')
+      history.push(getAppConfigValue('homeUrl') || link('/'))
     } catch (err) {
       setSaving(false)
       console.log(err)

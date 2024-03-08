@@ -7,7 +7,7 @@ import Box from '../../elements/Box'
 import Button from '../../elements/Button'
 import { useAuthContext } from '../../../hooks'
 import { localStorage } from '../../../services'
-import { getAppConfigValue } from '../../../utils'
+import { getAppConfigValue, link } from '../../../utils'
 
 function Profile() {
   const history = useHistory()
@@ -29,7 +29,7 @@ function Profile() {
   const logout = () => {
     localStorage.remove(AUTH_TOKEN)
     // @ts-expect-error it's fine
-    window.location = '/'
+    window.location = link('/')
   }
 
   const deleteAccount = async () => {

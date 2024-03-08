@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Button from '../../../elements/Button'
 import Flex from '../../../elements/Flex'
 import { sessionStorage } from '../../../../services'
+import { link } from '../../../../utils'
 
 export default function Actions({ setShare }) {
   const history = useHistory()
@@ -27,7 +28,7 @@ export default function Actions({ setShare }) {
   }
 
   function goHome() {
-    history.push('/')
+    history.push(link('/'))
   }
 
   return (

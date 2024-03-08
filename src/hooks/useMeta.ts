@@ -23,7 +23,7 @@ function exists(properties) {
 }
 
 function getKey(properties) {
-  return btoa(JSON.stringify(sortedClone(properties)))
+  return encodeURIComponent(JSON.stringify(sortedClone(properties)))
 }
 
 function sortedClone(properties) {

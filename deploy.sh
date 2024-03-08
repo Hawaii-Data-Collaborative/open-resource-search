@@ -33,10 +33,6 @@ if [ -d "./.dist" ]; then
 fi
 echo "[deploy] uncompressing ..."
 tar xzf dist.tar.gz
-echo "[deploy] installing dependencies ..."
-npm i --force
-echo "[deploy] restarting ..."
-sudo ./restart.sh
 EOF
 
 echo "[deploy] done"

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { THEME_CONSTANTS as theme } from '../../constants'
-import { getAppConfigValue, getTextColorContrast } from '../../utils'
+import { getAppConfigValue, getTextColorContrast, link } from '../../utils'
 import { AuthLayout } from '../layouts'
 import { usePageLoaded, useAuthContext, useTitle, useMeta } from '../../hooks'
 import { AUTH_TOKEN } from '../../constants'
@@ -35,7 +35,7 @@ function SingInInner() {
 
   useEffect(() => {
     if (localStorage.get(AUTH_TOKEN)) {
-      history.push(getAppConfigValue('homeUrl') || '/')
+      history.push(getAppConfigValue('homeUrl') || link('/'))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
