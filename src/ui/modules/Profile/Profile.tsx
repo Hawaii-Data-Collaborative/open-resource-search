@@ -38,6 +38,10 @@ function Profile() {
       if (res.data?.message) {
         setMessage(res.data.message)
       }
+      localStorage.clear()
+      setTimeout(() => {
+        window.location = link('/')
+      }, 2000)
     }
   }
 
