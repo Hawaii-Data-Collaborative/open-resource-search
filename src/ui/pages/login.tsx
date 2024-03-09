@@ -176,11 +176,11 @@ export default function LoginPage() {
           Sign In
         </Button>
 
-        <Text textAlign="center" variant="h3" marginTop="8px">
+        {/* <Text textAlign="center" variant="h3" marginTop="8px">
           <Link color="primary" to="/password-reset">
             Forgot your password?
           </Link>
-        </Text>
+        </Text> */}
       </form>
       <Text paragraph>
         Don&apos;t have an account?{' '}
