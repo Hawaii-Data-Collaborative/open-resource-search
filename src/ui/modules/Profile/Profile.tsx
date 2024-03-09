@@ -17,7 +17,7 @@ function Profile() {
   useEffect(() => {
     if (!localStorage.get(AUTH_TOKEN)) {
       history.push({
-        pathname: '/login'
+        pathname: link('/login')
         // query: {
         //   message: 'Please sign in to continue',
         // },

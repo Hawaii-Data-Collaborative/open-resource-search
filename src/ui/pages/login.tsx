@@ -43,7 +43,7 @@ export default function LoginPage() {
       setSaving(false)
       setUser(res.data.user)
       localStorage.set(AUTH_TOKEN, res.data.token)
-      history.push('/profile')
+      history.push(link('/profile'))
     } catch (err) {
       toastErr(err)
       // console.log('Error signing in', err)

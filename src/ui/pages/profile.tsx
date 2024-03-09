@@ -7,6 +7,7 @@ import { AUTH_TOKEN } from '../../constants/index'
 import { useMeta, useTitle } from '../../hooks'
 import { DefaultLayout } from '../layouts'
 import Profile from '../modules/Profile/Profile'
+import { link } from '../../utils'
 
 export default function ProfilePage() {
   const history = useHistory()
@@ -18,7 +19,7 @@ export default function ProfilePage() {
   useEffect(() => {
     if (!localStorage.get(AUTH_TOKEN)) {
       history.push({
-        pathname: '/login',
+        pathname: link('/login'),
         search: `message=Please sign in to continue`
       })
     }

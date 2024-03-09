@@ -9,6 +9,7 @@ import { useAuthContext, useMeta, usePageLoaded, useTitle } from '../../hooks'
 import { useHistory } from 'react-router-dom'
 import { SearchLayout } from '../layouts'
 import { FavsContextProvider } from '../../providers'
+import { link } from '../../utils'
 
 export default function FavoritesPage() {
   const history = useHistory()
@@ -23,7 +24,7 @@ export default function FavoritesPage() {
     if (!loading && !user) {
       dispatch(setResults([]))
       history.push({
-        pathname: '/login',
+        pathname: link('/login'),
         search: new URLSearchParams({ message: 'Please sign in to continue' }).toString()
       })
     }

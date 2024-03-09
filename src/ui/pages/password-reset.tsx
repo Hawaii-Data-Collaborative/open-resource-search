@@ -22,7 +22,7 @@ export default function PasswordReset() {
     try {
       if (params.get('confirmation_code') != null && params.get('user_name') != null) {
         // await Auth.forgotPasswordSubmit(params.get('user_name'), params.get('confirmation_code'), newPassword?.current?.value ?? '')
-        history.push('/login?message=Password%20saved.%20Sign%20in%20with%20your%20new%20password.')
+        history.push(link('/login?message=Password%20saved.%20Sign%20in%20with%20your%20new%20password.'))
       } else {
         // await Auth.forgotPassword(username?.current?.value ?? '')
         setMessage(
