@@ -118,6 +118,7 @@ export const resultsSlice = createSlice({
     setResults: (state, action: PayloadAction<any[]>) => {
       state.data = action.payload
       state.page = 0
+      state.isLoading = false
     }
   },
   extraReducers: {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 import { useAppDispatch } from '../../redux/store'
 import { fetchLocation, setCenter, setZoom } from '../../redux/slices/location'
 import { sessionStorage } from '../../services'
@@ -7,12 +8,10 @@ import { setResults } from '../../redux/slices/results'
 import SingleResult from '../modules/DetailedResult/SingleResult'
 import Map from '../modules/Map/Map'
 import { getAppConfigValue } from '../../utils'
-import axios from 'axios'
 import { useMeta, usePageLoaded, useTitle } from '../../hooks'
-import { Providers } from '../../providers'
 import { SearchLayout } from '../layouts'
 import { If } from '../elements'
-// import { resultFromApi } from '../../adapters/result';
+import { FavsContextProvider } from '../../providers'
 
 export default function SingleResultPage() {
   const params = useParams<{ id: string }>()
@@ -43,9 +42,9 @@ export default function SingleResultPage() {
   }
 
   return (
-    <Providers>
+    <FavsContextProvider>
       <SingleResultPageInner data={data} />
-    </Providers>
+    </FavsContextProvider>
   )
 }
 

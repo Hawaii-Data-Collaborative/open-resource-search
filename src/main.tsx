@@ -10,6 +10,7 @@ import GlobalConfig from './ui/modules/GlobalConfig/GlobalConfig'
 import { ThemeProvider } from '@mui/material'
 import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
+import { AuthContextProvider } from './providers'
 
 // Import polyfills for IE11 support
 if (import.meta.env.MODE === 'production' && isInternetExplorer()) {
@@ -26,14 +27,16 @@ initAxios()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <Router>
-      <ThemeProvider theme={materialUiTheme}>
-        <GlobalStyleSheet />
-        <GlobalConfig>
-          <App />
-          <Toast />
-        </GlobalConfig>
-      </ThemeProvider>
-    </Router>
+    <AuthContextProvider>
+      <Router>
+        <ThemeProvider theme={materialUiTheme}>
+          <GlobalStyleSheet />
+          <GlobalConfig>
+            <App />
+            <Toast />
+          </GlobalConfig>
+        </ThemeProvider>
+      </Router>
+    </AuthContextProvider>
   </Provider>
 )

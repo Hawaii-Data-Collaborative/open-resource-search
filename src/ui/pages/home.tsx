@@ -2,7 +2,6 @@ import color from 'color'
 import { useEffect } from 'react'
 import InfoIcon from '@mui/icons-material/Info'
 import { useMeta, usePageLoaded, useTitle } from '../../hooks'
-import { AuthContextProvider } from '../../providers'
 import { useAppDispatch } from '../../redux/store'
 import { sessionStorage } from '../../services'
 import { setLocation } from '../../redux/slices/search'
@@ -14,15 +13,7 @@ import Search from '../modules/Search/Search'
 import AlertSearch from '../modules/AlertSearch/AlertSearch'
 import Categories from '../modules/Categories/Categories'
 
-export default function Home() {
-  return (
-    <AuthContextProvider>
-      <HomeInner />
-    </AuthContextProvider>
-  )
-}
-
-function HomeInner() {
+export default function HomePage() {
   useTitle(getAppConfigValue('brandName'))
   useMeta({ name: 'description', content: getAppConfigValue('meta.description') })
   usePageLoaded()

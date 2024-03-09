@@ -3,25 +3,44 @@ import { useEffect, useMemo, useState } from 'react'
 import { FavsContext } from '../context'
 import { getAppConfigValue } from '../utils/getAppConfigValue'
 import { useAuthContext } from '../hooks/index'
+import { useAppDispatch } from '../redux/store'
+import { setResults } from '../redux/slices/results'
+import { resultsFromApi } from '../adapters/results'
 
-export function FavsContextProvider({ children }) {
+interface Props {
+  force?: boolean
+  children: any
+}
+
+let _favorites = []
+let _spids = []
+
+export function FavsContextProvider({ force, children }: Props) {
+  const dispatch = useAppDispatch()
   const { user } = useAuthContext()
-  const [favorites, setFavorites] = useState([])
-  const [spids, setSpids] = useState([])
+  const [favorites, setFavorites] = useState(_favorites)
+  const [spids, setSpids] = useState(_spids)
 
   useEffect(() => {
-    if (!user) {
-      return
-    }
     const fn = async () => {
       const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
-      setFavorites(res.data)
+      _favorites = resultsFromApi(res.data)
+      setFavorites(_favorites)
+      if (force) {
+        dispatch(setResults(_favorites))
+      }
 
       const res2 = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite/spids`)
       setSpids(res2.data)
+      _spids = res2.data
     }
-    fn()
-  }, [])
+
+    if (user && (!favorites?.length || force)) {
+      fn()
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   const value = useMemo(() => {
     const spidMap = {}

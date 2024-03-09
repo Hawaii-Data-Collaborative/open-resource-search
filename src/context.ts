@@ -18,5 +18,5 @@ interface IFavsContext {
   deleteFavorite: (id: string) => void
 }
 
-export const AuthContext = createContext<IAuthContext>({} as IAuthContext)
-export const FavsContext = createContext<IFavsContext>({} as IFavsContext)
+export const AuthContext = createContext<IAuthContext>(null)
+export const FavsContext = createContext<IFavsContext>(null)

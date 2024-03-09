@@ -7,18 +7,9 @@ import { AuthLayout } from '../layouts'
 import { usePageLoaded, useAuthContext, useTitle, useMeta } from '../../hooks'
 import { AUTH_TOKEN } from '../../constants'
 import { localStorage, toastErr } from '../../services'
-import { AuthContextProvider } from '../../providers'
 import { Box, Button, If, Input, Label, Link, Text } from '../elements'
 
-export default function SignIn() {
-  return (
-    <AuthContextProvider>
-      <SingInInner />
-    </AuthContextProvider>
-  )
-}
-
-function SingInInner() {
+export default function LoginPage() {
   const history = useHistory()
   const params = new URLSearchParams(useLocation().search)
   const [saving, setSaving] = useState(false)

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getAppConfigValue } from '../utils'
 
+let _didFetch = false
+
 export function useBannerQuery() {
   const [data, setData] = useState({ text: '', link: '' })
 
@@ -12,7 +14,10 @@ export function useBannerQuery() {
       setData(res.data)
     }
 
-    fn()
+    if (!_didFetch) {
+      _didFetch = true
+      fn()
+    }
   }, [])
 
   return data

@@ -1,5 +1,7 @@
-import { THEME_CONSTANTS as theme } from '../constants'
 import { createTheme } from '@mui/material'
+import { LinkProps } from '@mui/material/Link'
+import { THEME_CONSTANTS as theme } from '../constants'
+import { LinkBehavior } from './LinkBehavior'
 
 export const defaultTheme = {
   typography: {
@@ -117,6 +119,16 @@ export const materialUiTheme = createTheme({
     borderRadius: parseInt(defaultTheme.shape.borderRadius.replace(/^\D+/g, ''))
   },
   components: {
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior
+      } as LinkProps
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        LinkComponent: LinkBehavior
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {

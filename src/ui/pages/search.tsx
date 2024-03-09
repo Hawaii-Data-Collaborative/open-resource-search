@@ -2,21 +2,13 @@ import { useEffect } from 'react'
 import { useAppDispatch } from '../../redux/store'
 import { setResults } from '../../redux/slices/results'
 import { getAppConfigValue } from '../../utils/getAppConfigValue'
-import { Providers } from '../../providers'
 import { SearchLayout } from '../layouts'
 import { useMeta, useResultsFetch, useTitle } from '../../hooks'
 import Results from '../modules/Results/Results'
 import Map from '../modules/Map/Map'
+import { FavsContextProvider } from '../../providers'
 
-export default function Search() {
-  return (
-    <Providers>
-      <SearchInner />
-    </Providers>
-  )
-}
-
-function SearchInner() {
+export default function SearchPage() {
   const dispatch = useAppDispatch()
 
   useTitle(`${getAppConfigValue('brandName')} | Search`)
@@ -30,9 +22,11 @@ function SearchInner() {
   }, [])
 
   return (
-    <SearchLayout>
-      <Results hideSearch={false} />
-      <Map />
-    </SearchLayout>
+    <FavsContextProvider>
+      <SearchLayout>
+        <Results hideSearch={false} />
+        <Map />
+      </SearchLayout>
+    </FavsContextProvider>
   )
 }

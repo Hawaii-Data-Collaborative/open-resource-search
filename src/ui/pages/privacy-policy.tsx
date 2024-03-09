@@ -2,7 +2,7 @@ import { usePageLoaded, useTitle, useMeta } from '../../hooks'
 import { getAppConfigValue } from '../../utils/getAppConfigValue'
 import { Box, Link, Text } from '../elements'
 
-function PrivacyPolicy() {
+export default function PrivacyPolicy() {
   usePageLoaded()
   useTitle(`${getAppConfigValue('brandName')} | Privacy Policy`)
   useMeta({ name: 'description', content: getAppConfigValue('meta.description') })
@@ -99,5 +99,3 @@ function PrivacyPolicy() {
     </Box>
   )
 }
-
-export default PrivacyPolicy

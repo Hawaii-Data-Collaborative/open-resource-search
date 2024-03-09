@@ -4,7 +4,7 @@ import { getAppConfigValue, link } from '../../utils'
 import { usePageLoaded, useTitle, useMeta } from '../../hooks'
 import { Box, Button, Flex, If, Input, Label, Link, Text } from '../elements'
 
-function PasswordReset() {
+export default function PasswordReset() {
   const params = new URLSearchParams(useLocation().search)
   const username = useRef<HTMLInputElement>()
   const newPassword = useRef<HTMLInputElement>()
@@ -123,5 +123,3 @@ function PasswordReset() {
     </Flex>
   )
 }
-
-export default PasswordReset

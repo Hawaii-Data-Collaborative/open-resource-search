@@ -5,25 +5,16 @@ import { useAppDispatch } from '../../redux/store'
 import { setZoom } from '../../redux/slices/location'
 import { setResults } from '../../redux/slices/results'
 import { getAppConfigValue } from '../../utils/getAppConfigValue'
-import { Providers } from '../../providers'
-import { useAuthContext, useFavoritesFetch, useMeta, usePageLoaded, useTitle } from '../../hooks'
+import { useAuthContext, useMeta, usePageLoaded, useTitle } from '../../hooks'
 import { useHistory } from 'react-router-dom'
 import { SearchLayout } from '../layouts'
+import { FavsContextProvider } from '../../providers'
 
-export default function Favorites() {
-  return (
-    <Providers>
-      <FavoritesInner />
-    </Providers>
-  )
-}
-
-function FavoritesInner() {
+export default function FavoritesPage() {
   const history = useHistory()
   const dispatch = useAppDispatch()
   const { user, loading } = useAuthContext()
 
-  useFavoritesFetch()
   usePageLoaded()
   useTitle(`${getAppConfigValue('brandName')} | Profile - Favorites`)
   useMeta({ name: 'description', content: getAppConfigValue('meta.description') })
@@ -36,6 +27,7 @@ function FavoritesInner() {
         search: new URLSearchParams({ message: 'Please sign in to continue' }).toString()
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading])
 
   useEffect(() => {
@@ -52,9 +44,11 @@ function FavoritesInner() {
   }, [])
 
   return (
-    <SearchLayout>
-      <Results hideSearch />
-      <Map />
-    </SearchLayout>
+    <FavsContextProvider force>
+      <SearchLayout>
+        <Results hideSearch />
+        <Map />
+      </SearchLayout>
+    </FavsContextProvider>
   )
 }

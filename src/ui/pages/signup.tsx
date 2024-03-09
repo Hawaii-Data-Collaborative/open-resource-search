@@ -2,22 +2,13 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuthContext, useMeta, usePageLoaded, useTitle } from '../../hooks'
-import { AuthContextProvider } from '../../providers'
 import { getAppConfigValue, link } from '../../utils'
 import { AUTH_TOKEN } from '../../constants'
 import { toastErr } from '../../services'
 import { AuthLayout } from '../layouts'
 import { Button, Input, Label, Link, Text } from '../elements'
 
-export default function SignUp() {
-  return (
-    <AuthContextProvider>
-      <SignupInner />
-    </AuthContextProvider>
-  )
-}
-
-function SignupInner() {
+export default function SignUpPage() {
   const history = useHistory()
   const [saving, setSaving] = useState(false)
   const [email, setEmail] = useState('')
