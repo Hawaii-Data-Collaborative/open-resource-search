@@ -46,7 +46,11 @@ export default function SocialButtonsModal({ share, setShare, hit }) {
       <Flex flexDirection="column">
         <PrintButton onClick={onPrintButtonClick}>Print this Listing</PrintButton>
 
-        <EmailButton to={`mailto:?subject=${hit.title}&body=${window.location.href}`} onClick={onEmailButtonClick}>
+        <EmailButton
+          to={`mailto:?subject=${hit.title}&body=${window.location.href}`}
+          onClick={onEmailButtonClick}
+          external
+        >
           Share with Email
         </EmailButton>
 
@@ -55,6 +59,7 @@ export default function SocialButtonsModal({ share, setShare, hit }) {
           rel="noreferrer"
           to={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
           onClick={onFBButtonClick}
+          external
         >
           Share on Facebook
         </FacebookButton>
@@ -64,6 +69,7 @@ export default function SocialButtonsModal({ share, setShare, hit }) {
           rel="noreferrer"
           to={`https://twitter.com/share?text=${hit.title}&url=${window.location.href}`}
           onClick={onTwitterButtonClick}
+          external
         >
           Share on Twitter
         </TwitterButton>

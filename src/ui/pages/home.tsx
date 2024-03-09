@@ -69,8 +69,9 @@ export default function HomePage() {
                 style={{
                   textDecoration: 'underline'
                 }}
+                external
               >
-                <span>Search tips</span>
+                Search tips
               </Link>
             </Text>
           </div>

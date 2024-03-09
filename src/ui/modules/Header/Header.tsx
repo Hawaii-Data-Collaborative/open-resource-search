@@ -57,7 +57,7 @@ export default function Header() {
 
             {divider}
 
-            <Link to="https://auw211.org/" variant="normal" color="primary">
+            <Link to="https://auw211.org/" variant="normal" color="primary" external>
               Main Site
             </Link>
 
@@ -138,7 +138,7 @@ export default function Header() {
                     }}
                   ></span>
 
-                  <Link to="https://auw211.org/" variant="normal" color="primary">
+                  <Link to="https://auw211.org/" variant="normal" color="primary" external>
                     Main Site
                   </Link>
                 </div>
