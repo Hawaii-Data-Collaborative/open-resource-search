@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useAuthContext, useMeta, usePageLoaded, useTitle } from '../../hooks'
 import { getAppConfigValue, link } from '../../utils'
 import { AUTH_TOKEN } from '../../constants'
-import { toastErr } from '../../services'
+import { localStorage, toastErr } from '../../services'
 import { AuthLayout } from '../layouts'
 import { Button, Input, Label, Link, Text } from '../elements'
 
