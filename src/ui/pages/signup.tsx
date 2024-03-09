@@ -167,7 +167,7 @@ export default function SignUpPage() {
       </form>
       <Text paragraph>
         Already have an account?{' '}
-        <Link color="textPrimary" to="/login">
+        <Link color="textPrimary" to={link('/login')}>
           Sign In
         </Link>
       </Text>

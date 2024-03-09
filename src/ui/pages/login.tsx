@@ -184,7 +184,7 @@ export default function LoginPage() {
       </form>
       <Text paragraph>
         Don&apos;t have an account?{' '}
-        <Link color="textPrimary" to="/signup">
+        <Link color="textPrimary" to={link('/signup')}>
           Sign Up
         </Link>
       </Text>
