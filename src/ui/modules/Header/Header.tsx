@@ -65,13 +65,13 @@ export default function Header() {
               <>
                 {divider}
 
-                <Link to="/profile" variant="normal" color="primary">
+                <Link to={link('/profile')} variant="normal" color="primary">
                   Profile
                 </Link>
 
                 {divider}
 
-                <Link to="/profile/favorites" variant="normal" color="primary">
+                <Link to={link('/profile/favorites')} variant="normal" color="primary">
                   Favorites
                 </Link>
               </>
@@ -79,13 +79,13 @@ export default function Header() {
               <>
                 {divider}
 
-                <Link to="/login" variant="normal" color="primary">
+                <Link to={link('/login')} variant="normal" color="primary">
                   Log in
                 </Link>
 
                 {divider}
 
-                <Link to="/signup" variant="normal" color="primary">
+                <Link to={link('/signup')} variant="normal" color="primary">
                   Sign up
                 </Link>
               </>
