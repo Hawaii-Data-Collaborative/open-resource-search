@@ -1,9 +1,7 @@
-import { getAppConfigValue } from 'src/utils/getAppConfigValue';
+import { getAppConfigValue } from '../utils/getAppConfigValue'
 
-const COGNITO_CONSTANTS = {
+export const COGNITO_CONSTANTS = {
   REGION: getAppConfigValue('services.auth.cognito.region'),
   USER_POOL_ID: getAppConfigValue('services.auth.cognito.userPoolId'),
-  CLIENT_ID: getAppConfigValue('services.auth.cognito.clientId'),
-};
-
-export default COGNITO_CONSTANTS;
+  CLIENT_ID: getAppConfigValue('services.auth.cognito.clientId')
+}

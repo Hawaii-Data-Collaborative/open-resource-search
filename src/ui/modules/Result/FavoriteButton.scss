@@ -1,0 +1,10 @@
+.FavoriteButton {
+  svg.unfav {
+    color: #ddd;
+  }
+  &:hover {
+    svg.unfav {
+      color: #aaa;
+    }
+  }
+}

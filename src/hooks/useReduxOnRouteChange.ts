@@ -1,46 +1,36 @@
-import { useEffect } from 'react';
-import { useAppDispatch } from 'src/redux/store';
-import {
-  setQuery,
-  setLocation,
-  setTaxonomies,
-  setDistance,
-} from 'src/redux/slices/search';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useAppDispatch } from '../redux/store'
+import { setQuery, setLocation, setTaxonomies, setDistance } from '../redux/slices/search'
 
 export function useReduxOnRouteChange() {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+  const dispatch = useAppDispatch()
+  const l = useLocation()
+  const params = new URLSearchParams(l.search)
+  const location = params.get('params')
+  const taxonomies = params.get('taxonomies')
+  const radius = params.get('radius')
+  const terms = params.get('terms')
 
   useEffect(() => {
-    if (router.query.location != null && router.query.location.length > 0) {
-      dispatch(setLocation(router.query.location as string));
+    if (location != null && location.length > 0) {
+      dispatch(setLocation(location as string))
     }
 
-    if (router.query.taxonomies != null && router.query.taxonomies.length > 0) {
-      dispatch(setTaxonomies(router.query.taxonomies as string));
+    if (taxonomies != null && taxonomies.length > 0) {
+      dispatch(setTaxonomies(taxonomies as string))
     }
 
-    if (router.query.radius != null && router.query.radius.length > 0) {
-      dispatch(setDistance(router.query.radius as string));
+    if (radius != null && radius.length > 0) {
+      dispatch(setDistance(radius as string))
     }
 
-    if (
-      router.query.taxonomies == null ||
-      router.query.taxonomies.length === 0
-    ) {
-      dispatch(setTaxonomies(''));
+    if (taxonomies == null || taxonomies.length === 0) {
+      dispatch(setTaxonomies(''))
     }
 
-    if (router.query.terms != null && router.query.terms.length > 0) {
-      dispatch(setQuery(router.query.terms as string));
+    if (terms != null && terms.length > 0) {
+      dispatch(setQuery(terms as string))
     }
-  }, [
-    router.query.location,
-    router.query.terms,
-    router.query.taxonomies,
-    router.query.radius,
-  ]);
+  }, [location, terms, taxonomies, radius, dispatch])
 }
-
-export default useReduxOnRouteChange;

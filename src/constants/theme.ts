@@ -1,6 +1,6 @@
-import { getAppConfigValue } from 'src/utils/getAppConfigValue';
+import { getAppConfigValue } from '../utils/getAppConfigValue'
 
-const THEME_CONSTANTS = {
+export const THEME_CONSTANTS = {
   BASE_FONT_SIZE: getAppConfigValue('theme.baseFontSize'),
   PRIMARY_COLOR: getAppConfigValue('theme.primaryColor'),
   PRIMARY_MEDIUM_COLOR: getAppConfigValue('theme.primaryMediumColor'),
@@ -11,7 +11,5 @@ const THEME_CONSTANTS = {
   ERROR_COLOR: getAppConfigValue('theme.errorColor'),
   SUCCESS_COLOR: getAppConfigValue('theme.successColor'),
   BORDER_RADIUS: getAppConfigValue('theme.borderRadius'),
-  FEEDBACK_URL: getAppConfigValue('feedbackUrl'),
-};
-
-export default THEME_CONSTANTS;
+  FEEDBACK_URL: getAppConfigValue('feedbackUrl')
+}
