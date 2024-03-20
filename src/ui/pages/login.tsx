@@ -177,7 +177,7 @@ export default function LoginPage() {
         </Button>
 
         <Text textAlign="center" variant="h3" marginTop="8px">
-          <Link color="primary" to="/password-reset">
+          <Link color="primary" to={link('/password-reset')}>
             Forgot your password?
           </Link>
         </Text>
