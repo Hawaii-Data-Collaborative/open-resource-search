@@ -1,16 +1,21 @@
-import { useRef, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { getAppConfigValue, link } from '../../utils'
+import axios from 'axios'
+import { useState } from 'react'
+import { getAppConfigValue, getUserErrorMessage, link } from '../../utils'
 import { usePageLoaded, useTitle, useMeta } from '../../hooks'
 import { Box, Button, Flex, If, Input, Label, Link, Text } from '../elements'
+import { localStorage, toast } from '../../services'
+import { AUTH_TOKEN } from '../../constants'
 
 export default function PasswordReset() {
-  const params = new URLSearchParams(useLocation().search)
-  const username = useRef<HTMLInputElement>()
-  const newPassword = useRef<HTMLInputElement>()
   const [errorMessage, setErrorMessage] = useState('')
+  const [step, setStep] = useState<'ENTER_EMAIL' | 'ENTER_CODE' | 'ENTER_PASSWORD'>('ENTER_EMAIL')
+  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
   const [message, setMessage] = useState('')
-  const history = useHistory()
+  const [token, setToken] = useState('')
+  const [saving, setSaving] = useState(false)
 
   usePageLoaded()
   useTitle(`${getAppConfigValue('brandName')} | Sign In`)
@@ -20,18 +25,32 @@ export default function PasswordReset() {
     e.preventDefault()
 
     try {
-      if (params.get('confirmation_code') != null && params.get('user_name') != null) {
-        // await Auth.forgotPasswordSubmit(params.get('user_name'), params.get('confirmation_code'), newPassword?.current?.value ?? '')
-        history.push(link('/login?message=Password%20saved.%20Sign%20in%20with%20your%20new%20password.'))
-      } else {
-        // await Auth.forgotPassword(username?.current?.value ?? '')
-        setMessage(
-          'If an account exists with this email address, you will be receiving a confirmation link to your inbox.'
-        )
+      setSaving(true)
+      if (step === 'ENTER_EMAIL') {
+        const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/send-code`
+        const res = await axios.post(url, { email: email.trim() })
+        setSaving(false)
+        setToken(res.data)
+        setStep('ENTER_CODE')
+      } else if (step === 'ENTER_CODE') {
+        const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/check-code`
+        await axios.post(url, { code: code.trim(), token })
+        setSaving(false)
+        setStep('ENTER_PASSWORD')
+      } else if (step === 'ENTER_PASSWORD') {
+        const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/reset-password`
+        const res = await axios.post(url, { password, token })
+        localStorage.set(AUTH_TOKEN, res.data.token)
+        toast('Your password was updated', 'success')
+        setTimeout(() => {
+          window.location = link('/')
+        }, 2000)
       }
+      setErrorMessage('')
     } catch (err) {
+      setSaving(false)
       setMessage('')
-      setErrorMessage(err?.message ?? '')
+      setErrorMessage(getUserErrorMessage(err) || '')
     }
   }
 
@@ -60,31 +79,7 @@ export default function PasswordReset() {
           </Box>
         </If>
 
-        <If value={params.get('confirmation_code') != null && params.get('user_name') != null}>
-          <Text variant="h2" color="textSecondary" marginBottom="16px">
-            Change Password
-          </Text>
-          <Label id="password-label" htmlFor="password" marginBottom="8px" color="textSecondary">
-            New Password
-          </Label>
-          <Input
-            fullWidth
-            ref={newPassword}
-            id="password"
-            style={{
-              border: '1px solid #ebebeb',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-            }}
-            placeholder="NewSuperSecretPassword"
-            type="password"
-            marginBottom="16px"
-          />
-          <Button type="submit" color="primary">
-            Change Password
-          </Button>
-        </If>
-
-        <If value={params.get('confirmation_code') == null && params.get('user_name') == null}>
+        <If value={step === 'ENTER_EMAIL'}>
           <Text variant="h2" color="textSecondary" marginBottom="16px">
             Password Reset
           </Text>
@@ -93,7 +88,6 @@ export default function PasswordReset() {
           </Label>
           <Input
             fullWidth
-            ref={username}
             id="email"
             style={{
               border: '1px solid #ebebeb',
@@ -102,9 +96,77 @@ export default function PasswordReset() {
             placeholder="johndoe@example.com"
             type="email"
             marginBottom="16px"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
-          <Button type="submit" color="primary">
+          <Button type="submit" color="primary" disabled={saving || email.trim().length < 3}>
             Send Code
+          </Button>
+        </If>
+
+        <If value={step === 'ENTER_CODE'}>
+          <Text variant="h2" color="textSecondary" marginBottom="16px">
+            Enter six digit code sent to your email
+          </Text>
+          <Label id="email-label" htmlFor="email" marginBottom="8px" color="textSecondary">
+            Code
+          </Label>
+          <Input
+            fullWidth
+            id="code"
+            style={{
+              border: '1px solid #ebebeb',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
+            placeholder="000000"
+            type="text"
+            marginBottom="16px"
+            value={code}
+            onChange={e => setCode(e.target.value)}
+          />
+          <Button type="submit" color="primary" disabled={saving || code.length !== 6}>
+            Verify Code
+          </Button>
+        </If>
+
+        <If value={step === 'ENTER_PASSWORD'}>
+          <Text variant="h2" color="textSecondary" marginBottom="16px">
+            Change Password
+          </Text>
+          <Label id="password-label" htmlFor="password" marginBottom="8px" color="textSecondary">
+            New Password
+          </Label>
+          <Input
+            fullWidth
+            id="password"
+            style={{
+              border: '1px solid #ebebeb',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
+            type="password"
+            marginBottom="16px"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+
+          <Label id="password2-label" htmlFor="password2" color="textSecondary" marginBottom="8px">
+            Confirm Password
+          </Label>
+          <Input
+            fullWidth
+            value={password2}
+            onChange={e => setPassword2(e.target.value)}
+            id="password2"
+            type="password"
+            marginBottom="16px"
+            style={{
+              border: '1px solid #ebebeb',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
+          />
+
+          <Button type="submit" color="primary" disabled={saving || password.length < 6 || password !== password2}>
+            Change Password
           </Button>
         </If>
       </form>
