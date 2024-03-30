@@ -15,6 +15,7 @@ export default function SiteFooter() {
         </Text>
         <Box>
           <Link
+            external
             to="/admin"
             target="_blank"
             style={{
