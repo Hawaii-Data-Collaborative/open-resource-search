@@ -14,7 +14,6 @@ import { StyledAutocomplete } from './Search.styled'
 import { getAppConfigValue, link } from '../../../utils'
 import { useSuggestionsQuery } from '../../../hooks'
 import { getParentElements } from '../../../utils'
-import { appEmitter } from '../../../services'
 
 type Props = {
   variant?: 'outlined' | 'standard' | 'filled'
@@ -143,8 +142,6 @@ function Search({ variant = 'outlined' }: Props) {
       pathname: link('/search'),
       search: new URLSearchParams(queryParams).toString()
     })
-
-    appEmitter.emit('search', queryParams)
   }
 
   return (

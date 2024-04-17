@@ -11,7 +11,6 @@ import { ThemeProvider } from '@mui/material'
 import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
 import { AuthContextProvider } from './providers'
-import { AppContextProvider } from './providers/AppContextProvider'
 
 // Import polyfills for IE11 support
 if (import.meta.env.MODE === 'production' && isInternetExplorer()) {
@@ -28,18 +27,16 @@ initAxios()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <AppContextProvider>
-      <AuthContextProvider>
-        <Router>
-          <ThemeProvider theme={materialUiTheme}>
-            <GlobalStyleSheet />
-            <GlobalConfig>
-              <App />
-              <Toast />
-            </GlobalConfig>
-          </ThemeProvider>
-        </Router>
-      </AuthContextProvider>
-    </AppContextProvider>
+    <AuthContextProvider>
+      <Router>
+        <ThemeProvider theme={materialUiTheme}>
+          <GlobalStyleSheet />
+          <GlobalConfig>
+            <App />
+            <Toast />
+          </GlobalConfig>
+        </ThemeProvider>
+      </Router>
+    </AuthContextProvider>
   </Provider>
 )
