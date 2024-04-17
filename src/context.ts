@@ -4,6 +4,11 @@ interface User {
   email: string
 }
 
+export interface IAppContext {
+  showAdvancedFilters: boolean
+  update: (arg: { showAdvancedFilters?: boolean }) => void
+}
+
 interface IAuthContext {
   user: User
   setUser: (user: User) => void
@@ -18,5 +23,6 @@ interface IFavsContext {
   deleteFavorite: (id: string) => void
 }
 
+export const AppContext = createContext<IAppContext>(null)
 export const AuthContext = createContext<IAuthContext>(null)
 export const FavsContext = createContext<IFavsContext>(null)

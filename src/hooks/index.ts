@@ -1,4 +1,4 @@
-import { AuthContext, FavsContext } from '../context'
+import { AppContext, AuthContext, FavsContext } from '../context'
 import { useContext } from 'react'
 
 export * from './useBannerQuery'
@@ -15,5 +15,6 @@ export * from './useSession'
 export * from './useSuggestionsQuery'
 export * from './useTitle'
 
+export const useAppContext = () => useContext(AppContext)
 export const useAuthContext = () => useContext(AuthContext)
 export const useFavsContext = () => useContext(FavsContext)
