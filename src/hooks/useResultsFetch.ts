@@ -14,12 +14,6 @@ export function useResultsFetch() {
   const terms = params.get('terms')
   const category_name = params.get('category_name')
   const radius = params.get('radius')
-  let query
-  try {
-    query = JSON.parse(params.get('query'))
-  } catch {
-    // no op
-  }
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
@@ -41,15 +35,18 @@ export function useResultsFetch() {
         await dispatch(fetchResults(terms) as any)
       }
 
-      if (query && JSON.stringify(query) !== '{}') {
-        if (category_name) {
-          logEvent('Search.Category', query)
-        } else if (taxonomies?.length) {
-          logEvent('Search.Taxonomy', query)
-        } else {
-          logEvent('Search.Keyword', query)
-        }
+      const paramsObj: any = {}
+      for (const [k, v] of params.entries()) {
+        paramsObj[k] = v
+      }
+
+      if (category_name) {
+        logEvent('Search.Category', paramsObj)
+      } else if (taxonomies?.length) {
+        logEvent('Search.Taxonomy', paramsObj)
+      } else if (terms?.length) {
+        logEvent('Search.Keyword', paramsObj)
       }
     })()
-  }, [location, terms, taxonomies, radius, query, category_name, dispatch])
+  }, [location, terms, taxonomies, radius, category_name, dispatch])
 }
