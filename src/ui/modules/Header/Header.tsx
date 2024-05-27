@@ -13,7 +13,7 @@ export default function Header() {
   const banner = useBannerQuery()
   const { user } = useAuthContext()
 
-  const divider = (
+  const desktopDivider = (
     <span
       style={{
         backgroundColor: theme.PRIMARY_COLOR,
@@ -55,7 +55,7 @@ export default function Header() {
               Home
             </Link>
 
-            {divider}
+            {desktopDivider}
 
             <Link to="https://auw211.org/" variant="normal" color="primary" external>
               Main Site
@@ -63,13 +63,13 @@ export default function Header() {
 
             {user ? (
               <>
-                {divider}
+                {desktopDivider}
 
                 <Link to={link('/profile')} variant="normal" color="primary">
                   Profile
                 </Link>
 
-                {divider}
+                {desktopDivider}
 
                 <Link to={link('/profile/favorites')} variant="normal" color="primary">
                   Favorites
@@ -77,13 +77,13 @@ export default function Header() {
               </>
             ) : (
               <>
-                {divider}
+                {desktopDivider}
 
                 <Link to={link('/login')} variant="normal" color="primary">
                   Log in
                 </Link>
 
-                {divider}
+                {desktopDivider}
 
                 <Link to={link('/signup')} variant="normal" color="primary">
                   Sign up
@@ -115,8 +115,7 @@ export default function Header() {
                     textAlign: 'center',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'stretch'
                   }}
                 >
                   <Link
@@ -124,23 +123,62 @@ export default function Header() {
                     rel="noreferrer"
                     variant="normal"
                     color="primary"
+                    style={{ paddingTop: 10, paddingBottom: 10 }}
                   >
                     Home
                   </Link>
 
-                  <span
-                    style={{
-                      backgroundColor: theme.PRIMARY_COLOR,
-                      marginTop: '1rem',
-                      marginBottom: '1rem',
-                      width: 24,
-                      height: 1
-                    }}
-                  ></span>
-
-                  <Link to="https://auw211.org/" variant="normal" color="primary" external>
+                  <Link
+                    to="https://auw211.org/"
+                    variant="normal"
+                    color="primary"
+                    style={{ paddingTop: 10, paddingBottom: 10 }}
+                    external
+                  >
                     Main Site
                   </Link>
+
+                  {user ? (
+                    <>
+                      <Link
+                        to={link('/profile')}
+                        variant="normal"
+                        color="primary"
+                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                      >
+                        Profile
+                      </Link>
+
+                      <Link
+                        to={link('/profile/favorites')}
+                        variant="normal"
+                        color="primary"
+                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                      >
+                        Favorites
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to={link('/login')}
+                        variant="normal"
+                        color="primary"
+                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                      >
+                        Log in
+                      </Link>
+
+                      <Link
+                        to={link('/signup')}
+                        variant="normal"
+                        color="primary"
+                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                      >
+                        Sign up
+                      </Link>
+                    </>
+                  )}
                 </div>
               </motion.div>
             )}

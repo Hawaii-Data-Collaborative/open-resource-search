@@ -147,7 +147,7 @@ function Search({ variant = 'outlined' }: Props) {
   return (
     <form className="Search" onSubmit={submitSearch}>
       <Flex mb="8px" flexDirection={['column', 'row']}>
-        <Flex flex={2} marginRight={[0, '4px']} marginLeft={[0, '4px']} marginBottom={['8px', 0]}>
+        <Flex flex={2} marginRight={[0, '4px']} marginLeft={[0, '4px']} marginBottom={[0, '8px']}>
           <StyledAutocomplete
             id="search-query-field"
             options={newHits}
