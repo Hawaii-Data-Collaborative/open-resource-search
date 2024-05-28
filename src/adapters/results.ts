@@ -10,6 +10,7 @@ export const resultsFromApi = (results: any[]) =>
     description: getDescription(result._source),
     phone: result._source.phone,
     website: result._source.website,
+    active: result._source.active,
     _score: result._score
   }))
 

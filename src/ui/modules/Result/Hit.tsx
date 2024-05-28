@@ -25,6 +25,7 @@ interface HitProps {
 export default function Hit({ hit, location, score }: HitProps) {
   return (
     <Box
+      className="Result-Hit"
       id={hit?.id}
       margin="16px"
       padding="16px"
@@ -32,11 +33,12 @@ export default function Hit({ hit, location, score }: HitProps) {
       backgroundColor="#ffffff"
       borderRadius="6px"
       boxShadow="0 0 8px #D0C9D6"
+      position="relative"
     >
       <Box marginBottom="16px">
         <Flex alignItems="flex-start" justifyContent="space-between">
           <Heading hit={hit} />
-          <FavoriteButton hit={hit} />
+          {hit?.active !== false && <FavoriteButton hit={hit} />}
         </Flex>
         <Location hit={hit} location={location} />
       </Box>
@@ -51,6 +53,30 @@ export default function Hit({ hit, location, score }: HitProps) {
             score: {score}
           </Text>
         </Flex>
+      )}
+
+      {hit?.active === false && (
+        <>
+          <Flex
+            position="absolute"
+            top={0}
+            bottom={0}
+            left={0}
+            right={0}
+            backgroundColor="#ddda"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box backgroundColor="#fffb" p={1} pl={2} pr={2} borderRadius={4} fontSize={1}>
+              This program is no longer active
+            </Box>
+          </Flex>
+
+          <Box position="absolute" zIndex={10} top={16} right={16}>
+            <FavoriteButton hit={hit} />
+          </Box>
+        </>
       )}
     </Box>
   )

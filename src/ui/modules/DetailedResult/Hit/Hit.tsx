@@ -26,7 +26,7 @@ export default function Hit({ hit }: HitProps) {
   const [share, setShare] = useState(false)
 
   return (
-    <Box padding="16px 24px" className="Hit">
+    <Box padding="16px 24px" className="DetailedResult-Hit">
       <Actions setShare={setShare} />
 
       <EmergencyInfo hit={hit} />
