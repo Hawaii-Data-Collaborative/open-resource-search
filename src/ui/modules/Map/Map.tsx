@@ -44,8 +44,8 @@ function Map({ google }) {
         return (
           <CustomMarker
             key={m.id}
-            // @ts-expect-error it's fine
             icon={link('/pin.svg')}
+            // @ts-expect-error it's fine
             phone={m.phone}
             website={m.website}
             onClick={(_props, marker) => {
