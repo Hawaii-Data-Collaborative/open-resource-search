@@ -9,7 +9,6 @@ import Flex from '../../elements/Flex'
 import Button from '../../elements/Button'
 import { useAppDispatch, useAppSelector } from '../../../redux/store'
 import { setQuery, setLocation, setDistance, setTaxonomies } from '../../../redux/slices/search'
-import { useCachedLocations } from '../../../hooks'
 import { StyledAutocomplete } from './Search.styled'
 import { getAppConfigValue, link } from '../../../utils'
 import { useSuggestionsQuery } from '../../../hooks'
@@ -26,7 +25,6 @@ function Search({ variant = 'outlined' }: Props) {
   const dispatch = useAppDispatch()
   const [findingLocation, setFindingLocation] = useState(false)
   const taxonomies = useAppSelector(state => state.search.taxonomies)
-  const geoSuggestions = useCachedLocations(locationQuery)
   const radius = useAppSelector(state => state.search.radius)
   const suggestions = useSuggestionsQuery()
   const newHits = suggestions
@@ -157,6 +155,7 @@ function Search({ variant = 'outlined' }: Props) {
             onInputChange={onInputChange}
             onChange={onChange}
             filterOptions={options => options}
+            getOptionKey={(o: any) => o.id}
             getOptionLabel={(o: any) => o.title || o.text || o.group || o}
             groupBy={(o: any) => o.group}
             renderInput={params => (
@@ -170,7 +169,7 @@ function Search({ variant = 'outlined' }: Props) {
         <Flex flex={1.7} marginRight={[0, '4px']} marginLeft={[0, '4px']} marginBottom={['8px', '4px']}>
           <StyledAutocomplete
             id="geo-location-field"
-            options={geoSuggestions}
+            options={[]}
             fullWidth
             freeSolo
             getOptionLabel={(option: any) => (typeof option === 'string' ? option : option.description)}

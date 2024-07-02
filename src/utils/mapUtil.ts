@@ -1,15 +1,11 @@
-import _axios from 'axios'
-import { getAppConfigValue } from './getAppConfigValue'
-
-const axios = _axios.create()
-
-let google
+let goog
+let geocoder: google.maps.Geocoder
 const locationCache = {}
-const apiKey = getAppConfigValue('services.map.google.apiKey')
-const urlTemplate = `https://maps.googleapis.com/maps/api/geocode/json?address={{address}}&key=${apiKey}`
 
 export function setGoogleInstance(g) {
-  google = g
+  console.log('[setGoogleInstance] goog=', g)
+  goog = g
+  geocoder = new goog.maps.Geocoder()
 }
 
 export async function filterByRadius(results: any[], radius: number, location: string) {
@@ -17,9 +13,8 @@ export async function filterByRadius(results: any[], radius: number, location: s
   if (locationCache[location]) {
     center = locationCache[location]
   } else {
-    const url = urlTemplate.replace('{{address}}', location.trim())
-    const res = await axios.get(url)
-    center = res.data.results[0].geometry.location
+    const res = await geocoder.geocode({ address: location })
+    center = res.results[0].geometry.location
     locationCache[location] = center
   }
 
@@ -30,7 +25,7 @@ export async function filterByRadius(results: any[], radius: number, location: s
         lat: Number(hit.locationLat),
         lng: Number(hit.locationLon)
       }
-      const distanceMeters = google.maps.geometry.spherical.computeDistanceBetween(center, hitCenter)
+      const distanceMeters = goog.maps.geometry.spherical.computeDistanceBetween(center, hitCenter)
       const distance = distanceMeters * 0.000621371
       if (distance <= radius) {
         rv.push(hit)
