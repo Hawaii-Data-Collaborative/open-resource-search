@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { App } from './ui/app'
-import { isInternetExplorer } from './utils'
+import { isInternetExplorer, initMapLibraries } from './utils'
 import { initAxios } from './services'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
@@ -23,20 +23,25 @@ if (import.meta.env.MODE === 'production' && isInternetExplorer()) {
   elementClosest(window)
 }
 
-initAxios()
+async function main() {
+  initAxios()
+  await initMapLibraries()
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <AuthContextProvider>
-      <Router>
-        <ThemeProvider theme={materialUiTheme}>
-          <GlobalStyleSheet />
-          <GlobalConfig>
-            <App />
-            <Toast />
-          </GlobalConfig>
-        </ThemeProvider>
-      </Router>
-    </AuthContextProvider>
-  </Provider>
-)
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
+      <AuthContextProvider>
+        <Router>
+          <ThemeProvider theme={materialUiTheme}>
+            <GlobalStyleSheet />
+            <GlobalConfig>
+              <App />
+              <Toast />
+            </GlobalConfig>
+          </ThemeProvider>
+        </Router>
+      </AuthContextProvider>
+    </Provider>
+  )
+}
+
+main()

@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react'
-import GoogleMap, { GoogleApiWrapper, InfoWindow } from 'google-maps-react'
+import GoogleMap, { InfoWindow } from 'google-maps-react'
 import Text from '../../elements/Text'
 import { useAppSelector } from '../../../redux/store'
 import CustomMarker from './CustomMarker'
 import MapContainer from './MapContainer'
-import { getAppConfigValue, link, setGoogleInstance } from '../../../utils'
+import { link } from '../../../utils'
 import MapStyles from './mapStyles.json'
 
 function Map({ google }) {
@@ -33,9 +33,6 @@ function Map({ google }) {
       zoom={location.zoom}
       styles={MapStyles}
       onClick={() => setShowInfoWindow(false)}
-      onReady={() => {
-        setGoogleInstance(google)
-      }}
     >
       {results?.map(m => {
         const title = m.locationName || 'Address Unavailable'
@@ -121,15 +118,12 @@ function Map({ google }) {
   )
 }
 
-const WrappedMap = GoogleApiWrapper({
-  libraries: ['places', 'geometry'],
-  apiKey: getAppConfigValue('services.map.google.apiKey')
-})(Map)
-
 export default function CustomWrappedMap() {
+  const google = window.google
+
   return (
     <MapContainer>
-      <WrappedMap />
+      <Map google={google} />
     </MapContainer>
   )
 }

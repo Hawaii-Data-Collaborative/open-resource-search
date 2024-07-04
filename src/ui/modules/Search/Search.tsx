@@ -3,7 +3,17 @@ import './Search.scss'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import parse from 'autosuggest-highlight/parse'
-import { TextField, Select, InputLabel, Grid, Typography, InputAdornment, IconButton, FormControl } from '@mui/material'
+import {
+  TextField,
+  Select,
+  InputLabel,
+  Grid,
+  Typography,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  MenuItem
+} from '@mui/material'
 import { SearchOutlined, LocationOnOutlined, LocationSearchingOutlined, MyLocationOutlined } from '@mui/icons-material'
 import Flex from '../../elements/Flex'
 import Button from '../../elements/Button'
@@ -230,7 +240,6 @@ function Search({ variant = 'outlined' }: Props) {
         <FormControl className="distance" variant={variant}>
           <InputLabel htmlFor="radius-filter">Distance</InputLabel>
           <Select
-            native
             value={radius}
             onChange={setRadius}
             label="Distance"
@@ -239,13 +248,13 @@ function Search({ variant = 'outlined' }: Props) {
               id: 'radius-filter'
             }}
           >
-            <option value="0">Any</option>
-            <option value="5">5 Miles</option>
-            <option value="10">10 Miles</option>
-            <option value="15">15 Miles</option>
-            <option value="30">30 Miles</option>
-            <option value="45">45 Miles</option>
-            <option value="60">60 Miles</option>
+            <MenuItem value="0">Any</MenuItem>
+            <MenuItem value="5">5 Miles</MenuItem>
+            <MenuItem value="10">10 Miles</MenuItem>
+            <MenuItem value="15">15 Miles</MenuItem>
+            <MenuItem value="30">30 Miles</MenuItem>
+            <MenuItem value="45">45 Miles</MenuItem>
+            <MenuItem value="60">60 Miles</MenuItem>
           </Select>
         </FormControl>
 
