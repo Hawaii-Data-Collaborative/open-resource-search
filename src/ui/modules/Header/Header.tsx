@@ -5,13 +5,19 @@ import { CloseOutlined, MenuOutlined } from '@mui/icons-material'
 import Link from '../../elements/Link'
 import { THEME_CONSTANTS as theme } from '../../../constants'
 import { getAppConfigValue, link } from '../../../utils'
-import { useBannerQuery, useAuthContext } from '../../../hooks'
+import { useBannerQuery, useAuthContext, useAppContext } from '../../../hooks'
 import * as Styles from './Header.styles'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const banner = useBannerQuery()
+  const { setState } = useAppContext()
   const { user } = useAuthContext()
+
+  const onFavClick = e => {
+    e.preventDefault()
+    setState({ modal: 'LOGIN_PROMPT' })
+  }
 
   const desktopDivider = (
     <span
@@ -77,6 +83,12 @@ export default function Header() {
               </>
             ) : (
               <>
+                {desktopDivider}
+
+                <Link to={link('/profile/favorites')} variant="normal" color="primary" onClick={onFavClick}>
+                  Favorites
+                </Link>
+
                 {desktopDivider}
 
                 <Link to={link('/login')} variant="normal" color="primary">
@@ -160,6 +172,16 @@ export default function Header() {
                     </>
                   ) : (
                     <>
+                      <Link
+                        to={link('/profile/favorites')}
+                        variant="normal"
+                        color="primary"
+                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                        onClick={onFavClick}
+                      >
+                        Favorites
+                      </Link>
+
                       <Link
                         to={link('/login')}
                         variant="normal"

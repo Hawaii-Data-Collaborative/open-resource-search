@@ -34,12 +34,12 @@ function LoginPrompt({ onClose }) {
 
   return (
     <Modal handleClose={onClose} open>
-      <Box pt={5}>
+      <Box pt={4}>
         <Text color="textSecondary" textAlign="center">
           You must be logged in to use Favorites.
         </Text>
       </Box>
-      <Stack spacing={1} pt={3}>
+      <Stack spacing={1} pt={4}>
         <Button onClick={login} fullWidth>
           Log In
         </Button>
