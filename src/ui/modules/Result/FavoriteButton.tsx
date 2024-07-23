@@ -2,23 +2,28 @@ import './FavoriteButton.scss'
 
 import { FavoriteBorder, FavoriteOutlined } from '@mui/icons-material'
 import Button from '../../elements/Button'
-import { useAuthContext, useFavsContext } from '../../../hooks'
+import { useAppContext, useAuthContext, useFavsContext } from '../../../hooks'
 
 export default function FavoriteButton({ hit }) {
+  const { setState } = useAppContext()
   const { user } = useAuthContext()
   const { spidMap, addFavorite, deleteFavorite } = useFavsContext()
 
   const isFav = hit ? spidMap[hit.id] : false
 
   const onClick = () => {
-    if (isFav) {
-      deleteFavorite(hit.id)
+    if (user) {
+      if (isFav) {
+        deleteFavorite(hit.id)
+      } else {
+        addFavorite(hit.id)
+      }
     } else {
-      addFavorite(hit.id)
+      setState({ modal: 'LOGIN_PROMPT' })
     }
   }
 
-  if (!hit || !user) {
+  if (!hit) {
     return null
   }
 
@@ -46,7 +51,7 @@ export default function FavoriteButton({ hit }) {
       }}
       onClick={onClick}
     >
-      {isFav ? (
+      {user && isFav ? (
         <FavoriteOutlined className="fav" style={{ color: '#DA291C', width: 25, height: 25 }} />
       ) : (
         <FavoriteBorder className="unfav" style={{ width: 25, height: 25 }} />
