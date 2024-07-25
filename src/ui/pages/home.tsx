@@ -83,12 +83,13 @@ export default function HomePage() {
               {getAppConfigValue('search.subtitleUrl') && getAppConfigValue('search.subtitleUrlText') && (
                 <Link
                   to={getAppConfigValue('search.subtitleUrl')}
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   variant="normal"
                   color="textPrimary"
                   style={{
                     textDecoration: 'underline'
                   }}
+                  external
                 >
                   {getAppConfigValue('search.subtitleUrlText')}
                 </Link>
