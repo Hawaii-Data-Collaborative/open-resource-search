@@ -1,3 +1,4 @@
+import debug from 'debug'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { App } from './ui/app'
@@ -11,6 +12,9 @@ import { ThemeProvider } from '@mui/material'
 import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
 import { AuthContextProvider } from './providers'
+
+// @ts-expect-error
+window._debug = debug
 
 // Import polyfills for IE11 support
 if (import.meta.env.MODE === 'production' && isInternetExplorer()) {

@@ -5,7 +5,6 @@ import { RootState } from '../../redux/store'
 import { resultsFromApi } from '../../adapters/results'
 import { favoritesFromApi } from '../../adapters/favorite'
 import { filterByRadius } from '../../utils'
-import { logEvent } from '../../analytics'
 
 type SearchParams = {
   q?: string
@@ -44,29 +43,8 @@ export const fetchResults = createAsyncThunk('fetchResults', async (term: string
     params
   })
 
-  let rv = resultsFromApi(res.data)
-  const count = rv.length
-  const radius = Number(params.radius)
-  let filterByRadiusCount = null
-  if (radius > 0 && state.search.location?.trim()) {
-    rv = await filterByRadius(rv, Number(params.radius), state.search.location)
-    filterByRadiusCount = rv.length
-  }
+  const rv = resultsFromApi(res.data)
 
-  if (filterByRadiusCount === 0 && count > 0) {
-    logEvent('UnmetNeeds.NoResultNearby', {
-      terms: params.q,
-      radius: params.radius,
-      zipCode: state.search.location?.trim(),
-      totalCount: count
-    })
-  } else if (count === 0) {
-    logEvent('UnmetNeeds.NoResults', {
-      terms: params.q,
-      radius: params.radius,
-      zipCode: state.search.location?.trim()
-    })
-  }
   return rv
 })
 
