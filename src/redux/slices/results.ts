@@ -4,7 +4,6 @@ import { getAppConfigValue } from '../../utils/getAppConfigValue'
 import { RootState } from '../../redux/store'
 import { resultsFromApi } from '../../adapters/results'
 import { favoritesFromApi } from '../../adapters/favorite'
-import { filterByRadius } from '../../utils'
 
 type SearchParams = {
   q?: string
@@ -70,11 +69,8 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
     params
   })
 
-  let rv = resultsFromApi(res.data)
-  const radius = Number(params.radius)
-  if (radius > 0 && state.search.location?.trim()) {
-    rv = await filterByRadius(rv, Number(params.radius), state.search.location)
-  }
+  const rv = resultsFromApi(res.data)
+
   return rv
 })
 
