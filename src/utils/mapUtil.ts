@@ -1,4 +1,7 @@
 import { Loader } from '@googlemaps/js-api-loader'
+import debugInit from 'debug'
+
+const debug = debugInit('app:utils:mapUtil')
 
 let initialized = false
 let geocoder: google.maps.Geocoder
@@ -50,6 +53,7 @@ export async function filterByRadius(results: any[], radius: number, location: s
 }
 
 export async function getLatLng(location: string) {
+  debug('[getLatLng] location=%s', location)
   await initMapLibraries()
   const res = await geocoder.geocode({ address: location })
   return res.results[0].geometry.location.toJSON()

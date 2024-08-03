@@ -1,5 +1,4 @@
 import Box from '../../elements/Box'
-import Text from '../../elements/Text'
 import Flex from '../../elements/Flex'
 import Heading from './Heading'
 import Location from './Location'
@@ -7,7 +6,6 @@ import Description from './Description'
 import ContactButtons from './ContactButtons'
 import MoreInformation from './MoreInformation'
 import FavoriteButton from './FavoriteButton'
-import { checkString } from '../../../utils'
 
 interface ILocation {
   lat?: number
@@ -18,11 +16,10 @@ interface ILocation {
 interface HitProps {
   hit?: any
   location?: ILocation
-  score?: any
   mutate?: any
 }
 
-export default function Hit({ hit, location, score }: HitProps) {
+export default function Hit({ hit, location }: HitProps) {
   return (
     <Box
       className="Result-Hit"
@@ -46,14 +43,6 @@ export default function Hit({ hit, location, score }: HitProps) {
       <Description hit={hit} />
       <ContactButtons hit={hit} />
       <MoreInformation hit={hit} />
-
-      {(import.meta.env.MODE === 'development' || import.meta.env.VITE_DEBUG) != null && checkString(score) && (
-        <Flex justifyContent="flex-end" alignItems="center">
-          <Text color="textSecondary" variant="body1">
-            score: {score}
-          </Text>
-        </Flex>
-      )}
 
       {hit?.active === false && (
         <>

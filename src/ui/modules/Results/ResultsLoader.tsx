@@ -9,7 +9,7 @@ export default function ResultsLoader({ results, location }) {
         })}
 
       {results?.data?.map(result => {
-        return <Result key={result.id} hit={result} score={result?._score} location={location} />
+        return <Result key={result.id} hit={result} location={location} />
       })}
 
       {!results.isLoading && !results?.data?.length ? (
