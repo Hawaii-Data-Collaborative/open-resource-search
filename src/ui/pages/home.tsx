@@ -77,7 +77,7 @@ export default function HomePage() {
           </div>
 
           <If value={getAppConfigValue('search.subtitle')}>
-            <Text color="textPrimary" marginTop="4px">
+            <Text color="textPrimary" marginTop="15px" fontWeight={300} fontSize="90%">
               {getAppConfigValue('search.subtitle')}
               {getAppConfigValue('search.subtitleUrlText') && ' '}
               {getAppConfigValue('search.subtitleUrl') && getAppConfigValue('search.subtitleUrlText') && (
@@ -96,6 +96,24 @@ export default function HomePage() {
               )}
             </Text>
           </If>
+
+          <Text color="textPrimary" fontWeight={300} fontSize="90%">
+            Providers:{' '}
+            <Link
+              to="https://auw211.org/providers/#new-agency"
+              rel="noreferrer noopener"
+              variant="normal"
+              color="textPrimary"
+              target="_blank"
+              style={{
+                textDecoration: 'underline'
+              }}
+              external
+            >
+              Click here
+            </Link>{' '}
+            to add your programs to the 211 database.
+          </Text>
         </Box>
       </Flex>
 
