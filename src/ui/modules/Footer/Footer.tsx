@@ -16,6 +16,17 @@ export default function SiteFooter() {
         <Box>
           <Link
             external
+            to="/sitemap"
+            target="_blank"
+            style={{
+              color: getTextColorContrast(theme.PRIMARY_COLOR),
+              marginRight: 20
+            }}
+          >
+            Sitemap
+          </Link>
+          <Link
+            external
             to="/admin"
             target="_blank"
             style={{
