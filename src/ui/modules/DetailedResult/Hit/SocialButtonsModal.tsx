@@ -1,12 +1,23 @@
+import copy from 'copy-to-clipboard'
 import Text from '../../../elements/Text'
 import Modal from '../../../elements/Modal'
-import Flex from '../../../elements/Flex'
 import { logEvent } from '../../../../analytics'
-
-import { PrintButton, EmailButton, TwitterButton, FacebookButton } from './SocialButtons'
+import { toast } from '../../../../services'
+import { PrintButton, EmailButton, TwitterButton, FacebookButton, CopyButton } from './SocialButtons'
+import { Tooltip } from '../../../elements/Tooltip'
+import { Stack } from '@mui/material'
 
 export default function SocialButtonsModal({ share, setShare, hit }) {
   if (!hit) return null
+
+  const onCopyButtonClick = () => {
+    logEvent('Referral.CopyLink', {
+      currentPage: window.location.toString(),
+      program: hit.title
+    })
+    copy(window.location.href)
+    toast('Link copied to clipboard')
+  }
 
   const onPrintButtonClick = () => {
     logEvent('Referral.Print', {
@@ -43,16 +54,38 @@ export default function SocialButtonsModal({ share, setShare, hit }) {
         Share Listing
       </Text>
 
-      <Flex flexDirection="column">
+      <Stack spacing={1}>
+        <CopyButton onClick={onCopyButtonClick}>Copy Link</CopyButton>
+
         <PrintButton onClick={onPrintButtonClick}>Print this Listing</PrintButton>
 
-        <EmailButton
-          to={`mailto:?subject=${hit.title}&body=${window.location.href}`}
-          onClick={onEmailButtonClick}
-          external
-        >
-          Share with Email
-        </EmailButton>
+        <div>
+          <Tooltip
+            title="Press to open your device's email app and start a draft message with a link to this program"
+            slotProps={{
+              popper: {
+                modifiers: [
+                  {
+                    name: 'offset',
+                    options: {
+                      offset: [0, -8]
+                    }
+                  }
+                ]
+              }
+            }}
+          >
+            <span>
+              <EmailButton
+                to={`mailto:?subject=${hit.title}&body=${window.location.href}`}
+                onClick={onEmailButtonClick}
+                external
+              >
+                Share with Email
+              </EmailButton>
+            </span>
+          </Tooltip>
+        </div>
 
         <FacebookButton
           target="_blank"
@@ -73,7 +106,7 @@ export default function SocialButtonsModal({ share, setShare, hit }) {
         >
           Share on Twitter
         </TwitterButton>
-      </Flex>
+      </Stack>
     </Modal>
   )
 }
