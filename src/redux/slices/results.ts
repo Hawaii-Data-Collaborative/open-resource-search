@@ -21,7 +21,7 @@ const initialState = {
 }
 
 export const fetchResults = createAsyncThunk('fetchResults', async (term: string, thunk) => {
-  if (term == null) return []
+  // if (term == null) return []
 
   const state: RootState = thunk.getState() as RootState
 
