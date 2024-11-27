@@ -25,10 +25,6 @@ export function useReduxOnRouteChange() {
       dispatch(setDistance(radius as string))
     }
 
-    if (taxonomies == null || taxonomies.length === 0) {
-      dispatch(setTaxonomies(''))
-    }
-
     if (terms != null && terms.length > 0) {
       dispatch(setQuery(terms as string))
     }

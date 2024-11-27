@@ -13,7 +13,7 @@ import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
 import { AuthContextProvider } from './providers'
 
-// @ts-expect-error
+// @ts-expect-error it's fine
 window._debug = debug
 
 // Import polyfills for IE11 support
