@@ -4,6 +4,7 @@ interface User {
 
 interface IAppState {
   modal?: 'LOGIN_PROMPT'
+  showAdvancedFilters?: boolean
 }
 
 interface IAppContext extends IAppState {

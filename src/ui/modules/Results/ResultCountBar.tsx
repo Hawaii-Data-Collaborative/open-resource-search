@@ -7,10 +7,10 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import { useAppContext } from '../../../hooks'
 
 export default function ResultCountBar({ results }) {
-  const { showAdvancedFilters, update } = useAppContext()
+  const { showAdvancedFilters, setState } = useAppContext()
 
   const onClick = () => {
-    update({ showAdvancedFilters: !showAdvancedFilters })
+    setState({ showAdvancedFilters: !showAdvancedFilters })
   }
 
   return (
