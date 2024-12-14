@@ -2,15 +2,15 @@ import { checkString } from '../utils'
 
 export const resultsFromApi = (results: any[]) =>
   results.map(result => ({
-    id: result._source.id,
-    title: getTitle(result._source),
-    locationName: getLocationName(result._source),
-    locationLat: result._source.location_latitude,
-    locationLon: result._source.location_longitude,
-    description: getDescription(result._source),
-    phone: result._source.phone,
-    website: result._source.website,
-    _score: result._score
+    id: result.id,
+    title: getTitle(result),
+    locationName: getLocationName(result),
+    locationLat: result.location_latitude,
+    locationLon: result.location_longitude,
+    description: getDescription(result),
+    phone: result.phone,
+    website: result.website,
+    active: result.active
   }))
 
 function getTitle(result) {

@@ -7,7 +7,7 @@ export function useReduxOnRouteChange() {
   const dispatch = useAppDispatch()
   const l = useLocation()
   const params = new URLSearchParams(l.search)
-  const location = params.get('params')
+  const location = params.get('location')
   const taxonomies = params.get('taxonomies')
   const radius = params.get('radius')
   const terms = params.get('terms')
@@ -23,10 +23,6 @@ export function useReduxOnRouteChange() {
 
     if (radius != null && radius.length > 0) {
       dispatch(setDistance(radius as string))
-    }
-
-    if (taxonomies == null || taxonomies.length === 0) {
-      dispatch(setTaxonomies(''))
     }
 
     if (terms != null && terms.length > 0) {

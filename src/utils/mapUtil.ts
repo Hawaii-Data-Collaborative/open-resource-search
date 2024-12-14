@@ -1,25 +1,37 @@
-import _axios from 'axios'
-import { getAppConfigValue } from './getAppConfigValue'
+import { Loader } from '@googlemaps/js-api-loader'
+import debugInit from 'debug'
 
-const axios = _axios.create()
+const debug = debugInit('app:utils:mapUtil')
 
-let google
+let initialized = false
+let geocoder: google.maps.Geocoder
+
 const locationCache = {}
-const apiKey = getAppConfigValue('services.map.google.apiKey')
-const urlTemplate = `https://maps.googleapis.com/maps/api/geocode/json?address={{address}}&key=${apiKey}`
 
-export function setGoogleInstance(g) {
-  google = g
+export async function initMapLibraries() {
+  if (initialized) return
+
+  const loader = new Loader({
+    apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+    version: 'weekly',
+    libraries: ['maps', 'geometry', 'geocoding']
+  })
+
+  await loader.importLibrary('maps')
+  await loader.importLibrary('geometry')
+  const { Geocoder } = await loader.importLibrary('geocoding')
+  geocoder = new Geocoder()
+  initialized = true
 }
 
 export async function filterByRadius(results: any[], radius: number, location: string) {
+  await initMapLibraries()
+
   let center
   if (locationCache[location]) {
     center = locationCache[location]
   } else {
-    const url = urlTemplate.replace('{{address}}', location.trim())
-    const res = await axios.get(url)
-    center = res.data.results[0].geometry.location
+    center = await getLatLng(location)
     locationCache[location] = center
   }
 
@@ -38,4 +50,11 @@ export async function filterByRadius(results: any[], radius: number, location: s
     }
   }
   return rv
+}
+
+export async function getLatLng(location: string) {
+  debug('[getLatLng] location=%s', location)
+  await initMapLibraries()
+  const res = await geocoder.geocode({ address: location })
+  return res.results[0].geometry.location.toJSON()
 }

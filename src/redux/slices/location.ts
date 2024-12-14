@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import debugInit from 'debug'
 import { sessionStorage } from '../../services'
-import { getAppConfigValue } from '../../utils'
+import { getAppConfigValue, getLatLng } from '../../utils'
 import { LOCATION_CONSTANTS } from '../../constants'
+
+const debug = debugInit('app:redux:location')
 
 const initialState = {
   lat: null,
@@ -14,11 +16,10 @@ const initialState = {
   error: ''
 }
 
-const CustomAxios = axios.create()
-
 export const fetchLocation = createAsyncThunk(
   'fetchLocation',
   async (config: { location: string | null; forceFetch?: boolean }) => {
+    debug('[fetchLocation] config.location=%s', config.location)
     let payload
 
     if (config.location != null) {
@@ -28,6 +29,7 @@ export const fetchLocation = createAsyncThunk(
       const latLon = newCache[config.location]
 
       if (latLon != null) {
+        debug('[fetchLocation] using cached value, latLon=%o', latLon)
         // If the location was found in cache, use the cached version
         payload = {
           lat: latLon.lat,
@@ -37,29 +39,24 @@ export const fetchLocation = createAsyncThunk(
           zoom: 10
         }
       } else {
+        debug('[fetchLocation] call getLatLng')
         // Fetch the location if it's not found in cache
-        const res = await CustomAxios.post(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${
-            config.location
-          }&sensor=false&key=${getAppConfigValue('services.map.google.apiKey')}`
-        )
+        const { lat, lng } = await getLatLng(config.location)
 
         payload = {
-          lat: res.data.results[0].geometry.location.lat,
-          lng: res.data.results[0].geometry.location.lng,
-          centerLat: res.data.results[0].geometry.location.lat,
-          centerLng: res.data.results[0].geometry.location.lng,
+          lat,
+          lng,
+          centerLat: lat,
+          centerLng: lng,
           zoom: 10
         }
 
-        newCache[config.location] = {
-          lat: res.data.results[0].geometry.location.lat,
-          lng: res.data.results[0].geometry.location.lng
-        }
+        newCache[config.location] = { lat, lng }
 
         sessionStorage.set('latLonCache', newCache)
       }
     } else {
+      debug('[fetchLocation] using defaults')
       // When no location is provided, set some default values for the map
       payload = {
         lat: null,
@@ -111,6 +108,7 @@ export const locationSlice = createSlice({
         centerLng: string
       }>
     ) => {
+      debug('[fetchLocation.fulfilled] payload=%o', action.payload)
       state.isLoading = false
       state.lat = action.payload.lat
       state.lng = action.payload.lng

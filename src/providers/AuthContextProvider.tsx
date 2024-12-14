@@ -1,9 +1,12 @@
 import axios from 'axios'
+import debugInit from 'debug'
 import { useEffect, useState } from 'react'
 import { AuthContext } from '../context'
 import { AUTH_TOKEN } from '../constants/index'
 import { localStorage } from '../services'
 import { getAppConfigValue } from '../utils/getAppConfigValue'
+
+const debug = debugInit('app:providers:AuthContextProvider')
 
 let _user
 const emptyFn = () => {}
@@ -22,7 +25,7 @@ export function AuthContextProvider({ children }) {
           user = res.data.user
         } catch (err) {
           console.error(err)
-          console.log('removing auth token from storage')
+          debug('removing auth token from storage')
           localStorage.remove(AUTH_TOKEN)
         }
       }

@@ -1,9 +1,12 @@
+import debugInit from 'debug'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useAppDispatch } from '../redux/store'
 import { fetchResults, fetchResultsByTaxonomies } from '../redux/slices/results'
 import { fetchLocation } from '../redux/slices/location'
 import { logEvent } from '../analytics'
+
+const debug = debugInit('app:hooks:useResultsFetch')
 
 export function useResultsFetch() {
   const dispatch = useAppDispatch()
@@ -14,16 +17,11 @@ export function useResultsFetch() {
   const terms = params.get('terms')
   const category_name = params.get('category_name')
   const radius = params.get('radius')
-  let query
-  try {
-    query = JSON.parse(params.get('query'))
-  } catch {
-    // no op
-  }
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
     ;(async function () {
+      debug('calling fetchLocation')
       if (location != null && location.length > 0) {
         await dispatch(
           fetchLocation({
@@ -35,21 +33,26 @@ export function useResultsFetch() {
       }
 
       if (taxonomies != null && taxonomies.length > 0) {
+        debug('calling fetchResultsByTaxonomies')
         // fetch by taxonomies
         await dispatch(fetchResultsByTaxonomies(taxonomies) as any)
       } else {
+        debug('calling fetchResults')
         await dispatch(fetchResults(terms) as any)
       }
 
-      if (query && JSON.stringify(query) !== '{}') {
-        if (category_name) {
-          logEvent('Search.Category', query)
-        } else if (taxonomies?.length) {
-          logEvent('Search.Taxonomy', query)
-        } else {
-          logEvent('Search.Keyword', query)
-        }
+      const paramsObj: any = {}
+      for (const [k, v] of params.entries()) {
+        paramsObj[k] = v
+      }
+
+      if (category_name) {
+        logEvent('Search.Category', paramsObj)
+      } else if (taxonomies?.length) {
+        logEvent('Search.Taxonomy', paramsObj)
+      } else if (terms?.length) {
+        logEvent('Search.Keyword', paramsObj)
       }
     })()
-  }, [location, terms, taxonomies, radius, query, category_name, dispatch])
+  }, [location, terms, taxonomies, radius, category_name, dispatch])
 }

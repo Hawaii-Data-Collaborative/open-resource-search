@@ -1,7 +1,8 @@
+import debug from 'debug'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { App } from './ui/app'
-import { isInternetExplorer } from './utils'
+import { isInternetExplorer, initMapLibraries } from './utils'
 import { initAxios } from './services'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
@@ -11,7 +12,9 @@ import { ThemeProvider } from '@mui/material'
 import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
 import { AuthContextProvider } from './providers'
-import { AppContextProvider } from './providers/AppContextProvider'
+
+// @ts-expect-error it's fine
+window._debug = debug
 
 // Import polyfills for IE11 support
 if (import.meta.env.MODE === 'production' && isInternetExplorer()) {
@@ -24,11 +27,12 @@ if (import.meta.env.MODE === 'production' && isInternetExplorer()) {
   elementClosest(window)
 }
 
-initAxios()
+async function main() {
+  initAxios()
+  await initMapLibraries()
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <AppContextProvider>
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
       <AuthContextProvider>
         <Router>
           <ThemeProvider theme={materialUiTheme}>
@@ -40,6 +44,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </ThemeProvider>
         </Router>
       </AuthContextProvider>
-    </AppContextProvider>
-  </Provider>
-)
+    </Provider>
+  )
+}
+
+main()

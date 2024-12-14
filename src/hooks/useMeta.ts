@@ -1,36 +1,22 @@
+import debugInit from 'debug'
 import { useEffect } from 'react'
 
-const map = {}
+const debug = debugInit('app:hooks:useMeta')
 
-export function useMeta(properties) {
+export function useMeta({ name, content }) {
   useEffect(() => {
-    if (exists(properties)) {
-      return
+    debug('name=%s content=%s', name, content)
+    let meta = document.querySelector(`meta[name="${name}"]`)
+    if (meta) {
+      meta.setAttribute('content', content)
+      debug('updated meta tag')
+    } else {
+      meta = document.createElement('meta')
+      meta.setAttribute('name', name)
+      meta.setAttribute('content', content)
+      document.head.appendChild(meta)
+      debug('created meta tag')
     }
-    const meta = document.createElement('meta')
-    for (const [k, v] of Object.entries(properties)) {
-      meta.setAttribute(k, v as string)
-    }
-    map[getKey(properties)] = meta
-    document.head.appendChild(meta)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-}
-
-function exists(properties) {
-  const key = getKey(properties)
-  return !!map[key]
-}
-
-function getKey(properties) {
-  return encodeURIComponent(JSON.stringify(sortedClone(properties)))
-}
-
-function sortedClone(properties) {
-  const keys = Object.keys(properties).sort()
-  const clone = {}
-  for (const k of keys) {
-    clone[k] = properties[k]
-  }
-  return clone
+  }, [name, content])
 }

@@ -5,7 +5,7 @@ import SocialButtonsModal from './SocialButtonsModal'
 import Heading from './Heading'
 import Location from './Location'
 import Description from './Description'
-import ContactLinks from './ContactLinks'
+import Schedule from './Schedule'
 import ContactButtons from './ContactButtons'
 import Categories from './Categories'
 import ServiceArea from './ServiceArea'
@@ -26,7 +26,7 @@ export default function Hit({ hit }: HitProps) {
   const [share, setShare] = useState(false)
 
   return (
-    <Box padding="16px 24px" className="Hit">
+    <Box padding="16px 24px" className="DetailedResult-Hit">
       <Actions setShare={setShare} />
 
       <EmergencyInfo hit={hit} />
@@ -40,8 +40,8 @@ export default function Hit({ hit }: HitProps) {
       </Box>
 
       <Description hit={hit} />
-      <ContactLinks hit={hit} />
       <ContactButtons hit={hit} />
+      <Schedule hit={hit} />
       <Categories hit={hit} />
       <ServiceArea hit={hit} />
       <ApplicationProcess hit={hit} />

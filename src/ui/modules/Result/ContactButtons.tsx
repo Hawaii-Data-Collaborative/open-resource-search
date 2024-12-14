@@ -1,3 +1,4 @@
+import debugInit from 'debug'
 import ClipboardJS from 'clipboard'
 import { useState } from 'react'
 import { Button as MuiButton, Dialog, Tooltip } from '@mui/material'
@@ -8,6 +9,8 @@ import Link from '../../elements/Link'
 import { THEME_CONSTANTS as theme } from '../../../constants'
 import { logEvent } from '../../../analytics'
 import { getWebsiteUrl, onCopyToClipboard } from '../../../utils'
+
+const debug = debugInit('app:ui:modules:ContactButtons')
 
 export default function ContactButtons({ hit }) {
   const [action, setAction] = useState(null)
@@ -81,7 +84,7 @@ let clipboard: ClipboardJS
 
 export function ContactButtonsDialog({ action, hit, onClose }) {
   const onRef = (node: HTMLElement) => {
-    console.log('[onRef] node=', node)
+    debug('[onRef] node=', node)
     if (node) {
       clipboard = new ClipboardJS(node, {
         container: document.querySelector('#ContactButtonsDialog')
@@ -123,7 +126,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
   }
 
   const onCopyPhoneClick = e => {
-    console.log('[onCopyPhoneClick] e.currentTarget=', e.currentTarget)
+    debug('[onCopyPhoneClick] e.currentTarget=', e.currentTarget)
     onCopyToClipboard(e.currentTarget)
     logEvent('Referral.Phone.CopyNumber', {
       currentPage: window.location.toString(),
