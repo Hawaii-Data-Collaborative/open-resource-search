@@ -3,12 +3,12 @@ interface User {
 }
 
 interface IAppState {
-  modal?: 'LOGIN_PROMPT'
-  showAdvancedFilters?: boolean
+  modal: 'LOGIN_PROMPT'
+  showAdvancedFilters: boolean
 }
 
 interface IAppContext extends IAppState {
-  setState: (state: IAppState) => void
+  setAppState: (state: IAppState) => void
 }
 
 interface IAuthContext {

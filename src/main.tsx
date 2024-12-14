@@ -11,7 +11,7 @@ import GlobalConfig from './ui/modules/GlobalConfig/GlobalConfig'
 import { ThemeProvider } from '@mui/material'
 import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
-import { AuthContextProvider } from './providers'
+import { AppContextProvider, AuthContextProvider } from './providers'
 
 // @ts-expect-error it's fine
 window._debug = debug
@@ -33,17 +33,19 @@ async function main() {
 
   ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
-      <AuthContextProvider>
-        <Router>
-          <ThemeProvider theme={materialUiTheme}>
-            <GlobalStyleSheet />
-            <GlobalConfig>
-              <App />
-              <Toast />
-            </GlobalConfig>
-          </ThemeProvider>
-        </Router>
-      </AuthContextProvider>
+      <AppContextProvider>
+        <AuthContextProvider>
+          <Router>
+            <ThemeProvider theme={materialUiTheme}>
+              <GlobalStyleSheet />
+              <GlobalConfig>
+                <App />
+                <Toast />
+              </GlobalConfig>
+            </ThemeProvider>
+          </Router>
+        </AuthContextProvider>
+      </AppContextProvider>
     </Provider>
   )
 }

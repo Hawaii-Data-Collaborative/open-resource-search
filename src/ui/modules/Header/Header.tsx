@@ -11,12 +11,12 @@ import * as Styles from './Header.styles'
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const banner = useBannerQuery()
-  const { setState } = useAppContext()
+  const { setAppState } = useAppContext()
   const { user } = useAuthContext()
 
   const onFavClick = e => {
     e.preventDefault()
-    setState({ modal: 'LOGIN_PROMPT' })
+    setAppState({ modal: 'LOGIN_PROMPT' })
   }
 
   const desktopDivider = (

@@ -7,7 +7,7 @@ export function AppContextProvider({ children }) {
   const value = useMemo(() => {
     return {
       ...state,
-      setState: (partialState: IAppState) => setState({ ...state, ...partialState })
+      setAppState: (partialState: Partial<IAppState>) => setState({ ...state, ...partialState })
     }
   }, [state])
 

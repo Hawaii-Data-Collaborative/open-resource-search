@@ -9,14 +9,14 @@ const modals = {
 }
 
 export function Modals() {
-  const { modal, setState } = useAppContext()
+  const { modal, setAppState } = useAppContext()
 
   const Modal = modals[modal]
   if (!Modal) {
     return null
   }
 
-  return <Modal onClose={() => setState({ modal: null })} />
+  return <Modal onClose={() => setAppState({ modal: null })} />
 }
 
 function LoginPrompt({ onClose }) {
