@@ -1,23 +1,31 @@
 import axios from 'axios'
 import debugInit from 'debug'
 import { useEffect, useRef, useState } from 'react'
-import { Box, Chip, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Chip, FormControlLabel, Stack, Typography } from '@mui/material'
 import { useAppContext } from '../../../hooks'
 import { useAppDispatch, useAppSelector } from '../../../redux/store'
 import { setFilters } from '../../../redux/slices/search'
 import { getAppConfigValue, stringifyParams } from '../../../utils'
 import { useHistory, useLocation } from 'react-router-dom'
 import { THEME_CONSTANTS } from '../../../constants'
+import { Flex } from '../../elements'
 
 const debug = debugInit('app:ui:AdvancedFilters')
 
-interface FilterOptions {
+interface Facets {
   openNow: boolean
+  groups: {
+    name: string
+    items: {
+      name: string
+    }[]
+  }[]
 }
 
 export function AdvancedFilters() {
   const { showAdvancedFilters } = useAppContext()
-  const [filterOptions, setFilterOptions] = useState<FilterOptions>(null as FilterOptions)
+  const [facets, setFacets] = useState<Facets>(null as Facets)
+  const [loading, setLoading] = useState(false)
   const appState = useAppSelector(state => state)
   const search = useAppSelector(state => state.search)
   const results = useAppSelector(state => state.results)
@@ -56,15 +64,23 @@ export function AdvancedFilters() {
       }
 
       // prettier-ignore
-      const url = `${getAppConfigValue('apiUrl')}/api/v1/search/filters?${stringifyParams(params)}`
+      const url = `${getAppConfigValue('apiUrl')}/api/v1/search/facets?${stringifyParams(params)}`
       if (lastUrlRef.current === url) {
         debug('skipping fetch')
         return
       }
       lastUrlRef.current = url
       debug('fetching %s', url)
-      const res = await axios.get(url)
-      setFilterOptions(res.data)
+      setLoading(true)
+      try {
+        const res = await axios.get(url)
+        setFacets(res.data)
+        setLoading(false)
+        // dispatch(setFilters({}))
+      } catch (err) {
+        console.error(err)
+        setLoading(false)
+      }
     }
 
     if (results.data.length) {
@@ -72,7 +88,26 @@ export function AdvancedFilters() {
     }
   }, [results])
 
-  const applyFilter = async (k: string, v: any) => {
+  const applyFilter = async (name: string) => {
+    const selectedFilters2 = { ...selectedFilters }
+    if (selectedFilters2[name]) {
+      delete selectedFilters2[name]
+    } else {
+      selectedFilters2[name] = true
+    }
+
+    const params = new URLSearchParams(location.search)
+    if (params.has('filters') && JSON.stringify(selectedFilters2) === '{}') {
+      params.delete('filters')
+    } else if (JSON.stringify(selectedFilters2) !== '{}') {
+      params.set('filters', JSON.stringify(selectedFilters2))
+    }
+
+    history.push({ pathname: location.pathname, search: params.toString() })
+    dispatch(setFilters(selectedFilters2))
+  }
+
+  const toggleQuickFilter = async (k: string, v: any) => {
     const selectedFilters2 = { ...selectedFilters, [k]: v }
     if (v == null) {
       delete selectedFilters2[k]
@@ -87,32 +122,95 @@ export function AdvancedFilters() {
     history.push({ pathname: location.pathname, search: params.toString() })
   }
 
+  const clearFilters = () => {
+    dispatch(setFilters({}))
+    const params = new URLSearchParams(location.search)
+    params.delete('filters')
+    history.push({ pathname: location.pathname, search: params.toString() })
+  }
+
   return (
     <Box
       sx={{
         width: showAdvancedFilters ? '180px' : '0px',
         transition: 'width 100ms',
         backgroundColor: '#fafafa',
-        padding: 1
+        position: 'relative'
       }}
     >
-      <Box>
-        <Typography variant="body2" fontSize="0.8rem" gutterBottom>
-          Quick Filters
-        </Typography>
-        <Box display="flex" flexWrap="wrap" gap={0.7}>
-          {filterOptions?.openNow && (
+      <Box padding={1}>
+        <Flex alignItems="center" justifyContent="space-between">
+          <Typography variant="body2" fontSize="0.8rem">
+            Filters
+          </Typography>
+          <Button
+            size="small"
+            onClick={() => clearFilters()}
+            sx={{ fontSize: '11px', padding: '2px 8px', minWidth: 'auto' }}
+          >
+            Clear
+          </Button>
+        </Flex>
+        <Box display="flex" flexWrap="wrap" gap={0.7} pt={1} pb={1}>
+          {!facets?.openNow && (
             <QuickFilter
               label="Open now"
               selected={selectedFilters.openNow}
-              onClick={() => applyFilter('openNow', selectedFilters.openNow ? undefined : true)}
+              onClick={() => toggleQuickFilter('openNow', selectedFilters.openNow ? undefined : true)}
             />
           )}
-          {/* {filterOptions?.openNow && <QuickFilter label="Open now" onClick={() => applyFilter('openNow')} />}
-          {filterOptions?.openNow && <QuickFilter label="Open now" onClick={() => applyFilter('openNow')} />}
-          {filterOptions?.openNow && <QuickFilter label="Open now" onClick={() => applyFilter('openNow')} />} */}
         </Box>
+
+        {facets?.groups?.map((g, i) => (
+          <Box key={i} pt={1}>
+            <Typography variant="body2" fontSize="0.8rem" pb={1}>
+              {g.name}
+            </Typography>
+            <Box>
+              {g.items.map((item, j) => (
+                <Stack key={j} direction="row" alignItems="center" pl={1}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        size="small"
+                        checked={selectedFilters[`${g.name}.${item.name}`] ?? false}
+                        onChange={() => applyFilter(`${g.name}.${item.name}`)}
+                        sx={{
+                          padding: '2px',
+                          '& .MuiSvgIcon-root': { fill: 'rgb(0, 81, 145)' }
+                        }}
+                      />
+                    }
+                    label={item.name}
+                    sx={{
+                      '& .MuiFormControlLabel-label': { fontSize: '0.75rem', lineHeight: 1.1 }
+                    }}
+                  />
+                </Stack>
+              ))}
+            </Box>
+          </Box>
+        ))}
       </Box>
+
+      {loading && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#fffa',
+            fontSize: '0.75rem',
+            padding: 1,
+            paddingTop: '10px',
+            textAlign: 'center'
+          }}
+        >
+          Loading...
+        </Box>
+      )}
     </Box>
   )
 }
