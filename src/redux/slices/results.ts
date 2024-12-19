@@ -11,6 +11,7 @@ type SearchParams = {
   lon?: number
   radius?: string
   taxonomies?: string
+  filters?: any
 }
 
 const initialState = {
@@ -36,6 +37,11 @@ export const fetchResults = createAsyncThunk('fetchResults', async (term: string
 
   if (state.search.radius.length > 0) {
     params.radius = state.search.radius
+  }
+
+  const filtersStr = state.search.filters != null ? JSON.stringify(state.search.filters) : ''
+  if (filtersStr.length > 0 && filtersStr !== '{}') {
+    params.filters = encodeURIComponent(filtersStr)
   }
 
   const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/search`, {

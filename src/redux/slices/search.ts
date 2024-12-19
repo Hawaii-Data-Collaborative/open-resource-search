@@ -5,7 +5,8 @@ const initialState = {
   query: '',
   location: '',
   taxonomies: '',
-  radius: '0'
+  radius: '0',
+  filters: {} as any
 }
 
 export const searchSlice = createSlice({
@@ -27,10 +28,13 @@ export const searchSlice = createSlice({
     },
     setTaxonomies: (state, action: PayloadAction<string>) => {
       state.taxonomies = action.payload
+    },
+    setFilters: (state, action: PayloadAction<any>) => {
+      state.filters = action.payload
     }
   }
 })
 
-export const { setQuery, setLocation, setTaxonomies, setDistance } = searchSlice.actions
+export const { setQuery, setLocation, setTaxonomies, setDistance, setFilters } = searchSlice.actions
 
 export default searchSlice.reducer

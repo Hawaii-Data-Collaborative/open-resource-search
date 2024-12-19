@@ -37,6 +37,7 @@ function Search({ variant = 'outlined' }: Props) {
   const [findingLocation, setFindingLocation] = useState(false)
   const taxonomies = useAppSelector(state => state.search.taxonomies)
   const radius = useAppSelector(state => state.search.radius)
+  const filters = useAppSelector(state => state.search.filters)
   const suggestions = useSuggestionsQuery()
   const newHits = suggestions
 
@@ -145,6 +146,9 @@ function Search({ variant = 'outlined' }: Props) {
     }
     if (radius.length > 0 && radius !== '0') {
       queryParams.radius = radius
+    }
+    if (filters && JSON.stringify(filters) !== '{}') {
+      queryParams.filters = JSON.stringify(filters)
     }
 
     history.push({

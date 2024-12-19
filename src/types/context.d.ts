@@ -8,7 +8,7 @@ interface IAppState {
 }
 
 interface IAppContext extends IAppState {
-  setAppState: (state: IAppState) => void
+  setAppState: (state: Partial<IAppState>) => void
 }
 
 interface IAuthContext {

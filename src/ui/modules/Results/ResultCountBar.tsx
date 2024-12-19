@@ -2,15 +2,15 @@ import Box from '../../elements/Box'
 import Text from '../../elements/Text'
 import { THEME_CONSTANTS as theme } from '../../../constants'
 import { getTextColorContrast } from '../../../utils'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { useAppContext } from '../../../hooks'
 
 export default function ResultCountBar({ results }) {
-  const { showAdvancedFilters, setState } = useAppContext()
+  const { showAdvancedFilters, setAppState } = useAppContext()
 
   const onClick = () => {
-    setState({ showAdvancedFilters: !showAdvancedFilters })
+    setAppState({ showAdvancedFilters: !showAdvancedFilters })
   }
 
   return (
@@ -25,9 +25,11 @@ export default function ResultCountBar({ results }) {
         {results.isLoading && 'Loading results...'}
         {!results.isLoading && <>Results: {results.data.length}</>}
       </Text>
-      <IconButton size="small" onClick={onClick}>
-        <FilterListIcon sx={{ fill: '#fff' }} />
-      </IconButton>
+      <Tooltip title={showAdvancedFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}>
+        <IconButton size="small" onClick={onClick}>
+          <FilterListIcon sx={{ fill: '#fff' }} />
+        </IconButton>
+      </Tooltip>
     </Box>
   )
 }

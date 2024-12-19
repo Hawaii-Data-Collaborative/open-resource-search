@@ -20,3 +20,17 @@ export function getUserErrorMessage(err) {
     return err.message
   }
 }
+
+export function stringifyParams(params) {
+  const search = new URLSearchParams()
+  for (const [k, v] of Object.entries(params)) {
+    if (v != null) {
+      if (typeof v === 'object') {
+        search.set(k, JSON.stringify(v))
+      } else {
+        search.set(k, v as any)
+      }
+    }
+  }
+  return search.toString()
+}
