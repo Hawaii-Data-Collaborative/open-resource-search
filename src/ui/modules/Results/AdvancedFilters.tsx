@@ -154,6 +154,7 @@ export function AdvancedFilters() {
           <Button
             size="small"
             onClick={() => clearFilters()}
+            disabled={selectedFilters == null || JSON.stringify(selectedFilters) === '{}'}
             sx={{ fontSize: '11px', padding: '2px 8px', minWidth: 'auto' }}
           >
             Clear
