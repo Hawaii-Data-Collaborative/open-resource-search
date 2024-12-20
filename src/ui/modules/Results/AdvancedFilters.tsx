@@ -120,14 +120,21 @@ export function AdvancedFilters() {
     if (v == null) {
       delete selectedFilters2[k]
     }
+
+    debug('[toggleQuickFilter] calling setFilters %j', selectedFilters2)
     dispatch(setFilters(selectedFilters2))
-    const params = new URLSearchParams(location.search)
-    if (params.has('filters') && JSON.stringify(selectedFilters2) === '{}') {
-      params.delete('filters')
-    } else if (!params.has('filters') && JSON.stringify(selectedFilters2) !== '{}') {
-      params.set('filters', JSON.stringify(selectedFilters2))
-    }
-    history.push({ pathname: location.pathname, search: params.toString() })
+
+    setTimeout(() => {
+      const params = new URLSearchParams(location.search)
+      if (params.has('filters') && JSON.stringify(selectedFilters2) === '{}') {
+        params.delete('filters')
+      } else if (JSON.stringify(selectedFilters2) !== '{}') {
+        params.set('filters', JSON.stringify(selectedFilters2))
+      }
+
+      debug('[toggleQuickFilter] calling history.push')
+      history.push({ pathname: location.pathname, search: params.toString() })
+    }, 250)
   }
 
   const clearFilters = () => {
