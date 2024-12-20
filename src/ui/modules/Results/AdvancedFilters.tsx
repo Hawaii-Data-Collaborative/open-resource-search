@@ -37,6 +37,8 @@ export function AdvancedFilters() {
   appStateRef.current = appState
   const selectedFilters = search.filters
 
+  debug('rendering, selectedFilters=%j', selectedFilters)
+
   useEffect(() => {
     const fn = async () => {
       const appState = appStateRef.current
@@ -74,6 +76,7 @@ export function AdvancedFilters() {
       setLoading(true)
       try {
         const res = await axios.get(url)
+        debug('got facets %j', res.data)
         setFacets(res.data)
         setLoading(false)
         // dispatch(setFilters({}))
@@ -96,15 +99,20 @@ export function AdvancedFilters() {
       selectedFilters2[name] = true
     }
 
-    const params = new URLSearchParams(location.search)
-    if (params.has('filters') && JSON.stringify(selectedFilters2) === '{}') {
-      params.delete('filters')
-    } else if (JSON.stringify(selectedFilters2) !== '{}') {
-      params.set('filters', JSON.stringify(selectedFilters2))
-    }
-
-    history.push({ pathname: location.pathname, search: params.toString() })
+    debug('[applyFilter] calling setFilters %j', selectedFilters2)
     dispatch(setFilters(selectedFilters2))
+
+    setTimeout(() => {
+      const params = new URLSearchParams(location.search)
+      if (params.has('filters') && JSON.stringify(selectedFilters2) === '{}') {
+        params.delete('filters')
+      } else if (JSON.stringify(selectedFilters2) !== '{}') {
+        params.set('filters', JSON.stringify(selectedFilters2))
+      }
+
+      debug('[applyFilter] calling history.push')
+      history.push({ pathname: location.pathname, search: params.toString() })
+    }, 250)
   }
 
   const toggleQuickFilter = async (k: string, v: any) => {
@@ -152,7 +160,7 @@ export function AdvancedFilters() {
           </Button>
         </Flex>
         <Box display="flex" flexWrap="wrap" gap={0.7} pt={1} pb={1}>
-          {!facets?.openNow && (
+          {facets?.openNow && (
             <QuickFilter
               label="Open now"
               selected={selectedFilters.openNow}

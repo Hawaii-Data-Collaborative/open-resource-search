@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import debugInit from 'debug'
 import { useLocation } from 'react-router-dom'
 import { useAppSelector } from '../../../redux/store'
 import FeedbackMargin from '../FeedbackButton/FeedbackMargin'
@@ -10,14 +11,17 @@ import { Box } from '../../elements/Box'
 import { Text } from '../../elements/Text'
 import { AdvancedFilters } from './AdvancedFilters'
 
+const debug = debugInit('app:ui:Results')
+
 export default function Results({ hideSearch }) {
   const l = useLocation()
   const scrollParent = useRef()
   const results = useAppSelector(state => state.results)
   const location = useAppSelector(state => state.location)
   const taxonomies = useAppSelector(state => state.search.taxonomies)
-
   const params = new URLSearchParams(l.search)
+
+  debug('rendering')
 
   return (
     <>
