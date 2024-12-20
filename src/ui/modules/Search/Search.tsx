@@ -1,5 +1,6 @@
 import './Search.scss'
 
+import debugInit from 'debug'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import parse from 'autosuggest-highlight/parse'
@@ -18,12 +19,14 @@ import { SearchOutlined, LocationOnOutlined, LocationSearchingOutlined, MyLocati
 import Flex from '../../elements/Flex'
 import Button from '../../elements/Button'
 import { useAppDispatch, useAppSelector } from '../../../redux/store'
-import { setQuery, setLocation, setDistance, setTaxonomies } from '../../../redux/slices/search'
+import { setQuery, setLocation, setDistance, setTaxonomies, setFilters } from '../../../redux/slices/search'
 import { StyledAutocomplete } from './Search.styled'
 import { getAppConfigValue, link } from '../../../utils'
 import { useSuggestionsQuery } from '../../../hooks'
 import { getParentElements } from '../../../utils'
 import { appEmitter } from '../../../services'
+
+const debug = debugInit('app:ui:Search')
 
 type Props = {
   variant?: 'outlined' | 'standard' | 'filled'
@@ -148,7 +151,13 @@ function Search({ variant = 'outlined' }: Props) {
       queryParams.radius = radius
     }
     if (filters && JSON.stringify(filters) !== '{}') {
-      queryParams.filters = JSON.stringify(filters)
+      const currentSearchTerm = new URLSearchParams(location.search).get('terms')
+      if (currentSearchTerm === query) {
+        queryParams.filters = JSON.stringify(filters)
+      } else {
+        debug('[submitSearch] filters not applied because search term has changed')
+        dispatch(setFilters({}))
+      }
     }
 
     history.push({
