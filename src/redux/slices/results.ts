@@ -1,9 +1,12 @@
 import axios from 'axios'
+import debugInit from 'debug'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { getAppConfigValue } from '../../utils/getAppConfigValue'
 import { RootState } from '../../redux/store'
 import { resultsFromApi } from '../../adapters/results'
 import { favoritesFromApi } from '../../adapters/favorite'
+
+const debug = debugInit('app:redux:results')
 
 type SearchParams = {
   q?: string
@@ -22,6 +25,7 @@ const initialState = {
 }
 
 export const fetchResults = createAsyncThunk('fetchResults', async (term: string, thunk) => {
+  debug('[fetchResults] term=%s', term)
   // if (term == null) return []
 
   const state: RootState = thunk.getState() as RootState
@@ -44,9 +48,11 @@ export const fetchResults = createAsyncThunk('fetchResults', async (term: string
     params.filters = encodeURIComponent(filtersStr)
   }
 
+  debug('[fetchResults] making api call...')
   const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/search`, {
     params
   })
+  debug('[fetchResults] ...done')
 
   const rv = resultsFromApi(res.data)
 
@@ -54,6 +60,8 @@ export const fetchResults = createAsyncThunk('fetchResults', async (term: string
 })
 
 export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomies', async (terms: string, thunk) => {
+  debug('[fetchResultsByTaxonomies] terms=%s', terms)
+
   if (terms == null) return []
 
   const state: RootState = thunk.getState() as RootState
@@ -71,9 +79,11 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
     params.radius = state.search.radius
   }
 
+  debug('[fetchResultsByTaxonomies] making api call...')
   const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/search`, {
     params
   })
+  debug('[fetchResultsByTaxonomies] ...done')
 
   const rv = resultsFromApi(res.data)
 
