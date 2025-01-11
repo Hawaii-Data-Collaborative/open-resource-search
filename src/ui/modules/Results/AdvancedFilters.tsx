@@ -42,13 +42,17 @@ export function AdvancedFilters() {
   useEffect(() => {
     const fn = async () => {
       const appState = appStateRef.current
-      console.log('[onSearch]')
-      if (!(appState.search.query || appState.search.taxonomies)) {
+      // debug('[useEffect][results] selectedFilters=%j', selectedFilters)
+      // prettier-ignore
+      if (!(appState.search.query || appState.search.taxonomies || (appState.search.location && appState.search.radius))) {
+        debug('[useEffect][results] no form input, returning')
         return
       }
 
-      const params: any = {
-        q: appState.search.query
+      const params: any = {}
+
+      if (typeof appState.search.query === 'string' && appState.search.query.trim().length > 0) {
+        params.q = appState.search.query.trim()
       }
 
       if (appState.location.lat != null && appState.location.lng != null) {
