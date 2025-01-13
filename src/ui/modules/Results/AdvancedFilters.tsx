@@ -51,7 +51,9 @@ export function AdvancedFilters() {
 
       const params: any = {}
 
-      if (typeof appState.search.query === 'string' && appState.search.query.trim().length > 0) {
+      if (appState.search.taxonomies?.length > 0) {
+        params.taxonomies = appState.search.taxonomies.trim()
+      } else if (typeof appState.search.query === 'string' && appState.search.query.trim().length > 0) {
         params.q = appState.search.query.trim()
       }
 
