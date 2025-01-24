@@ -159,7 +159,7 @@ export function AdvancedFilters() {
         position: 'relative'
       }}
     >
-      <Box padding={1}>
+      <Box sx={{ padding: 1, paddingBottom: '50px', height: 'calc(100vh - 88px)', overflowY: 'auto' }}>
         <Flex alignItems="center" justifyContent="space-between">
           <Typography variant="body2" fontSize="0.8rem">
             Filters
