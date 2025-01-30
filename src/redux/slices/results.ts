@@ -79,6 +79,11 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
     params.radius = state.search.radius
   }
 
+  const filtersStr = state.search.filters != null ? JSON.stringify(state.search.filters) : ''
+  if (filtersStr.length > 0 && filtersStr !== '{}') {
+    params.filters = encodeURIComponent(filtersStr)
+  }
+
   debug('[fetchResultsByTaxonomies] making api call...')
   const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/search`, {
     params

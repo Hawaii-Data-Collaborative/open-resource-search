@@ -1,7 +1,10 @@
+import debugInit from 'debug'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useAppDispatch } from '../redux/store'
 import { setQuery, setLocation, setTaxonomies, setDistance, setFilters } from '../redux/slices/search'
+
+const debug = debugInit('app:hooks:useReduxOnRouteChange')
 
 export function useReduxOnRouteChange() {
   const dispatch = useAppDispatch()
@@ -31,6 +34,7 @@ export function useReduxOnRouteChange() {
     }
 
     if (filters != null && filters.length > 0) {
+      debug('calling setFilters')
       dispatch(setFilters(JSON.parse(filters as string)))
     }
   }, [location, terms, taxonomies, radius, filters, dispatch])
