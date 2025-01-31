@@ -17,6 +17,7 @@ export function useResultsFetch() {
   const terms = params.get('terms')
   const category_name = params.get('category_name')
   const radius = params.get('radius')
+  const filters = params.get('filters')
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
@@ -54,5 +55,6 @@ export function useResultsFetch() {
         logEvent('Search.Keyword', paramsObj)
       }
     })()
-  }, [location, terms, taxonomies, radius, category_name, dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, terms, taxonomies, radius, category_name, filters, dispatch])
 }

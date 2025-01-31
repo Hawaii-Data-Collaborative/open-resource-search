@@ -17,6 +17,7 @@ import Fees from './Fees'
 import Actions from './Actions'
 import { EmergencyInfo } from './EmergencyInfo'
 import FavoriteButton from '../../Result/FavoriteButton'
+import AgeGroup from './AgeGroup'
 
 type HitProps = {
   hit: any
@@ -46,6 +47,7 @@ export default function Hit({ hit }: HitProps) {
       <ServiceArea hit={hit} />
       <ApplicationProcess hit={hit} />
       <Languages hit={hit} />
+      <AgeGroup hit={hit} />
       <Eligibility hit={hit} />
       <Fees hit={hit} />
       <AgencyInfo hit={hit} />

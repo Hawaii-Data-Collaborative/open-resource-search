@@ -5,7 +5,7 @@ import Button from '../../elements/Button'
 import { useAppContext, useAuthContext, useFavsContext } from '../../../hooks'
 
 export default function FavoriteButton({ hit }) {
-  const { setState } = useAppContext()
+  const { setAppState } = useAppContext()
   const { user } = useAuthContext()
   const { spidMap, addFavorite, deleteFavorite } = useFavsContext()
 
@@ -19,7 +19,7 @@ export default function FavoriteButton({ hit }) {
         addFavorite(hit.id)
       }
     } else {
-      setState({ modal: 'LOGIN_PROMPT' })
+      setAppState({ modal: 'LOGIN_PROMPT' })
     }
   }
 

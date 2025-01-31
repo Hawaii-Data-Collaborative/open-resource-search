@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import {
   background,
   space,
@@ -16,7 +16,9 @@ import {
   BoxShadowProps,
   position,
   PositionProps,
-} from 'styled-system';
+  flexbox,
+  FlexboxProps
+} from 'styled-system'
 
 interface BoxProps
   extends SpaceProps,
@@ -26,7 +28,8 @@ interface BoxProps
     ColorProps,
     BordersProps,
     BoxShadowProps,
-    PositionProps {}
+    PositionProps,
+    FlexboxProps {}
 
 export const Box = styled.div<BoxProps>`
   box-sizing: border-box;
@@ -37,7 +40,8 @@ export const Box = styled.div<BoxProps>`
   ${background};
   ${borders};
   ${boxShadow};
-  ${position}
-`;
+  ${position};
+  ${flexbox};
+`
 
-export default Box;
+export default Box

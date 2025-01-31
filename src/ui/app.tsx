@@ -11,12 +11,11 @@ import {
   SignupPage
 } from './pages'
 import { link } from '../utils'
-import { AppContextProvider } from '../providers'
 import { Modals } from './modals'
 
 export function App() {
   return (
-    <AppContextProvider>
+    <>
       <div>
         <Switch>
           <Route exact path={link('/')}>
@@ -49,6 +48,6 @@ export function App() {
         </Switch>
       </div>
       <Modals />
-    </AppContextProvider>
+    </>
   )
 }
