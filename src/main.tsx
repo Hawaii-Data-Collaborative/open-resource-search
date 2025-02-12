@@ -2,7 +2,7 @@ import debug from 'debug'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { App } from './ui/app'
-import { isInternetExplorer, initMapLibraries } from './utils'
+import { initMapLibraries } from './utils'
 import { initAxios } from './services'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
@@ -15,17 +15,6 @@ import { AppContextProvider, AuthContextProvider } from './providers'
 
 // @ts-expect-error it's fine
 window._debug = debug
-
-// Import polyfills for IE11 support
-if (import.meta.env.MODE === 'production' && isInternetExplorer()) {
-  import('core-js')
-  require('es6-promise/auto')
-  require('isomorphic-fetch')
-  require('proxy-polyfill/proxy.min')
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const elementClosest = require('element-closest').default
-  elementClosest(window)
-}
 
 async function main() {
   initAxios()
