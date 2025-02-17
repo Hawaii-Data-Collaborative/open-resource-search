@@ -12,12 +12,21 @@ import { ThemeProvider } from '@mui/material'
 import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
 import { AppContextProvider, AuthContextProvider } from './providers'
+import { checkForBot } from './cloudflare'
 
 // @ts-expect-error it's fine
 window._debug = debug
 
 async function main() {
   initAxios()
+
+  if (window.location.pathname === '/' && !localStorage.getItem('didPassBotCheck')) {
+    const isBot = await checkForBot()
+    if (isBot) {
+      return
+    }
+  }
+
   await initMapLibraries()
 
   ReactDOM.createRoot(document.getElementById('root')).render(

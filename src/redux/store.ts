@@ -15,6 +15,7 @@ export const store = configureStore({
     page: pageReducer
   },
   middleware: new MiddlewareArray().concat(Thunk)
+  // devTools: true
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
