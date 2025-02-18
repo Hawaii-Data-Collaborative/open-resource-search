@@ -20,7 +20,9 @@ window._debug = debug
 async function main() {
   initAxios()
 
-  if (window.location.pathname === '/' && !localStorage.getItem('didPassBotCheck')) {
+  const { hostname, pathname } = window.location
+  const isRoot = pathname === (hostname === 'dev.hawaiidata.org' ? '/auw211' : '/')
+  if (isRoot && !localStorage.getItem('didPassBotCheck')) {
     const isBot = await checkForBot()
     if (isBot) {
       return
