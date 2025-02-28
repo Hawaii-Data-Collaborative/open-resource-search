@@ -7,6 +7,8 @@ import { useMeta, useResultsFetch, useTitle } from '../../hooks'
 import Results from '../modules/Results/Results'
 import Map from '../modules/Map/Map'
 import { FavsContextProvider } from '../../providers'
+import { setLocation } from '../../redux/slices/search'
+import { sessionStorage } from '../../services'
 
 export default function SearchPage() {
   const dispatch = useAppDispatch()
@@ -18,6 +20,10 @@ export default function SearchPage() {
 
   useEffect(() => {
     dispatch(setResults([]))
+
+    if (sessionStorage.has('lastLocation')) {
+      dispatch(setLocation(sessionStorage.get('lastLocation')))
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
