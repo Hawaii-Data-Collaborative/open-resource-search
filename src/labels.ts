@@ -4,9 +4,13 @@ import { getAppConfigValue } from './utils'
 
 const debug = debugInit('app:labels')
 
-let labels = {}
+interface Labels {
+  [key: string]: string
+}
 
-export function t(key: string) {
+let labels: Labels = {}
+
+export function t(key: string): string {
   const value = labels[key]
   return value != null ? value : key
 }

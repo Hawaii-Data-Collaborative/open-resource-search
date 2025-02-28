@@ -25,6 +25,7 @@ import { getAppConfigValue, link } from '../../../utils'
 import { useSuggestionsQuery } from '../../../hooks'
 import { getParentElements } from '../../../utils'
 import { appEmitter } from '../../../services'
+import { t } from '../../../labels'
 
 const debug = debugInit('app:ui:Search')
 
@@ -185,7 +186,7 @@ function Search({ variant = 'outlined' }: Props) {
             getOptionLabel={(o: any) => o.title || o.text || o.group || o}
             groupBy={(o: any) => o.group}
             renderInput={params => (
-              <TextField {...params} label={getAppConfigValue('search.label')} variant={variant} value={query} />
+              <TextField {...params} label={t(getAppConfigValue('search.label'))} variant={variant} value={query} />
             )}
           />
         </Flex>
