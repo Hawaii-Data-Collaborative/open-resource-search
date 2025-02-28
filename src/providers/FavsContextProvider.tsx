@@ -5,7 +5,6 @@ import { getAppConfigValue } from '../utils/getAppConfigValue'
 import { useAuthContext } from '../hooks/index'
 import { useAppDispatch } from '../redux/store'
 import { setResults } from '../redux/slices/results'
-import { resultsFromApi } from '../adapters/results'
 
 interface Props {
   force?: boolean
@@ -24,7 +23,7 @@ export function FavsContextProvider({ force, children }: Props) {
   useEffect(() => {
     const fn = async () => {
       const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
-      _favorites = resultsFromApi(res.data)
+      _favorites = res.data
       setFavorites(_favorites)
       if (force) {
         dispatch(setResults(_favorites))
