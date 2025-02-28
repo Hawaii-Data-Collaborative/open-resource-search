@@ -1,3 +1,4 @@
+import debugInit from 'debug'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
@@ -12,6 +13,8 @@ import { useMeta, usePageLoaded, useTitle } from '../../hooks'
 import { SearchLayout } from '../layouts'
 import { If } from '../elements'
 import { FavsContextProvider } from '../../providers'
+
+const debug = debugInit('app:pages:program')
 
 export default function SingleResultPage() {
   const params = useParams<{ id: string }>()
@@ -60,6 +63,7 @@ function SingleResultPageInner({ data }) {
       dispatch(setResults([data]))
 
       if (sessionStorage.has('lastLocation')) {
+        debug('calling fetchLocation')
         await dispatch(fetchLocation({ location: sessionStorage.get('lastLocation') }) as any)
       }
 

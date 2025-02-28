@@ -24,11 +24,7 @@ export function useResultsFetch() {
     ;(async function () {
       debug('calling fetchLocation')
       if (location != null && location.length > 0) {
-        await dispatch(
-          fetchLocation({
-            location: location as string
-          }) as any
-        )
+        await dispatch(fetchLocation({ location }) as any)
       } else {
         await dispatch(fetchLocation({ location: null }) as any)
       }

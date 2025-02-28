@@ -3,7 +3,6 @@ import debugInit from 'debug'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { getAppConfigValue } from '../../utils/getAppConfigValue'
 import { RootState } from '../../redux/store'
-import { resultsFromApi } from '../../adapters/results'
 import { favoritesFromApi } from '../../adapters/favorite'
 
 const debug = debugInit('app:redux:results')
@@ -54,8 +53,7 @@ export const fetchResults = createAsyncThunk('fetchResults', async (term: string
   })
   debug('[fetchResults] ...done')
 
-  const rv = resultsFromApi(res.data)
-
+  const rv = res.data
   return rv
 })
 
@@ -90,14 +88,14 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
   })
   debug('[fetchResultsByTaxonomies] ...done')
 
-  const rv = resultsFromApi(res.data)
-
+  const rv = res.data
   return rv
 })
 
 export const fetchFavorites = createAsyncThunk('fetchFavorites', async () => {
   const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
-  return resultsFromApi(res.data)
+  const rv = res.data
+  return rv
 })
 
 export const deleteFavoriteById = createAsyncThunk('deleteFavoriteById', async (id: string) => {
