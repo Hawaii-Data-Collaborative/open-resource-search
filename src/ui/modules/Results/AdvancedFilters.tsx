@@ -9,6 +9,7 @@ import { getAppConfigValue, stringifyParams } from '../../../utils'
 import { useHistory, useLocation } from 'react-router-dom'
 import { THEME_CONSTANTS } from '../../../constants'
 import { Flex } from '../../elements'
+import { t } from '../../../labels'
 
 const debug = debugInit('app:ui:AdvancedFilters')
 
@@ -162,7 +163,7 @@ export function AdvancedFilters() {
       <Box sx={{ padding: 1, paddingBottom: '50px', height: 'calc(100vh - 88px)', overflowY: 'auto' }}>
         <Flex alignItems="center" justifyContent="space-between">
           <Typography variant="body2" fontSize="0.8rem">
-            Filters
+            {t('Filters')}
           </Typography>
           <Button
             size="small"
@@ -170,13 +171,13 @@ export function AdvancedFilters() {
             disabled={selectedFilters == null || JSON.stringify(selectedFilters) === '{}'}
             sx={{ fontSize: '11px', padding: '2px 8px', minWidth: 'auto' }}
           >
-            Clear
+            {t('Clear')}
           </Button>
         </Flex>
         <Box display="flex" flexWrap="wrap" gap={0.7} pt={1} pb={1}>
           {facets?.openNow && (
             <QuickFilter
-              label="Open now"
+              label={t('Open now')}
               selected={selectedFilters.openNow}
               onClick={() => toggleQuickFilter('openNow', selectedFilters.openNow ? undefined : true)}
             />

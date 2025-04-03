@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Text from '../../../elements/Text'
 import Box from '../../../elements/Box'
 import { link } from '../../../../utils'
+import { t } from '../../../../labels'
 
 export default function Categories({ hit }) {
   if (!hit?.categories?.length) {
@@ -13,7 +14,7 @@ export default function Categories({ hit }) {
   return (
     <Box marginTop="32px" className="Categories">
       <Text variant="h2" color="primary">
-        Categories
+        {t('Categories')}
       </Text>
       <div className="chips">
         {hit.categories.map(c => (

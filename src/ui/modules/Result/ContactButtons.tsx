@@ -197,7 +197,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.phone}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>
@@ -241,7 +241,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.website}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>
@@ -285,7 +285,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.email}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>
@@ -329,7 +329,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.locationName}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>

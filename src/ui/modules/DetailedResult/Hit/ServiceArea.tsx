@@ -1,5 +1,6 @@
 import Text from '../../../elements/Text'
 import Box from '../../../elements/Box'
+import { t } from '../../../../labels'
 
 export default function ServiceArea({ hit }) {
   if (!hit?.serviceArea) {
@@ -9,7 +10,7 @@ export default function ServiceArea({ hit }) {
   return (
     <Box marginTop="32px">
       <Text variant="h2" color="primary">
-        Service Area
+        {t('Service Area')}
       </Text>
       <Text color="textSecondary">{hit.serviceArea}</Text>
     </Box>

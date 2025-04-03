@@ -1,5 +1,6 @@
 import Text from '../../../elements/Text'
 import Box from '../../../elements/Box'
+import { t } from '../../../../labels'
 
 export default function Schedule({ hit }) {
   if (!hit?.schedule) return null
@@ -7,7 +8,7 @@ export default function Schedule({ hit }) {
   return (
     <Box marginTop="32px">
       <Text variant="h2" color="primary" paddingBottom="8px">
-        Hours
+        {t('Hours')}
       </Text>
       <Text
         variant="div"

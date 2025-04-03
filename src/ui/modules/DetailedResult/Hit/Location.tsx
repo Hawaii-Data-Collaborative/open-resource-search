@@ -6,6 +6,7 @@ import Text from '../../../elements/Text'
 import { THEME_CONSTANTS as theme } from '../../../../constants'
 import { logEvent } from '../../../../analytics'
 import { onCopyToClipboard } from '../../../../utils'
+import { t } from '../../../../labels'
 
 let clipboard: ClipboardJS
 
@@ -44,7 +45,7 @@ export default function Location({ hit }) {
           {hit.locationName}
 
           <MuiButton style={{ minWidth: 35 }} onClick={onCopyClick} ref={onRef} data-clipboard-text={hit.locationName}>
-            <Tooltip title="Copy" style={{ color: '#ccc' }}>
+            <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
               <FileCopy fontSize="small" />
             </Tooltip>
           </MuiButton>
@@ -52,8 +53,12 @@ export default function Location({ hit }) {
       ) : (
         <>
           <Room style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
-          <span style={{ fontSize: '90%', color: '#999' }}>Address unavailable</span>
-          <Tooltip title="This location may be confidential or not open to the public. Please choose another provided contact method for this service.">
+          <span style={{ fontSize: '90%', color: '#999' }}>{t('Address unavailable')}</span>
+          <Tooltip
+            title={t(
+              'This location may be confidential or not open to the public. Please choose another provided contact method for this service.'
+            )}
+          >
             <Info
               fontSize="small"
               style={{

@@ -4,6 +4,7 @@ import Button from '../../../elements/Button'
 import Flex from '../../../elements/Flex'
 import { sessionStorage } from '../../../../services'
 import { link } from '../../../../utils'
+import { t } from '../../../../labels'
 
 export default function Actions({ setShare }) {
   const history = useHistory()
@@ -35,18 +36,18 @@ export default function Actions({ setShare }) {
     <Flex justifyContent="space-between" alignItems="center" marginBottom="16px">
       {showButton && buttonType === 'BACK' && (
         <Button onClick={goBack} noPrint color="primary">
-          Go Back
+          {t('Go Back')}
         </Button>
       )}
 
       {showButton && buttonType === 'HOME' && (
         <Button onClick={goHome} noPrint color="primary">
-          Back to Search
+          {t('Back to Search')}
         </Button>
       )}
 
       <Button noPrint color="primary" onClick={() => setShare(true)}>
-        Print &amp; Share
+        {t('Print & Share')}
       </Button>
     </Flex>
   )
