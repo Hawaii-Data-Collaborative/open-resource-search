@@ -4,6 +4,8 @@ import { AUTH_TOKEN } from '../constants'
 import { getAnalyticsUserId } from '../analytics'
 
 export function initAxios() {
+  axios.defaults.withCredentials = window.location.hostname === 'localhost'
+
   axios.interceptors.request.use(config => {
     const token = localStorage.get(AUTH_TOKEN)
     if (token) {
