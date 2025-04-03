@@ -15,10 +15,14 @@ export function t(key: string): string {
   return value != null ? value : key
 }
 
-async function fetchLabels() {
-  const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/labels`)
-  labels = res.data
-  debug('got %s labels', Object.keys(labels).length)
+export async function initLabels() {
+  const lang = localStorage.getItem('lang')
+  if (lang) {
+    debug('fetching labels for %s', lang)
+    const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/labels?lang=${lang}`)
+    labels = res.data
+    debug('got %s labels', Object.keys(labels).length)
+  } else {
+    debug('no language selected, using default')
+  }
 }
-
-fetchLabels()

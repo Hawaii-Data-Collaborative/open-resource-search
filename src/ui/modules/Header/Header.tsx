@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Box } from '@mui/material'
 import { CloseOutlined, MenuOutlined } from '@mui/icons-material'
 import Link from '../../elements/Link'
 import { THEME_CONSTANTS as theme } from '../../../constants'
 import { getAppConfigValue, link } from '../../../utils'
 import { useBannerQuery, useAuthContext, useAppContext } from '../../../hooks'
 import * as Styles from './Header.styles'
+import { LanguageSelector } from './LanguageSelector'
+import { t } from '../../../labels'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -58,13 +61,13 @@ export default function Header() {
         <Styles.HiddenOnMobile>
           <>
             <Link to={getAppConfigValue('homeUrl') || link('/')} rel="noreferrer" variant="normal" color="primary">
-              Home
+              {t('Home')}
             </Link>
 
             {desktopDivider}
 
             <Link to="https://auw211.org/" variant="normal" color="primary" external>
-              Main Site
+              {t('Main Site')}
             </Link>
 
             {user ? (
@@ -72,13 +75,13 @@ export default function Header() {
                 {desktopDivider}
 
                 <Link to={link('/profile')} variant="normal" color="primary">
-                  Profile
+                  {t('Profile')}
                 </Link>
 
                 {desktopDivider}
 
                 <Link to={link('/profile/favorites')} variant="normal" color="primary">
-                  Favorites
+                  {t('Favorites')}
                 </Link>
               </>
             ) : (
@@ -86,20 +89,24 @@ export default function Header() {
                 {desktopDivider}
 
                 <Link to={link('/profile/favorites')} variant="normal" color="primary" onClick={onFavClick}>
-                  Favorites
+                  {t('Favorites')}
                 </Link>
 
                 {desktopDivider}
 
                 <Link to={link('/login')} variant="normal" color="primary">
-                  Log in
+                  {t('Log in')}
                 </Link>
 
                 {desktopDivider}
 
                 <Link to={link('/signup')} variant="normal" color="primary">
-                  Sign up
+                  {t('Sign up')}
                 </Link>
+
+                <Box pl={2}>
+                  <LanguageSelector />
+                </Box>
               </>
             )}
           </>

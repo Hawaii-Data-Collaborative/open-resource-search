@@ -7,11 +7,12 @@ import { sessionStorage } from '../../services'
 import { setLocation } from '../../redux/slices/search'
 import { getAppConfigValue, getTextColorContrast, link } from '../../utils'
 import { DefaultLayout } from '../layouts'
-import { Box, Flex, If, Link, Text } from '../elements'
+import { Box, Flex, Link, Text } from '../elements'
 import { THEME_CONSTANTS as theme } from '../../constants'
 import Search from '../modules/Search/Search'
 import AlertSearch from '../modules/AlertSearch/AlertSearch'
 import Categories from '../modules/Categories/Categories'
+import { t } from '../../labels'
 
 export default function HomePage() {
   useTitle(getAppConfigValue('brandName'))
@@ -52,7 +53,7 @@ export default function HomePage() {
             }}
             marginBottom="16px"
           >
-            {getAppConfigValue('search.title')}
+            {t('What do you need help with?')}
           </Text>
 
           <Search />
@@ -71,34 +72,29 @@ export default function HomePage() {
                 }}
                 external
               >
-                Search tips
+                {t('Search tips')}
               </Link>
             </Text>
           </div>
 
-          <If value={getAppConfigValue('search.subtitle')}>
-            <Text color="textPrimary" marginTop="15px" fontWeight={300} fontSize="90%">
-              {getAppConfigValue('search.subtitle')}
-              {getAppConfigValue('search.subtitleUrlText') && ' '}
-              {getAppConfigValue('search.subtitleUrl') && getAppConfigValue('search.subtitleUrlText') && (
-                <Link
-                  to={getAppConfigValue('search.subtitleUrl')}
-                  rel="noreferrer noopener"
-                  variant="normal"
-                  color="textPrimary"
-                  style={{
-                    textDecoration: 'underline'
-                  }}
-                  external
-                >
-                  {getAppConfigValue('search.subtitleUrlText')}
-                </Link>
-              )}
-            </Text>
-          </If>
+          <Text color="textPrimary" marginTop="15px" fontWeight={300} fontSize="90%">
+            {t("To find resources outside of Hawaii, use your state's 211.") + ' '}
+            <Link
+              to={t('https://www.211.org')}
+              rel="noreferrer noopener"
+              variant="normal"
+              color="textPrimary"
+              style={{
+                textDecoration: 'underline'
+              }}
+              external
+            >
+              {t('Find your local 211.')}
+            </Link>
+          </Text>
 
           <Text color="textPrimary" fontWeight={300} fontSize="90%">
-            Providers:{' '}
+            {t('Providers:') + ' '}
             <Link
               to="https://auw211.org/providers/#new-agency"
               rel="noreferrer noopener"
@@ -110,9 +106,9 @@ export default function HomePage() {
               }}
               external
             >
-              Click here
-            </Link>{' '}
-            to add your programs to the 211 database.
+              {t('Click here')}
+            </Link>
+            {' ' + t('to add your programs to the 211 database.')}
           </Text>
         </Box>
       </Flex>

@@ -6,6 +6,7 @@ import Description from './Description'
 import ContactButtons from './ContactButtons'
 import MoreInformation from './MoreInformation'
 import FavoriteButton from './FavoriteButton'
+import { t } from '../../../labels'
 
 interface ILocation {
   lat?: number
@@ -58,7 +59,7 @@ export default function Hit({ hit, location }: HitProps) {
             justifyContent="center"
           >
             <Box backgroundColor="#fffb" p={1} pl={2} pr={2} borderRadius={4} fontSize={1}>
-              This program is no longer active
+              {t('This program is no longer active')}
             </Box>
           </Flex>
 

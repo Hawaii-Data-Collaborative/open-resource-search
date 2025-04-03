@@ -186,7 +186,7 @@ function Search({ variant = 'outlined' }: Props) {
             getOptionLabel={(o: any) => o.title || o.text || o.group || o}
             groupBy={(o: any) => o.group}
             renderInput={params => (
-              <TextField {...params} label={t(getAppConfigValue('search.label'))} variant={variant} value={query} />
+              <TextField {...params} label={t('Search resources in Hawaii')} variant={variant} value={query} />
             )}
           />
         </Flex>
@@ -207,7 +207,7 @@ function Search({ variant = 'outlined' }: Props) {
             renderInput={params => (
               <TextField
                 {...params}
-                label="Zip code, city, or address"
+                label={t('Zip code, city, or address')}
                 variant={variant}
                 InputProps={{
                   ...params.InputProps,
@@ -255,23 +255,23 @@ function Search({ variant = 'outlined' }: Props) {
         </Flex>
 
         <FormControl className="distance" variant={variant}>
-          <InputLabel htmlFor="radius-filter">Distance</InputLabel>
+          <InputLabel htmlFor="radius-filter">{t('Distance')}</InputLabel>
           <Select
             value={radius}
             onChange={setRadius}
-            label="Distance"
+            label={t('Distance')}
             inputProps={{
               name: 'radius',
               id: 'radius-filter'
             }}
           >
-            <MenuItem value="0">Any</MenuItem>
-            <MenuItem value="5">5 Miles</MenuItem>
-            <MenuItem value="10">10 Miles</MenuItem>
-            <MenuItem value="15">15 Miles</MenuItem>
-            <MenuItem value="30">30 Miles</MenuItem>
-            <MenuItem value="45">45 Miles</MenuItem>
-            <MenuItem value="60">60 Miles</MenuItem>
+            <MenuItem value="0">{t('Any')}</MenuItem>
+            <MenuItem value="5">{t('5 Miles')}</MenuItem>
+            <MenuItem value="10">{t('10 Miles')}</MenuItem>
+            <MenuItem value="15">{t('15 Miles')}</MenuItem>
+            <MenuItem value="30">{t('30 Miles')}</MenuItem>
+            <MenuItem value="45">{t('45 Miles')}</MenuItem>
+            <MenuItem value="60">{t('60 Miles')}</MenuItem>
           </Select>
         </FormControl>
 
@@ -287,7 +287,7 @@ function Search({ variant = 'outlined' }: Props) {
           noShadows
         >
           <SearchOutlined style={{ marginRight: '4px' }} />
-          Search
+          {t('Search')}
         </Button>
       </Flex>
     </form>

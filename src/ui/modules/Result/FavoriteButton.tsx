@@ -3,6 +3,7 @@ import './FavoriteButton.scss'
 import { FavoriteBorder, FavoriteOutlined } from '@mui/icons-material'
 import Button from '../../elements/Button'
 import { useAppContext, useAuthContext, useFavsContext } from '../../../hooks'
+import { t } from '../../../labels'
 
 export default function FavoriteButton({ hit }) {
   const { setAppState } = useAppContext()
@@ -32,7 +33,7 @@ export default function FavoriteButton({ hit }) {
       className="FavoriteButton"
       noPrint
       noShadows
-      aria-label="Remove from Favorites"
+      aria-label={t('Remove from Favorites')}
       style={{
         background: 'none',
         color: '#666',

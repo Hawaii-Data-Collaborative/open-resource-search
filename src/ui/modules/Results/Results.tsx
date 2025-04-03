@@ -10,6 +10,7 @@ import Search from '../../modules/Search/Search'
 import { Box } from '../../elements/Box'
 import { Text } from '../../elements/Text'
 import { AdvancedFilters } from './AdvancedFilters'
+import { t } from '../../../labels'
 
 const debug = debugInit('app:ui:Results')
 
@@ -43,7 +44,7 @@ export default function Results({ hideSearch }) {
                   paddingBottom="2px"
                   paddingTop="5px"
                 >
-                  {`Taxonomy Search: ${taxonomies}`}
+                  {`${t('Taxonomy Search:')} ${taxonomies}`}
                 </Text>
                 <div
                   style={{
