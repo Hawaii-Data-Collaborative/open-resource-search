@@ -5,6 +5,7 @@ import { usePageLoaded, useTitle, useMeta } from '../../hooks'
 import { Box, Button, Flex, If, Input, Label, Link, Text } from '../elements'
 import { localStorage, toast } from '../../services'
 import { AUTH_TOKEN } from '../../constants'
+import { t } from '../../labels'
 
 export default function PasswordReset() {
   const [errorMessage, setErrorMessage] = useState('')
@@ -81,10 +82,10 @@ export default function PasswordReset() {
 
         <If value={step === 'ENTER_EMAIL'}>
           <Text variant="h2" color="textSecondary" marginBottom="16px">
-            Password Reset
+            {t('Password Reset')}
           </Text>
           <Label id="email-label" htmlFor="email" marginBottom="8px" color="textSecondary">
-            Email
+            {t('Email')}
           </Label>
           <Input
             fullWidth
@@ -100,16 +101,16 @@ export default function PasswordReset() {
             onChange={e => setEmail(e.target.value)}
           />
           <Button type="submit" color="primary" disabled={saving || email.trim().length < 3}>
-            Send Code
+            {t('Send Code')}
           </Button>
         </If>
 
         <If value={step === 'ENTER_CODE'}>
           <Text variant="h2" color="textSecondary" marginBottom="16px">
-            Enter six digit code sent to your email
+            {t('Enter six digit code sent to your email')}
           </Text>
           <Label id="email-label" htmlFor="email" marginBottom="8px" color="textSecondary">
-            Code
+            {t('Code')}
           </Label>
           <Input
             fullWidth
@@ -125,16 +126,16 @@ export default function PasswordReset() {
             onChange={e => setCode(e.target.value)}
           />
           <Button type="submit" color="primary" disabled={saving || code.length !== 6}>
-            Verify Code
+            {t('Verify Code')}
           </Button>
         </If>
 
         <If value={step === 'ENTER_PASSWORD'}>
           <Text variant="h2" color="textSecondary" marginBottom="16px">
-            Change Password
+            {t('Change Password')}
           </Text>
           <Label id="password-label" htmlFor="password" marginBottom="8px" color="textSecondary">
-            New Password
+            {t('New Password')}
           </Label>
           <Input
             fullWidth
@@ -150,7 +151,7 @@ export default function PasswordReset() {
           />
 
           <Label id="password2-label" htmlFor="password2" color="textSecondary" marginBottom="8px">
-            Confirm Password
+            {t('Confirm Password')}
           </Label>
           <Input
             fullWidth
@@ -166,20 +167,20 @@ export default function PasswordReset() {
           />
 
           <Button type="submit" color="primary" disabled={saving || password.length < 6 || password !== password2}>
-            Change Password
+            {t('Change Password')}
           </Button>
         </If>
       </form>
 
       <Text paragraph>
-        Want to sign in?{' '}
+        {t('Want to sign in?')}{' '}
         <Link color="textPrimary" to="/login">
-          Log In
+          {t('Log In')}
         </Link>
       </Text>
       <Text>
         <Link color="textPrimary" to={link('/')}>
-          Back to home page
+          {t('Back to home page')}
         </Link>
       </Text>
     </Flex>
