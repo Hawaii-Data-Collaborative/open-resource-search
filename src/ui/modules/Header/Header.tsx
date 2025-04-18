@@ -144,7 +144,7 @@ export default function Header() {
                     color="primary"
                     style={{ paddingTop: 10, paddingBottom: 10 }}
                   >
-                    Home
+                    {t('Home')}
                   </Link>
 
                   <Link
@@ -154,7 +154,7 @@ export default function Header() {
                     style={{ paddingTop: 10, paddingBottom: 10 }}
                     external
                   >
-                    Main Site
+                    {t('Main Site')}
                   </Link>
 
                   {user ? (
@@ -165,7 +165,7 @@ export default function Header() {
                         color="primary"
                         style={{ paddingTop: 10, paddingBottom: 10 }}
                       >
-                        Profile
+                        {t('Profile')}
                       </Link>
 
                       <Link
@@ -174,7 +174,7 @@ export default function Header() {
                         color="primary"
                         style={{ paddingTop: 10, paddingBottom: 10 }}
                       >
-                        Favorites
+                        {t('Favorites')}
                       </Link>
                     </>
                   ) : (
@@ -186,7 +186,7 @@ export default function Header() {
                         style={{ paddingTop: 10, paddingBottom: 10 }}
                         onClick={onFavClick}
                       >
-                        Favorites
+                        {t('Favorites')}
                       </Link>
 
                       <Link
@@ -195,7 +195,7 @@ export default function Header() {
                         color="primary"
                         style={{ paddingTop: 10, paddingBottom: 10 }}
                       >
-                        Log in
+                        {t('Log in')}
                       </Link>
 
                       <Link
@@ -204,7 +204,7 @@ export default function Header() {
                         color="primary"
                         style={{ paddingTop: 10, paddingBottom: 10 }}
                       >
-                        Sign up
+                        {t('Sign up')}
                       </Link>
                     </>
                   )}
