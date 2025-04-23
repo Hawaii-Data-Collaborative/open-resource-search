@@ -231,7 +231,7 @@ export function AdvancedFilters() {
             textAlign: 'center'
           }}
         >
-          Loading...
+          {t('Loading...')}
         </Box>
       )}
     </Box>
