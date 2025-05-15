@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useEffect, useMemo, useState } from 'react'
 import { FavsContext } from '../context'
-import { getAppConfigValue } from '../utils/getAppConfigValue'
 import { useAuthContext } from '../hooks/index'
 import { useAppDispatch } from '../redux/store'
 import { setResults } from '../redux/slices/results'
@@ -22,14 +21,14 @@ export function FavsContextProvider({ force, children }: Props) {
 
   useEffect(() => {
     const fn = async () => {
-      const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
+      const res = await axios.get(`/favorite`)
       _favorites = res.data
       setFavorites(_favorites)
       if (force) {
         dispatch(setResults(_favorites))
       }
 
-      const res2 = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite/spids`)
+      const res2 = await axios.get(`/favorite/spids`)
       setSpids(res2.data)
       _spids = res2.data
     }
@@ -48,12 +47,12 @@ export function FavsContextProvider({ force, children }: Props) {
     }
 
     const addFavorite = async (id: string) => {
-      await axios.post(`${getAppConfigValue('apiUrl')}/api/v1/favorite`, { id })
+      await axios.post(`/favorite`, { id })
       setSpids([...spids, id])
     }
 
     const deleteFavorite = async (id: string) => {
-      await axios.delete(`${getAppConfigValue('apiUrl')}/api/v1/favorite/${id}`)
+      await axios.delete(`/favorite/${id}`)
       setSpids(spids.filter(id2 => id2 !== id))
     }
 

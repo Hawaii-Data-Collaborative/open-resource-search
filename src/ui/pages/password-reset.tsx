@@ -27,18 +27,18 @@ export default function PasswordReset() {
     try {
       setSaving(true)
       if (step === 'ENTER_EMAIL') {
-        const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/send-code`
+        const url = `/auth/send-code`
         const res = await axios.post(url, { email: email.trim() })
         setSaving(false)
         setToken(res.data)
         setStep('ENTER_CODE')
       } else if (step === 'ENTER_CODE') {
-        const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/check-code`
+        const url = `/auth/check-code`
         await axios.post(url, { code: code.trim(), token })
         setSaving(false)
         setStep('ENTER_PASSWORD')
       } else if (step === 'ENTER_PASSWORD') {
-        const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/reset-password`
+        const url = `/auth/reset-password`
         const res = await axios.post(url, { password, token })
         localStorage.set(AUTH_TOKEN, res.data.token)
         toast('Your password was updated', 'success')

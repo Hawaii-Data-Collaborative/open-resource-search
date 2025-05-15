@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { getAppConfigValue } from '../utils'
 import { getAnalyticsUserId } from '../analytics'
 import { useAppSelector } from '../redux/store'
 
@@ -11,7 +10,7 @@ export function useSuggestionsQuery() {
   useEffect(() => {
     const fn = async () => {
       // prettier-ignore
-      const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/suggestions?userId=${getAnalyticsUserId()}&searchText=${searchText}`);
+      const res = await axios.get(`/suggestions?userId=${getAnalyticsUserId()}&searchText=${searchText}`);
       setData(res.data)
     }
 

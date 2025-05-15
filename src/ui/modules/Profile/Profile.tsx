@@ -7,7 +7,7 @@ import Box from '../../elements/Box'
 import Button from '../../elements/Button'
 import { useAuthContext } from '../../../hooks'
 import { localStorage } from '../../../services'
-import { getAppConfigValue, link } from '../../../utils'
+import { link } from '../../../utils'
 
 function Profile() {
   const history = useHistory()
@@ -33,7 +33,7 @@ function Profile() {
 
   const deleteAccount = async () => {
     if (confirm('Are you sure?')) {
-      const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/delete-account`
+      const url = `/auth/delete-account`
       const res = await axios.post(url)
       if (res.data?.message) {
         setMessage(res.data.message)

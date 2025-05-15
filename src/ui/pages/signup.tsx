@@ -25,7 +25,7 @@ export default function SignUpPage() {
     setSaving(true)
 
     try {
-      const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/signup`
+      const url = `/auth/signup`
       const res = await axios.post(url, {
         email: email.trim(),
         password: password.trim()

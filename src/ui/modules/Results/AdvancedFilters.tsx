@@ -5,7 +5,7 @@ import { Box, Button, Checkbox, Chip, FormControlLabel, Stack, Typography } from
 import { useAppContext } from '../../../hooks'
 import { useAppDispatch, useAppSelector } from '../../../redux/store'
 import { setFilters } from '../../../redux/slices/search'
-import { getAppConfigValue, stringifyParams } from '../../../utils'
+import { stringifyParams } from '../../../utils'
 import { useHistory, useLocation } from 'react-router-dom'
 import { THEME_CONSTANTS } from '../../../constants'
 import { Flex } from '../../elements'
@@ -72,7 +72,7 @@ export function AdvancedFilters() {
       }
 
       // prettier-ignore
-      const url = `${getAppConfigValue('apiUrl')}/api/v1/search/facets?${stringifyParams(params)}`
+      const url = `/search/facets?${stringifyParams(params)}`
       if (lastUrlRef.current === url) {
         debug('skipping fetch')
         return

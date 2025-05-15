@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { AuthContext } from '../context'
 import { AUTH_TOKEN } from '../constants/index'
 import { localStorage } from '../services'
-import { getAppConfigValue } from '../utils/getAppConfigValue'
 
 const debug = debugInit('app:providers:AuthContextProvider')
 
@@ -21,7 +20,7 @@ export function AuthContextProvider({ children }) {
       if (token) {
         try {
           // prettier-ignore
-          const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/auth/session`);
+          const res = await axios.get(`/auth/session`);
           user = res.data.user
         } catch (err) {
           console.error(err)

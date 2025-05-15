@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { getAppConfigValue, makeObservable } from '../utils'
+import { makeObservable } from '../utils'
 import { sessionStorage } from '../services'
 
 const cachedQueries = makeObservable(sessionStorage.get('queryCache') || {})
@@ -20,7 +20,7 @@ export function useCachedTaxonomies(key) {
     ;(async function () {
       if (key != null && key.length > 0 && query[key] == null) {
         const currentKey = key
-        const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/taxonomy?q=${currentKey}`)
+        const res = await axios.get(`/taxonomy?q=${currentKey}`)
         const newCache = {
           ...query,
           [currentKey]: res.data?.body?.hits?.hits ?? []

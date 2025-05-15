@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getAppConfigValue } from './utils'
 
 let user
 
@@ -24,7 +23,7 @@ export function logEvent(eventName, data) {
     window.gtag('event', eventName, data)
   }
 
-  const url = `${getAppConfigValue('apiUrl')}/api/v1/user-activity`
+  const url = `/user-activity`
   axios.post(url, { userId: user.id, event: eventName, data })
 }
 

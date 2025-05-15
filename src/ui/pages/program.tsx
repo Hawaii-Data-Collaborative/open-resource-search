@@ -25,7 +25,7 @@ export default function SingleResultPage() {
   useEffect(() => {
     async function fn() {
       try {
-        const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/service-at-location/${params.id}`)
+        const res = await axios.get(`/service-at-location/${params.id}`)
         const data = res.data
         setData(data)
         setLoading(false)

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getAppConfigValue } from './utils'
 
 const CLOUDFLARE_PUBLIC_KEY = '0x4AAAAAAA9NIp2zk_Ht0wtv'
 
@@ -48,7 +47,7 @@ async function runCheck() {
         sitekey: CLOUDFLARE_PUBLIC_KEY,
         callback: async token => {
           console.log(`Challenge Success ${token}`)
-          const url = getAppConfigValue('apiUrl') + '/api/v1/auth/verify-token'
+          const url = '/auth/verify-token'
           await axios.post(url, { token })
           localStorage.setItem('didPassBotCheck', '1')
           document.body.removeChild(div)

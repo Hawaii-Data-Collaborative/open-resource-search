@@ -1,7 +1,6 @@
 import axios from 'axios'
 import debugInit from 'debug'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { getAppConfigValue } from '../../utils/getAppConfigValue'
 import { RootState } from '../../redux/store'
 import { favoritesFromApi } from '../../adapters/favorite'
 
@@ -48,7 +47,7 @@ export const fetchResults = createAsyncThunk('fetchResults', async (term: string
   }
 
   debug('[fetchResults] making api call...')
-  const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/search`, {
+  const res = await axios.get(`/search`, {
     params
   })
   debug('[fetchResults] ...done')
@@ -83,7 +82,7 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
   }
 
   debug('[fetchResultsByTaxonomies] making api call...')
-  const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/search`, {
+  const res = await axios.get(`/search`, {
     params
   })
   debug('[fetchResultsByTaxonomies] ...done')
@@ -93,13 +92,13 @@ export const fetchResultsByTaxonomies = createAsyncThunk('fetchResultsByTaxonomi
 })
 
 export const fetchFavorites = createAsyncThunk('fetchFavorites', async () => {
-  const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/favorite`)
+  const res = await axios.get(`/favorite`)
   const rv = res.data
   return rv
 })
 
 export const deleteFavoriteById = createAsyncThunk('deleteFavoriteById', async (id: string) => {
-  const res = await axios.delete(`${getAppConfigValue('apiUrl')}/api/v1/favorite/${id}`)
+  const res = await axios.delete(`/favorite/${id}`)
 
   return favoritesFromApi(res.data)
 })

@@ -35,7 +35,7 @@ export default function LoginPage() {
     e.preventDefault()
 
     try {
-      const url = `${getAppConfigValue('apiUrl')}/api/v1/auth/login`
+      const url = `/auth/login`
       const res = await axios.post(url, {
         email: email.trim(),
         password: password.trim()

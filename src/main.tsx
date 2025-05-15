@@ -1,3 +1,4 @@
+import axios from 'axios'
 import debug from 'debug'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -13,6 +14,9 @@ import { materialUiTheme } from './styles/theme'
 import { Toast } from './ui/modules/Toast/Toast'
 import { AppContextProvider, AuthContextProvider } from './providers'
 import { checkForBot } from './cloudflare'
+
+const VITE_API_URL = import.meta.env.VITE_API_URL ?? ''
+axios.defaults.baseURL = VITE_API_URL + '/api/v1'
 
 // @ts-expect-error it's fine
 window._debug = debug

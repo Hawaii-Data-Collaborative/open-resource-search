@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getAppConfigValue } from '../utils'
 
 export function useCategoriesQuery() {
   const [data, setData] = useState([])
@@ -8,7 +7,7 @@ export function useCategoriesQuery() {
   useEffect(() => {
     const fn = async () => {
       // prettier-ignore
-      const res = await axios.get(`${getAppConfigValue('apiUrl')}/api/v1/categories`);
+      const res = await axios.get(`/categories`);
       setData(res.data)
     }
 
