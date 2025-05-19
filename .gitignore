@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 dist
+dist-old
 dist-ssr
 *.local
 
@@ -25,4 +26,6 @@ dist-ssr
 
 .next
 .env
+.env.production
+.env.development
 dist.tar.gz
