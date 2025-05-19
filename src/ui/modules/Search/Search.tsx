@@ -41,8 +41,7 @@ function Search({ variant = 'outlined' }: Props) {
   const taxonomies = useAppSelector(state => state.search.taxonomies)
   const radius = useAppSelector(state => state.search.radius)
   const filters = useAppSelector(state => state.search.filters)
-  const suggestions = useSuggestionsQuery()
-  const newHits = suggestions
+  const { data: newHits, loading: loadingSuggestions } = useSuggestionsQuery()
 
   const onChange = (_e, v) => {
     // console.log('[onChange] v=%o e=%o', v, e);
@@ -174,6 +173,7 @@ function Search({ variant = 'outlined' }: Props) {
         <Flex flex={2} marginRight={[0, '4px']} marginLeft={[0, '4px']} marginBottom={[0, '8px']}>
           <StyledAutocomplete
             id="search-query-field"
+            loading={loadingSuggestions}
             options={newHits}
             freeSolo
             fullWidth
