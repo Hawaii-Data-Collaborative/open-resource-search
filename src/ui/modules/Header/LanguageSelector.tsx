@@ -18,7 +18,7 @@ function changeLanguage(language: string) {
   window.location.reload()
 }
 
-export function LanguageSelector() {
+export function LanguageSelector({ mobile = false }: { mobile?: boolean }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [selectedLanguageCode, setSelectedLanguageCode] = useState(localStorage.getItem('lang') ?? 'en')
   const selectedLanguage = languages.find(language => language.code === selectedLanguageCode)
@@ -54,14 +54,10 @@ export function LanguageSelector() {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
+        anchorReference={mobile ? 'anchorPosition' : 'anchorEl'}
+        anchorPosition={mobile ? { top: 100, left: window.innerWidth / 2 } : undefined}
+        anchorOrigin={mobile ? { vertical: 'top', horizontal: 'center' } : { vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={mobile ? { vertical: 'top', horizontal: 'center' } : { vertical: 'top', horizontal: 'right' }}
       >
         {languages.map(language => (
           <MenuItem

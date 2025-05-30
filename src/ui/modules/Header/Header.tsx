@@ -103,12 +103,12 @@ export default function Header() {
                 <Link to={link('/signup')} variant="normal" color="primary">
                   {t('Sign up')}
                 </Link>
-
-                <Box pl={2}>
-                  <LanguageSelector />
-                </Box>
               </>
             )}
+
+            <Box pl={2}>
+              <LanguageSelector />
+            </Box>
           </>
         </Styles.HiddenOnMobile>
 
@@ -208,6 +208,10 @@ export default function Header() {
                       </Link>
                     </>
                   )}
+
+                  <Box>
+                    <LanguageSelector mobile />
+                  </Box>
                 </div>
               </motion.div>
             )}
