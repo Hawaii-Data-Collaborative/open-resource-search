@@ -8,6 +8,7 @@ import { usePageLoaded, useAuthContext, useTitle, useMeta } from '../../hooks'
 import { AUTH_TOKEN } from '../../constants'
 import { localStorage, toastErr } from '../../services'
 import { Box, Button, If, Input, Label, Link, Text } from '../elements'
+import { t } from '../../labels'
 
 export default function LoginPage() {
   const history = useHistory()
@@ -117,7 +118,7 @@ export default function LoginPage() {
                   boxShadow: 'none'
                 }}
               >
-                Resend Verification?
+                {t('Resend Verification?')}
               </Button>
             </If>
           </Box>
@@ -136,11 +137,11 @@ export default function LoginPage() {
         </If>
 
         <Text variant="h2" color="textSecondary" marginBottom="16px">
-          Sign In
+          {t('Sign In')}
         </Text>
 
         <Label id="email-label" htmlFor="email" marginBottom="8px" color="textSecondary">
-          Email
+          {t('Email')}
         </Label>
         <Input
           fullWidth
@@ -157,7 +158,7 @@ export default function LoginPage() {
         />
 
         <Label id="password-label" htmlFor="password" color="textSecondary" marginBottom="8px">
-          Password
+          {t('Password')}
         </Label>
         <Input
           fullWidth
@@ -173,24 +174,24 @@ export default function LoginPage() {
         />
 
         <Button type="submit" color="primary" disabled={saving || !valid} fullWidth>
-          Sign In
+          {t('Sign In')}
         </Button>
 
         <Text textAlign="center" variant="h3" marginTop="8px">
           <Link color="primary" to={link('/password-reset')}>
-            Forgot your password?
+            {t('Forgot your password?')}
           </Link>
         </Text>
       </form>
       <Text paragraph>
-        Don&apos;t have an account?{' '}
+        {t("Don't have an account?")}{' '}
         <Link color="textPrimary" to={link('/signup')}>
-          Sign Up
+          {t('Sign Up')}
         </Link>
       </Text>
       <Text>
         <Link color="textPrimary" to={link('/')}>
-          Back to home page
+          {t('Back to home page')}
         </Link>
       </Text>
     </AuthLayout>

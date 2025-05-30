@@ -5,13 +5,14 @@ import Link from '../../elements/Link'
 import { THEME_CONSTANTS as theme } from '../../../constants'
 import FeedbackMargin from '../FeedbackButton/FeedbackMargin'
 import { getAppConfigValue, getTextColorContrast } from '../../../utils'
+import { t } from '../../../labels'
 
 export default function SiteFooter() {
   return (
     <Box backgroundColor={theme.PRIMARY_COLOR} padding="16px">
       <Flex maxWidth={1200} margin="0 auto" justifyContent="space-between" alignItems="center">
         <Text variant="small" style={{ color: getTextColorContrast(theme.PRIMARY_COLOR) }}>
-          &copy; 2021, {getAppConfigValue('brandName')}. All rights reserved.
+          &copy; 2021, {getAppConfigValue('brandName')}. {t('All rights reserved.')}
         </Text>
         <Box>
           <Link
@@ -23,7 +24,7 @@ export default function SiteFooter() {
               marginRight: 20
             }}
           >
-            Sitemap
+            {t('Sitemap')}
           </Link>
           <Link
             external
@@ -34,10 +35,10 @@ export default function SiteFooter() {
               marginRight: 20
             }}
           >
-            Administrators
+            {t('Administrators')}
           </Link>
           <Link to="/privacy-policy" target="_blank" style={{ color: getTextColorContrast(theme.PRIMARY_COLOR) }}>
-            Privacy Policy
+            {t('Privacy Policy')}
           </Link>
         </Box>
       </Flex>

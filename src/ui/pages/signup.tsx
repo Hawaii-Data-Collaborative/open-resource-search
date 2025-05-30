@@ -7,6 +7,7 @@ import { AUTH_TOKEN } from '../../constants'
 import { localStorage, toastErr } from '../../services'
 import { AuthLayout } from '../layouts'
 import { Button, Input, Label, Link, Text } from '../elements'
+import { t } from '../../labels'
 
 export default function SignUpPage() {
   const history = useHistory()
@@ -17,7 +18,7 @@ export default function SignUpPage() {
   const { setUser } = useAuthContext()
 
   usePageLoaded()
-  useTitle(`${getAppConfigValue('brandName')} | Sign Up`)
+  useTitle(`${getAppConfigValue('brandName')} | ${t('Sign Up')}`)
   useMeta({ name: 'description', content: getAppConfigValue('meta.description') })
 
   const signUp = async e => {
@@ -62,7 +63,7 @@ export default function SignUpPage() {
         }}
       >
         <Text color="textSecondary" variant="h2" marginBottom="16px">
-          Sign Up
+          {t('Sign Up')}
         </Text>
 
         {/* <Flex marginBottom="16px">
@@ -112,7 +113,7 @@ export default function SignUpPage() {
         </Flex> */}
 
         <Label id="email-label" htmlFor="email" color="textSecondary" marginBottom="8px">
-          Email
+          {t('Email')}
         </Label>
 
         <Input
@@ -130,7 +131,7 @@ export default function SignUpPage() {
         />
 
         <Label id="password-label" htmlFor="password" color="textSecondary" marginBottom="8px">
-          Password
+          {t('Password')}
         </Label>
         <Input
           fullWidth
@@ -146,7 +147,7 @@ export default function SignUpPage() {
         />
 
         <Label id="password2-label" htmlFor="password2" color="textSecondary" marginBottom="8px">
-          Confirm Password
+          {t('Confirm Password')}
         </Label>
         <Input
           fullWidth
@@ -162,18 +163,18 @@ export default function SignUpPage() {
         />
 
         <Button type="submit" color="primary" disabled={saving || !valid} fullWidth>
-          Sign Up
+          {t('Sign Up')}
         </Button>
       </form>
       <Text paragraph>
-        Already have an account?{' '}
+        {t('Already have an account?')}{' '}
         <Link color="textPrimary" to={link('/login')}>
-          Sign In
+          {t('Sign In')}
         </Link>
       </Text>
       <Text>
         <Link color="textPrimary" to={link('/')}>
-          Back to home page
+          {t('Back to home page')}
         </Link>
       </Text>
     </AuthLayout>

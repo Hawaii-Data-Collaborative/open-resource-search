@@ -1,5 +1,5 @@
 import Result from '../Result/Hit'
-
+import { t } from '../../../labels'
 export default function ResultsLoader({ results, location }) {
   return (
     <>
@@ -24,11 +24,11 @@ export default function ResultsLoader({ results, location }) {
             textAlign: 'center'
           }}
         >
-          No results. If you are having a hard time finding what you&apos;re looking for,{' '}
+          {t("No results. If you are having a hard time finding what you're looking for,")}
           <a href="https://auw211.org/tips-for-search/" target="_blank" rel="noreferrer noopener">
-            check out our tips page
+            {t('check out our tips page')}
           </a>{' '}
-          or call 211.
+          {t('or call 211.')}
         </div>
       ) : null}
     </>

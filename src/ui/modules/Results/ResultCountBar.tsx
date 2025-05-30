@@ -5,7 +5,7 @@ import { getTextColorContrast } from '../../../utils'
 import { IconButton, Tooltip } from '@mui/material'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import { useAppContext } from '../../../hooks'
-
+import { t } from '../../../labels'
 export default function ResultCountBar({ results }) {
   const { showAdvancedFilters, setAppState } = useAppContext()
 
@@ -22,10 +22,10 @@ export default function ResultCountBar({ results }) {
       justifyContent="space-between"
     >
       <Text variant="body2" style={{ color: getTextColorContrast(theme.PRIMARY_COLOR) }}>
-        {results.isLoading && 'Loading results...'}
-        {!results.isLoading && <>Results: {results.data.length}</>}
+        {results.isLoading && t('Loading results...')}
+        {!results.isLoading && <>{`${t('Results:')} ${results.data.length}`}</>}
       </Text>
-      <Tooltip title={showAdvancedFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}>
+      <Tooltip title={showAdvancedFilters ? t('Hide Advanced Filters') : t('Show Advanced Filters')}>
         <IconButton size="small" onClick={onClick}>
           <FilterListIcon sx={{ fill: '#fff' }} />
         </IconButton>

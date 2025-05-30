@@ -8,6 +8,7 @@ import Button from '../../elements/Button'
 import { useAuthContext } from '../../../hooks'
 import { localStorage } from '../../../services'
 import { getAppConfigValue, link } from '../../../utils'
+import { t } from '../../../labels'
 
 function Profile() {
   const history = useHistory()
@@ -56,12 +57,12 @@ function Profile() {
             <Box>{user.email}</Box>
             <Box paddingTop={3}>
               <Button color="primary" style={{ display: 'inline-flex' }} onClick={logout}>
-                Log out
+                {t('Log out')}
               </Button>
             </Box>
             <Box paddingTop={4}>
               <Button color="secondary" style={{ display: 'inline-flex' }} onClick={deleteAccount}>
-                Delete account
+                {t('Delete account')}
               </Button>
             </Box>
           </>

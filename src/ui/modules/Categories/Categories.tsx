@@ -2,6 +2,7 @@ import Text from '../../elements/Text'
 import Category from './Category/Category'
 import { CategoriesContainer, Container } from './Categories.styles'
 import { useCategoriesQuery } from '../../../hooks'
+import { t } from '../../../labels'
 
 export default function Categories() {
   const categories = useCategoriesQuery()
@@ -10,7 +11,7 @@ export default function Categories() {
     <Container>
       <CategoriesContainer>
         <Text variant="h2" color="primary" paragraph>
-          Search Service by Category
+          {t('Search Service by Category')}
         </Text>
       </CategoriesContainer>
 

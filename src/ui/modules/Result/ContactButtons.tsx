@@ -9,6 +9,7 @@ import Link from '../../elements/Link'
 import { THEME_CONSTANTS as theme } from '../../../constants'
 import { logEvent } from '../../../analytics'
 import { getWebsiteUrl, onCopyToClipboard } from '../../../utils'
+import { t } from '../../../labels'
 
 const debug = debugInit('app:ui:modules:ContactButtons')
 
@@ -33,7 +34,7 @@ export default function ContactButtons({ hit }) {
             })
           }}
         >
-          <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Call
+          <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Call')}
         </Button>
       )}
 
@@ -52,7 +53,7 @@ export default function ContactButtons({ hit }) {
             })
           }}
         >
-          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Website
+          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Website')}
         </Button>
       )}
 
@@ -70,8 +71,7 @@ export default function ContactButtons({ hit }) {
             })
           }}
         >
-          <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
-          Directions
+          <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Directions')}
         </Button>
       ) : null}
 
@@ -179,7 +179,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onPhoneClick}
             >
-              <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Call from this device
+              <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Call from this device')}
             </Link>
 
             <div
@@ -197,7 +197,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.phone}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>
@@ -223,7 +223,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onWebsiteClick}
             >
-              <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Open in new tab
+              <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Open in new tab')}
             </Link>
 
             <div
@@ -241,7 +241,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.website}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>
@@ -267,7 +267,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onEmailClick}
             >
-              <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Send Email
+              <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Send Email')}
             </Link>
 
             <div
@@ -285,7 +285,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.email}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>
@@ -311,8 +311,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
               justifyContent="center"
               onClick={onDirectionsClick}
             >
-              <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
-              Directions
+              <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Directions')}
             </Link>
 
             <div
@@ -330,7 +329,7 @@ export function ContactButtonsDialog({ action, hit, onClose }) {
                   ref={onRef}
                   data-clipboard-text={hit.locationName}
                 >
-                  <Tooltip title="Copy" style={{ color: '#ccc' }}>
+                  <Tooltip title={t('Copy')} style={{ color: '#ccc' }}>
                     <FileCopy fontSize="small" />
                   </Tooltip>
                 </MuiButton>

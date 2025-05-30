@@ -6,6 +6,7 @@ import { Button } from '../../../elements/Button'
 import { ContactButtonsDialog } from '../../Result/ContactButtons'
 import { getWebsiteUrl } from '../../../../utils'
 import { DontPrintContainer } from './Hit.styles'
+import { t } from '../../../../labels'
 
 export default function ContactButtons({ hit }) {
   const [action, setAction] = useState(null)
@@ -28,7 +29,7 @@ export default function ContactButtons({ hit }) {
             })
           }}
         >
-          <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Call
+          <Phone style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Call')}
         </Button>
       )}
 
@@ -47,7 +48,7 @@ export default function ContactButtons({ hit }) {
             })
           }}
         >
-          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Website
+          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Website')}
         </Button>
       )}
 
@@ -66,7 +67,7 @@ export default function ContactButtons({ hit }) {
             })
           }}
         >
-          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> Email
+          <Language style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} /> {t('Email')}
         </Button>
       )}
 
@@ -85,7 +86,7 @@ export default function ContactButtons({ hit }) {
           }}
         >
           <Navigation style={{ marginRight: '4px', color: theme.SECONDARY_COLOR }} />
-          Directions
+          {t('Directions')}
         </Button>
       ) : null}
 
