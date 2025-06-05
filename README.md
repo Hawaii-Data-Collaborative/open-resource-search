@@ -1,74 +1,23 @@
 Cloned from https://github.com/211-Connect/open-resource-search.
 
-![Preview image of deployed application](.github/screenshot.png)
+## Development
 
-# Open Resource Search
+### Setup
 
-The goal of this project is to provide all 211s with an equal opportunity at a rich user experience, modern speed and efficiency for data searchability, and a low barrier to entry.
+Clone the repo, run `npm i`.
 
-## Dependencies
+`cp .env.example .env` then edit accordingly.
 
-- [Open Resource API](https://github.com/211-Connect/open-resource-api)
-- Amazon Web Services
-  - Cognito
-  - Simple Email Service
-- A hosting platform
-  - We recommend Vercel
-  - Other options include Digital Ocean App Platform, Netlify, Render, etc.
-- Google Maps
-- Google Places
+### Running
 
-## Run Locally
+Open a terminal, run `npm run dev` to start the Vite server.
 
-Clone the project
+### Build and deploy
 
-```bash
-  git clone https://github.com/211-Connect/open-resource-search
-```
+Run `./build.sh` to compile and zip the code. Run `./deploy.sh` to copy the
+dist files to the production machine.
 
-Go to the project directory
-
-```bash
-  cd open-resource-search
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run dev
-```
-
-## Deployment
-
-For automated CI/CD we recommend Vercel. Getting set up is as simple as clicking the Deploy button below.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F211-Connect%2Fopen-resource-search)
-
-If you'd like to host this on your own, or on an alternative platform, you'll need to do the following:
-
-install dependencies
-
-```bash
-npm install
-```
-
-build the project
-
-```bash
-npm run build
-```
-
-and then start the server
-
-```bash
-npm start
-```
+NOTE: `./deploy.sh` assumes you have an entry called `auw1` in your `~/.ssh/config` file.
 
 ## License
 

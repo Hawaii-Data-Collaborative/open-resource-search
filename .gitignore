@@ -25,4 +25,7 @@ dist-ssr
 
 .next
 .env
-dist.tar.gz
+.env.production
+
+/dist.tar.gz
+/dist-old
