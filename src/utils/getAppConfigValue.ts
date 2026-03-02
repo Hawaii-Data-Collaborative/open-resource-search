@@ -3,7 +3,7 @@ import appConfig from '../../app.config.json'
 
 export function getAppConfigValue(path: string) {
   const envConfigs = {
-    'services.map.google.apiKey': environment.SERVICES_MAP_GOOGLE_APIKEY
+    'services.map.google.apiKey': environment.GOOGLE_API_KEY
   }
 
   if (envConfigs[path]) {

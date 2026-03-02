@@ -1,5 +1,6 @@
 import { Loader } from '@googlemaps/js-api-loader'
 import debugInit from 'debug'
+import { environment } from '../constants'
 
 const debug = debugInit('app:utils:mapUtil')
 
@@ -12,7 +13,7 @@ export async function initMapLibraries() {
   if (initialized) return
 
   const loader = new Loader({
-    apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+    apiKey: environment.GOOGLE_API_KEY,
     version: 'weekly',
     libraries: ['maps', 'geometry', 'geocoding']
   })
